@@ -13,13 +13,22 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets";
-/* Import cerulean variables */
-@import "bootswatch/paper/variables"; 
-@import "bootstrap";
-/*@import "bootstrap/theme"; */
-/* And finally bootswatch style itself */
-@import "bootswatch/paper/bootswatch"; 
+/* Example using 'Cerulean' bootswatch */
 
-@import "bootstrap-multiselect";
+/* Import bootstrap-sprockets */
+@import "bootstrap-sprockets";
+
+/* Import sandstone variables */
+@import "bootswatch/sandstone/variables";
+
+/* Then bootstrap itself */
+@import "bootstrap";
+
+/* Bootstrap body padding for fixed navbar */
+body { padding-top: 70px; }
+
+/* And finally bootswatch style itself */
+@import "bootswatch/sandstone/bootswatch";
+
+/* Whatever application styles you have go last */
 @import "bootstrap-custom";
