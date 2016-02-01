@@ -24,9 +24,6 @@
 /* Then bootstrap itself */
 @import "bootstrap";
 
-/* Bootstrap body padding for fixed navbar */
-body { padding-top: 70px; }
-
 /* And finally bootswatch style itself */
 @import "bootswatch/sandstone/bootswatch";
 

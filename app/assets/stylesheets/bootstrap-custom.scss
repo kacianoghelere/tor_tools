@@ -1,20 +1,7 @@
-@font-face {
-  font-family: 'ringbearer';
-  src:url('ringbearer.eot');
-  src:url('ringbearer.eot?#iefix') format('embedded-opentype'),
-    url('ringbearer.svg#icomoon') format('svg'),
-    url('ringbearer.woff') format('woff'),
-    url('fonts/ringbearer.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+body { 
+  padding-top: 63px; 
+  background-color: #C3936F;
 }
-@font-face {
-  font-family: 'aniron';
-  src:url('aniron.eot');
-  src:url('aniron.eot?#iefix') format('embedded-opentype'),
-    url('aniron.svg#icomoon') format('svg'),
-    url('aniron.woff') format('woff'),
-    url('fonts/anirb___.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+body>.container {
+  background-color: #FFF;
 }
