@@ -177,6 +177,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.10)
   bootstrap-multiselect-rails
   bootstrap-sass (~> 3.3.6)
   bootswatch-rails (~> 3.3.5)
