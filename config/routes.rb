@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'usuarios/new'
+
   root 'principal#index'
   get 'principal/index'
 
