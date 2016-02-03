@@ -16,6 +16,24 @@ body>.container {
 	box-sizing:				 border-box;
 }
 
+.page-header {
+    padding-bottom: 5px;
+    margin: 20px 0px;
+    border-bottom: 1px solid #E6E3DD;
+}
+
+.checkbox {
+	margin-top: -10px;
+	margin-bottom: 10px;
+	span {
+		margin-left: 20px;
+		font-weight: normal;
+	}
+	input[type="checkbox"] {
+		margin-left: 0px;
+	}
+}
+
 /* miscellaneous */
 .debug_dump {
 	clear: both;
@@ -27,11 +45,3 @@ body>.container {
 	@include box_sizing;
 }
 
-.checkbox {
-	margin-top: -10px;
-	margin-bottom: 10px;
-	span {
-		margin-left: 20px;
-		font-weight: normal;
-	}
-}

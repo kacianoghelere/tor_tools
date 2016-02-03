@@ -1,2 +1,28 @@
-<h1>Main#contact</h1>
-<p>Find me in app/views/main/contact.html.erb</p>
+<% provide(:title, 'Contato') %>
+<% provide(:label, 'Contato') %>
+
+<div class="row-fluid">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for(:message, url: send_contact_path, class: 'form-horizontal') do |f| %>
+
+			<div class="form-group">
+				<%= f.label :email, "E-mail" %>
+				<%= f.email_field :email, class: 'form-control input-sm' %>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :name, "Nome" %>
+				<%= f.text_field :name, class: 'form-control input-sm' %>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :message, "Mensagem" %>
+				<%= f.text_area :message, size: '50x10', class: 'form-control input-sm' %>
+			</div>
+
+			<div class="form-group">
+				<%= button_tag "Acessar", type: :submit, class: "btn btn-default" %>
+			</div>
+		<% end %>
+	</div>
+</div>
