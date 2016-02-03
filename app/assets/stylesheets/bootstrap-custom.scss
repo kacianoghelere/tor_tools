@@ -1,8 +1,28 @@
 body { 
-  padding-top: 75px; 
-  padding-bottom: 15px; 
-  background-color: #C3936F;
+	padding-top: 75px; 
+	padding-bottom: 15px; 
+	background-color: #C3936F;
 }
 body>.container {
-  background-color: #FFF;
+	background-color: #FFF;
+	box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
+	-moz-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
+	-webkit-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
+}
+
+@mixin box_sizing {
+	-moz-box-sizing:		border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:				 border-box;
+}
+
+/* miscellaneous */
+.debug_dump {
+	clear: both;
+	float: left;
+	width: 100%;
+	margin-top: 45px;
+	background-color: #272822;
+	color: #EEE;
+	@include box_sizing;
 }
