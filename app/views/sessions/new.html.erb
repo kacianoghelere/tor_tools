@@ -16,8 +16,15 @@
 			</div>
 
 			<div class="form-group">
+				<%= f.label :remember_me, class: "checkbox inline" do %>
+					<span>Permanecer conectado?</span> <%= f.check_box :remember_me %>
+				<% end %>
+			</div>
+
+			<div class="form-group">
 				<%= button_tag "Acessar", type: :submit, class: "btn btn-default" %>
 			</div>
+
 			<div class="form-group">
 				<p>
 					Não possui uma conta? <%= link_to "Crie uma agora!", signup_path %>
