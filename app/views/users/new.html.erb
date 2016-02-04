@@ -1,35 +1,9 @@
 <% provide(:title, 'Registrar') %>
 <% provide(:label, 'Registrar') %>
+<% provide(:button_text, 'Criar') %>
 
 <div class="row-fluid">
 	<div class="col-md-6 col-md-offset-3">
-		<%= form_for(@user, class: 'form-horizontal') do |f| %>
-			<%= render 'shared/error_messages' %>
-			<div class="form-group">
-				<%= f.label :name, "Nome" %>
-				<%= f.text_field :name, class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :email, "E-mail" %>
-				<%= f.email_field :email, class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :password, "Senha" %>
-				<%= f.password_field :password, class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :password_confirmation, "Confirmação" %>
-				<%= f.password_field :password_confirmation, 
-															class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= button_tag "Criar",	 type: :submit, class: "btn btn-default" %>
-				<%= button_tag "Limpar", type: :reset,  class: "btn btn-default" %>
-			</div>
-		<% end %>
+		<%= render 'form' %>
 	</div>
 </div>

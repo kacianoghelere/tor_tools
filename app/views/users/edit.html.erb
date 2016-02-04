@@ -1,43 +1,14 @@
 <% provide(:title, 'Editar') %>
 <% provide(:label, 'Modificar informações') %>
+<% provide(:button_text, 'Salvar') %>
 
 <div class="row-fluid">
 	<div class="col-md-6 col-md-offset-3">
-		<%= form_for(@user, class: 'form-horizontal') do |f| %>
-			<%= render 'shared/error_messages' %>
-
-			<div class="form-group">
-				<div class="gravatar_edit">
-					<a href="http://gravatar.com/emails" target="_blank">
-						<%= gravatar_for @user %>
-					</a>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :name, "Nome" %>
-				<%= f.text_field :name, class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :email, "E-mail" %>
-				<%= f.email_field :email, class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :password, "Senha" %>
-				<%= f.password_field :password, class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :password_confirmation, "Confirmação" %>
-				<%= f.password_field :password_confirmation, 
-															class: 'form-control input-sm' %>
-			</div>
-
-			<div class="form-group">
-				<%= button_tag "Salvar", type: :submit, class: "btn btn-default" %>
-			</div>
-		<% end %>
+		<center>
+			<a href="http://gravatar.com/emails" target="_blank">
+				<%= gravatar_for @user, classes: "img-circle" %>
+			</a>
+		</center>
+		<%= render 'form' %>
 	</div>
 </div>
