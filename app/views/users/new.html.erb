@@ -4,6 +4,7 @@
 <div class="row-fluid">
 	<div class="col-md-6 col-md-offset-3">
 		<%= form_for(@user, class: 'form-horizontal') do |f| %>
+			<%= render 'shared/error_messages' %>
 			<div class="form-group">
 				<%= f.label :name, "Nome" %>
 				<%= f.text_field :name, class: 'form-control input-sm' %>

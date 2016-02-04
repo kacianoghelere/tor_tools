@@ -31,7 +31,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><%= link_to "Minha conta", current_user %></li>
-							<li><%= link_to "Opções", '#' %></li>
+							<li><%= link_to "Opções", edit_user_path(current_user) %></li>
 							<li role="separator" class="divider"></li>
 							<li><%= link_to "Sair", logout_path, method: "delete" %></li>
 						</ul>
