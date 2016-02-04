@@ -8,7 +8,8 @@
 				<span class="icon-bar"></span>
 			</button>
 			<%= link_to(root_path, class: "navbar-brand") do %>
-				<%= image_tag "logo.png", size: "32x32" %>
+				<% # image_tag "logo.png", size: "32x32" %>
+				TOR-T
 			<% end %>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
@@ -18,16 +19,20 @@
 						<span class="glyphicon glyphicon-home"></span>
 					<% end %>
 				</li>
-				<li><%= link_to 'Sobre',	 about_path %></li>
-				<li><%= link_to 'Contato', contact_path %></li>
-				<li><%= link_to 'Ajuda',	 help_path %></li>
+				<% if logged_in? %>
+					<li><%= link_to "Membros",   users_path %></li>
+				<% end %>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<% if logged_in? %>
+					<li><%= link_to 'Sobre',	 about_path %></li>
+					<li><%= link_to 'Contato', contact_path %></li>
+					<li><%= link_to 'Ajuda',	 help_path %></li>
 					<li class="dropdown active">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
 								role="button" aria-haspopup="true" aria-expanded="false">
-							<%= gravatar_for current_user, size: 22 %> <%= current_user.name %> <span class="caret"></span>
+							<%= gravatar_for current_user, size: 22, classes: "img-circle" %> 
+							<%= current_user.name %> <span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li><%= link_to "Minha conta", current_user %></li>
@@ -37,6 +42,9 @@
 						</ul>
 					</li>
 				<% else %>
+					<li><%= link_to 'Sobre',	 about_path %></li>
+					<li><%= link_to 'Contato', contact_path %></li>
+					<li><%= link_to 'Ajuda',	 help_path %></li>
 					<li class="active">
 						<%= link_to 'Entrar',	login_path %>
 					</li>
