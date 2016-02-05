@@ -18,6 +18,10 @@
 </div>
 <div class="row">
 	<aside class="col-md-12">
-		<legend>Minhas criações</legend>
+		<% if current_user === @user %>
+			<legend>Minhas criações</legend>
+		<% else %>
+			<legend>Criações</legend>
+		<% end %>
 	</aside>
 </div>
