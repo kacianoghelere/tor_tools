@@ -1,0 +1,17 @@
+<% provide(:title, 'Habilidades') %>
+<% provide(:label, 'Habilidades') %>
+
+<div class="row">
+	<div class="col-md-12">
+		<ul class="list-group">
+			<%= render @skills %>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= link_to 'Nova Habilidade', new_skill_path, 
+																		class: "btn btn-default btn-sm" %>
+	</div>
+</div>

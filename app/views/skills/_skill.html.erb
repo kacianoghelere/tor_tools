@@ -1,0 +1,27 @@
+<li class="list-group-item">
+	<div class="row">
+		<h5>
+			<b>
+				<%= link_to skill do %>
+					<span class="badge"><%= skill.id %></span> <%= skill.name %> 
+				<% end %>
+			</b>
+			<div class="pull-right">
+				<%= link_to edit_skill_path(skill), title: "Editar", 
+									class: "btn btn-primary btn-xs" do %>
+					<span class="glyphicon glyphicon-edit"></span> Editar
+				<% end %>
+				<%= link_to(skill, method: :delete, title: "Remover", 
+									class: "btn btn-danger btn-xs", 
+									data: { confirm: "Deseja remover?" }) do %>
+					<span class="glyphicon glyphicon-remove"></span> Remover
+				<% end %>
+			</div>
+		</h5>
+	</div>
+
+
+	<div class="row">
+			<%= skill.description %>
+	</div>
+</li>

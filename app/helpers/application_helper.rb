@@ -18,4 +18,19 @@ module ApplicationHelper
 		image_tag(gravatar_url, alt: user.name, 
 															class: "gravatar #{options[:classes]}")
 	end
+
+	def link_icon(icon, text = '')
+		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
+	end
+
+	def generate_tab(href, options = { active: false, inner: '', count: nil })
+		tab = "<li role='presentation'" +
+			(options[:active] ? " class='active' " : "") + ">" +
+			"  <a href='#{href}' aria-controls='#{href}'role=tab data-toggle='tab'>" +
+			"    #{options[:inner]} " + 
+			(options[:count] ? "<span class='badge'>#{options[:count]}</span>" : "") +
+			"  </a>"+
+			"</li>"
+		tab.html_safe
+	end
 end

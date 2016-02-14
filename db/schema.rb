@@ -11,7 +11,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212181228) do
+ActiveRecord::Schema.define(version: 20160214184231) do
+
+  create_table "npc_skills", force: :cascade do |t|
+    t.integer  "npc_id"
+    t.integer  "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "npc_skills", ["npc_id"], name: "index_npc_skills_on_npc_id"
+  add_index "npc_skills", ["skill_id"], name: "index_npc_skills_on_skill_id"
+
+  create_table "npc_weapons", force: :cascade do |t|
+    t.integer  "npc_id"
+    t.integer  "weapon_id"
+    t.integer  "bonus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "npc_weapons", ["npc_id"], name: "index_npc_weapons_on_npc_id"
+  add_index "npc_weapons", ["weapon_id"], name: "index_npc_weapons_on_weapon_id"
+
+  create_table "npcs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "img_url"
+    t.boolean  "ally",        default: false
+    t.integer  "attr_index",  default: 1,     null: false
+    t.integer  "resistance",  default: 1,     null: false
+    t.integer  "resource",    default: 1,     null: false
+    t.integer  "parry",       default: 1,     null: false
+    t.integer  "armour",      default: 1,     null: false
+    t.integer  "personality", default: 1,     null: false
+    t.integer  "movement",    default: 1,     null: false
+    t.integer  "perception",  default: 1,     null: false
+    t.integer  "survival",    default: 1,     null: false
+    t.integer  "custom",      default: 1,     null: false
+    t.integer  "vocation",    default: 1,     null: false
+    t.integer  "user_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "npcs", ["user_id", "created_at"], name: "index_npcs_on_user_id_and_created_at"
+  add_index "npcs", ["user_id"], name: "index_npcs_on_user_id"
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "cost"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "skills", ["user_id", "created_at"], name: "index_skills_on_user_id_and_created_at"
+  add_index "skills", ["user_id"], name: "index_skills_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

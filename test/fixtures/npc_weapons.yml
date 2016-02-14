@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  npc_id: 
+  weapon_id: 
+  bonus: 1
+
+two:
+  npc_id: 
+  weapon_id: 
+  bonus: 1

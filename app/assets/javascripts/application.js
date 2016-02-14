@@ -17,3 +17,31 @@
 // require dataTables/jquery.dataTables
 //= require turbolinks
 //= require_tree .
+
+// $(document).on('keyup', '[type="number"]', function(event) {
+//		 var v = this.value;
+//		 if($.isNumeric(v) === false) {
+//				 //chop off the last char entered
+//				 this.value = this.value.replace(/[^0-9\.]+/g, "")
+//		 }
+// });
+
+$(document).on('keyup', '[type="number"]', function(event) {
+	var v = this.value;
+	if($.isNumeric(v) === false) {
+		//chop off the last char entered
+		this.value = this.value.replace(/[^0-9]+/g, "")
+	}
+});
+
+$.startMultiselects = function() {
+	$('select[multiple="multiple"]').multiselect({
+		maxHeight: 200,
+		enableFiltering: false,
+		includeSelectAllOption: false,
+		buttonClass: 'btn btn-default btn-sm',
+		buttonContainer: '<div class="btn-group" />',
+		nonSelectedText: 'Selecione',
+		allSelectedText: 'Todos selecionados'
+	});
+}

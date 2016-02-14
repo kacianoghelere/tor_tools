@@ -1,14 +1,15 @@
 body { 
 	padding-top: 75px; 
 	padding-bottom: 15px; 
-	background-color: #DDD;
-	// background-image: url('bg/parchment_pattern.jpg');
+	// background-color: #DDD;
+	// // background-image: url('bg/parchment_pattern.jpg');
 }
 body>.container {
-	background-color: #FFF;
-	box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
-	-moz-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
-	-webkit-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
+	// padding-top: 15px; 
+	// background-color: #FFF;
+	// box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
+	// -moz-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
+	// -webkit-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
 }
 
 @mixin box_sizing {
@@ -33,6 +34,16 @@ body>.container {
 	input[type="checkbox"] {
 		margin-left: 0px;
 	}
+}
+
+.text-left {
+	text-align: left;
+}
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
 }
 
 .user {

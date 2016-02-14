@@ -1,0 +1,19 @@
+<div class="row-fluid">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4><%= @skill.id %> - <%= @skill.name %></h4>
+		</div>
+
+		<div class="panel-body">
+			<div class="col-md-12">
+				<%= @skill.description %>
+			</div>
+		</div>
+
+		<div class="panel-footer">
+			<%= link_to 'Editar', edit_skill_path(@skill), 
+																					class: "btn btn-primary btn-sm" %>
+			<%= link_to 'Voltar', skills_path, class: "btn btn-default btn-sm" %>
+		</div>
+	</div>
+</div>

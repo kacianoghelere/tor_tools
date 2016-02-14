@@ -1,2 +1,60 @@
-<h1>Weapons#show</h1>
-<p>Find me in app/views/weapons/show.html.erb</p>
+<div class="row-fluid">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4><%= @weapon.id %> - <%= @weapon.name %></h4>
+		</div>
+
+		<div class="panel-body">
+			<div class="col-md-12">
+				<div class="col-md-3">
+					<label class="text-right">Nome:</label>
+				</div>
+				<div class="col-md-9">
+					<%= @weapon.name %>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="col-md-3">
+					<label class="text-right">Dano:</label>
+				</div>
+				<div class="col-md-9">
+					<%= @weapon.damage %>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="col-md-3">
+					<label class="text-right">Gume:</label>
+				</div>
+				<div class="col-md-9">
+					<%= @weapon.edge %>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="col-md-3">
+					<label class="text-right">Trauma:</label>
+				</div>
+				<div class="col-md-9">
+					<%= @weapon.injury %>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="col-md-3">
+					<label class="text-right">Ataque direcionado:</label>
+				</div>
+				<div class="col-md-9">
+					<%= @weapon.enc %>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel-footer">
+			<%= link_to 'Editar', edit_weapon_path(@weapon), 
+																					class: "btn btn-primary btn-sm" %>
+			<%= link_to 'Voltar', weapons_path, class: "btn btn-default btn-sm" %>
+		</div>
+	</div>
+</div>

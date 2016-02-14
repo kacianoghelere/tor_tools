@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  img_url: MyString
+  ally: false
+  attr_index: 1
+  resistance: 1
+  resource: 1
+  parry: 1
+  armour: 1
+  personality: 1
+  movement: 1
+  perception: 1
+  survival: 1
+  custom: 1
+  vocation: 1
+  user_id: 
+
+two:
+  name: MyString
+  description: MyString
+  img_url: MyString
+  ally: false
+  attr_index: 1
+  resistance: 1
+  resource: 1
+  parry: 1
+  armour: 1
+  personality: 1
+  movement: 1
+  perception: 1
+  survival: 1
+  custom: 1
+  vocation: 1
+  user_id: 

@@ -1,40 +1,47 @@
 <%= form_for(@weapon, class: 'form-horizontal') do |f| %>
-	<%= render 'shared/error_messages' %>
-	<div class="form-group">
-		<%= f.label :name, "Nome" %>
-		<%= f.text_field :name, class: 'form-control input-sm' %>
+	<div class="col-md-6">
+		<div class="form-group">
+			<%= f.label :name, "Nome" %>
+			<%= f.text_field :name, class: 'form-control input-sm' %>
+		</div>
 	</div>
 
-	<div class="form-group">
-		<%= f.label :damage, "Dano" %>
-		<%= f.number_field :damage, in: 1..25, step: 1, 
-									class: 'form-control input-sm' %>
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :damage, "Dano" %>
+			<%= f.number_field :damage, in: 1..25, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
 	</div>
 
-	<div class="form-group">
-		<%= f.label :edge, "Gume" %>
-		<%= f.number_field :edge, in: 0..11, step: 1, 
-									class: 'form-control input-sm' %>
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :edge, "Gume" %>
+			<%= f.number_field :edge, in: 0..11, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
 	</div>
 
-	<div class="form-group">
-		<%= f.label :injury, "Trauma" %>
-		<%= f.number_field :injury, in: 0..11, step: 1, 
-									class: 'form-control input-sm' %>
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :injury, "Trauma" %>
+			<%= f.number_field :injury, in: 0..20, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
 	</div>
 
-	<div class="form-group">
-		<%= f.label :injury, "Trauma" %>
-		<%= f.number_field :injury, in: 0..11, step: 1, 
-									class: 'form-control input-sm' %>
+	<div class="col-md-6">
+		<div class="form-group">
+			<%= f.label :enc, "Ataque direcionado" %>
+			<%= f.select(:enc, ["Perfura","Desarma","Destroí Escudo"], {}, 
+																{ :class => 'form-control input-sm' }) %>
+		</div>
 	</div>
 
-	<div class="form-group">
-		<%= f.label :enc, "Ataque direcionado" %>
-		<%= f.text_field :enc, class: 'form-control input-sm' %>
-	</div>
-
-	<div class="form-group">
-		<%= button_tag yield(:button_text),	 type: :submit, class: "btn btn-default" %>
+	<div class="col-md-12">
+		<div class="form-group">
+			<%= button_tag yield(:button_text),	type: :submit, 
+																						class: "btn btn-default btn-sm" %>
+		</div>
 	</div>
 <% end %>

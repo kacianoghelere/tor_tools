@@ -1,0 +1,152 @@
+<%= form_for(@npc, class: 'form-horizontal') do |f| %>
+	<div class="col-md-6">
+		<div class="form-group">
+			<%= f.label :name, "Nome", class: 'col-md-12' %>
+			<%= f.text_field :name, class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="form-group">
+			<%= f.label :img_url, "URL Ilustração", class: 'col-md-12' %>
+			<%= f.text_field :img_url, class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :ally, "Aliado", class: 'col-md-12' %>
+			<%= f.select(:ally, [['Sim', true],['Não', false]], {}, 
+																{ :class => 'form-control input-sm' }) %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :attr_index, "Indice Atributo", class: 'col-md-12' %>
+			<%= f.number_field :attr_index, in: 1..12, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :resistance, "Resitência", class: 'col-md-12' %>
+			<%= f.number_field :resistance, in: 0..100, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :resource, "Recurso", class: 'col-md-12' %>
+			<%= f.number_field :resource, in: 0..20, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :parry, "Aparar", class: 'col-md-12' %>
+			<%= f.number_field :parry, in: 0..20, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :armour, "Armadura", class: 'col-md-12' %>
+			<%= f.number_field :armour, in: 0..20, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<!-- Perícias -->
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :personality, "Personalidade", class: 'col-md-12' %>
+			<%= f.number_field :personality, in: 1..25, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :movement, "Movimento", class: 'col-md-12' %>
+			<%= f.number_field :movement, in: 0..11, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :perception, "Percepção", class: 'col-md-12' %>
+			<%= f.number_field :perception, in: 1..3, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :survival, "Sobrevivência", class: 'col-md-12' %>
+			<%= f.number_field :survival, in: 1..3, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :custom, "Costumes", class: 'col-md-12' %>
+			<%= f.number_field :custom, in: 1..3, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="form-group">
+			<%= f.label :vocation, "Ocupação", class: 'col-md-12' %>
+			<%= f.number_field :vocation, in: 1..3, step: 1, 
+										class: 'form-control input-sm' %>
+		</div>
+	</div>
+	<!-- Fim Perícias -->
+
+	<div class="col-md-6">
+		<div class="form-group">
+			<%= f.label :weapons, "Armas", class: 'col-md-12' %>
+			<%= collection_select(:npc, :weapons, Weapon.all, :id, :name, 
+				{selected: @npc.weapon_ids, include_blank: false, prompt: false}, 
+				multiple: true, class: "form-control input-sm")	%>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="form-group">
+			<%= f.label :skills, "Habilidades", class: 'col-md-12' %>
+			<%= collection_select(:npc, :skills, Skill.all, :id, :name, 
+				{selected: @npc.skill_ids, include_blank: false, prompt: false}, 
+				multiple: true, class: "form-control input-sm")	%>
+		</div>
+	</div>
+
+	<div class="col-md-12">
+		<div class="form-group">
+			<%= f.label :description, "Descrição", class: 'col-md-12' %>
+			<%= f.text_area :description, size: "30x6", 
+																		class: 'form-control input-sm' %>
+		</div>
+	</div>
+
+	<div class="col-md-12">
+		<div class="form-group">
+			<%= button_tag yield(:button_text),	type: :submit, 
+																						class: "btn btn-default btn-sm" %>
+		</div>
+	</div>
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.startMultiselects();
+	});
+</script>
