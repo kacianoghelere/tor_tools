@@ -15,7 +15,6 @@ class NpcsController < ApplicationController
 	end
 
 	def create
-		debugger
 		@npc = Npc.new(npc_params)
 		@npc.user = current_user
 		if @npc.save
