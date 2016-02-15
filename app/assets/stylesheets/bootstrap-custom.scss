@@ -72,6 +72,15 @@ body>.container {
 	padding-left: 0;
 	padding-right: 15px;
 }
+
+.npc-bg {
+  background: url(imagem/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 /* miscellaneous */
 .debug_dump {
 	clear: both;
