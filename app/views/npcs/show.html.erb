@@ -2,7 +2,7 @@
 <% provide(:label, "#{@npc.id} - #{@npc.name}") %>
 
 <div class="row">
-	<% if @npc.img_url %>
+	<% if !@npc.img_url.empty? %>
 		<center class="col-md-12">
 			<div class="well well-sm">
 				<img src="<%= @npc.img_url %>" width="400" class="img-thumbnail">
