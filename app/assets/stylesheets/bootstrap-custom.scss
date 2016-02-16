@@ -94,6 +94,43 @@ body>.container {
 .table > tfoot > tr.default > th {
     background-color: #f8f5f0;
 }
+
+.panel-columns {
+	padding: 0;
+}
+.panel-columns div.col-xs-6.col-header,
+.panel-columns div.col-sm-6.col-header,
+.panel-columns div.col-md-6.col-header,
+.panel-columns div.col-lg-6.col-header,
+.panel-columns div.col-xs-12.col-header,
+.panel-columns div.col-sm-12.col-header,
+.panel-columns div.col-md-12.col-header,
+.panel-columns div.col-lg-12.col-header {
+	background-color: #f8f5f0;
+}
+.panel-columns div.col-xs-6,
+.panel-columns div.col-sm-6,
+.panel-columns div.col-md-6,
+.panel-columns div.col-lg-6,
+.panel-columns div.col-xs-12,
+.panel-columns div.col-sm-12,
+.panel-columns div.col-md-12,
+.panel-columns div.col-lg-12 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #E8E6E1;
+	border-right: 1px solid #E8E6E1;
+}
+.panel-columns div.col-xs-6:last-child,
+.panel-columns div.col-sm-6:last-child,
+.panel-columns div.col-md-6:last-child,
+.panel-columns div.col-lg-6:last-child,
+.panel-columns div.col-xs-12:last-child,
+.panel-columns div.col-sm-12:last-child,
+.panel-columns div.col-md-12:last-child,
+.panel-columns div.col-lg-12:last-child {
+	border-right: none;
+}
+
 /* miscellaneous */
 .debug_dump {
 	clear: both;

@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(version: 20160216010018) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "npc_skills", ["npc_id", "created_at"], name: "index_npc_skills_on_npc_id_and_created_at"
   add_index "npc_skills", ["npc_id"], name: "index_npc_skills_on_npc_id"
+  add_index "npc_skills", ["skill_id", "created_at"], name: "index_npc_skills_on_skill_id_and_created_at"
   add_index "npc_skills", ["skill_id"], name: "index_npc_skills_on_skill_id"
 
   create_table "npc_weapons", force: :cascade do |t|
@@ -31,7 +33,9 @@ ActiveRecord::Schema.define(version: 20160216010018) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "npc_weapons", ["npc_id", "created_at"], name: "index_npc_weapons_on_npc_id_and_created_at"
   add_index "npc_weapons", ["npc_id"], name: "index_npc_weapons_on_npc_id"
+  add_index "npc_weapons", ["weapon_id", "created_at"], name: "index_npc_weapons_on_weapon_id_and_created_at"
   add_index "npc_weapons", ["weapon_id"], name: "index_npc_weapons_on_weapon_id"
 
   create_table "npcs", force: :cascade do |t|
@@ -65,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160216010018) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "parties", ["user_id", "created_at"], name: "index_parties_on_user_id_and_created_at"
   add_index "parties", ["user_id"], name: "index_parties_on_user_id"
 
   create_table "party_npcs", force: :cascade do |t|
@@ -75,13 +80,14 @@ ActiveRecord::Schema.define(version: 20160216010018) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "party_npcs", ["npc_id", "created_at"], name: "index_party_npcs_on_npc_id_and_created_at"
   add_index "party_npcs", ["npc_id"], name: "index_party_npcs_on_npc_id"
+  add_index "party_npcs", ["party_id", "created_at"], name: "index_party_npcs_on_party_id_and_created_at"
   add_index "party_npcs", ["party_id"], name: "index_party_npcs_on_party_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "cost"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

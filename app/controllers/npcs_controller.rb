@@ -53,6 +53,27 @@ class NpcsController < ApplicationController
 	end
 
 	private
+
+		# Cria o vinculo entre o npc e as armas, deleta anteriores
+		def create_weapons(npc, weapons)
+			npc.npc_weapons.destroy_all
+			weapons.each do |w|
+				if !w.empty?
+					npc.npc_weapons.create({npc_id: npc, weapon_id: w.to_i})
+				end
+			end
+		end
+
+		# Cria o vinculo entre o npc e as habilidades, deleta anteriores
+		def create_skills(npc, skills)
+			npc.npc_skills.destroy_all
+			skills.each do |s|
+			if !s.empty?
+			 	npc.npc_skills.create({npc_id: npc, skill_id: s.to_i})
+			end
+			end
+		end
+
 		def npc_params
 			params.require(:npc).permit(:name, :description, :img_url, :ally, 
 				:attr_index, :resistance, :resource, :parry, :armour, :personality,
@@ -75,24 +96,4 @@ class NpcsController < ApplicationController
 			@npc = Npc.find(params[:id])
 			redirect_to(root_url) unless current_user?(@npc.user)
 		end
-
-    # Cria o vinculo entre o npc e as armas, deleta anteriores
-    def create_weapons(npc, weapons)
-      npc.npc_weapons.destroy_all
-      weapons.each do |w|
-        if !w.empty?
-          npc.npc_weapons.create({npc_id: npc, weapon_id: w.to_i})
-        end
-      end
-    end
-
-    # Cria o vinculo entre o npc e as habilidades, deleta anteriores
-    def create_skills(npc, skills)
-      npc.npc_skills.destroy_all
-      skills.each do |s|
-        if !s.empty?
-          npc.npc_skills.create({npc_id: npc, skill_id: s.to_i})
-        end
-      end
-    end
 end

@@ -6,5 +6,7 @@ class CreateNpcSkills < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :npc_skills, [:npc_id, :created_at]
+    add_index :npc_skills, [:skill_id, :created_at]
   end
 end

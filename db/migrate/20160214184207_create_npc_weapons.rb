@@ -7,5 +7,7 @@ class CreateNpcWeapons < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :npc_weapons, [:npc_id, :created_at]
+    add_index :npc_weapons, [:weapon_id, :created_at]
   end
 end

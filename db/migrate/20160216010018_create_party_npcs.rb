@@ -7,5 +7,7 @@ class CreatePartyNpcs < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :party_npcs, [:party_id, :created_at]
+    add_index :party_npcs, [:npc_id, :created_at]
   end
 end

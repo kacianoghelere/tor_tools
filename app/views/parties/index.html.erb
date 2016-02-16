@@ -1,0 +1,12 @@
+<% provide(:title, 'Grupos') %>
+<% provide(:label, 'Grupos') %>
+
+<div class="row">
+	<%= render @parties %>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= link_to 'Novo Grupo', new_party_path, class: "btn btn-default btn-sm" %>
+	</div>
+</div>
