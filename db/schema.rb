@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214184231) do
+ActiveRecord::Schema.define(version: 20160216010018) do
 
   create_table "npc_skills", force: :cascade do |t|
     t.integer  "npc_id"
@@ -57,6 +57,26 @@ ActiveRecord::Schema.define(version: 20160214184231) do
 
   add_index "npcs", ["user_id", "created_at"], name: "index_npcs_on_user_id_and_created_at"
   add_index "npcs", ["user_id"], name: "index_npcs_on_user_id"
+
+  create_table "parties", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "parties", ["user_id"], name: "index_parties_on_user_id"
+
+  create_table "party_npcs", force: :cascade do |t|
+    t.integer  "party_id"
+    t.integer  "npc_id"
+    t.integer  "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "party_npcs", ["npc_id"], name: "index_party_npcs_on_npc_id"
+  add_index "party_npcs", ["party_id"], name: "index_party_npcs_on_party_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"

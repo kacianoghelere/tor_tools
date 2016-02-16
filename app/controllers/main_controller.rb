@@ -1,5 +1,8 @@
 class MainController < ApplicationController
 	def index
+		unless logged_in?
+			render "visitor"
+		end
 	end
 
 	def about

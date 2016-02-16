@@ -1,125 +1,130 @@
-<% provide(:title, 'Editar') %>
-<% provide(:label, "#{@npc.id} - #{@npc.name}") %>
+<% provide(:title, "#{@npc.id} - #{@npc.name}") %>
 
 <div class="row">
-	<% if !@npc.img_url.empty? %>
-		<center class="col-md-12">
-			<div class="well well-sm">
-				<img src="<%= @npc.img_url %>" width="400" class="img-thumbnail">
-			</div>
-		</center>
-	<% end %>
 
-	<div class="col-md-6">
-
+	<div class="col-sm-offset-2 col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Informações
+				<h4><%= "#{@npc.id} - #{@npc.name}" %></h4>
 			</div>
+			<div class="table-responsive">
+				<table class="table table-bordered table-condensed">
+					<tbody>
+						<% if !@npc.img_url.empty? %>
+							<tr>
+								<td colspan="2" class="default" align="center">
+									<img src="<%= @npc.img_url %>" width="400" class="img-thumbnail">
+								</td>
+							</tr>
+						<% end %>
+						<tr>
+							<td class="default" align="center">
+								<b>Aliado</b>
+							</td>
+							<td class="default" align="center">
+								<b>Nível de Atributo</b>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<%= @npc.ally %>
+							</td>
+							<td align="center">
+								<%= @npc.attr_index %>
+							</td>
+						</tr>
 
-			<div class="panel-body">
-				<div class="col-md-4">
-					<%= label_tag "Aliado: " %>
-					<%= @npc.ally %>
-				</div>
+						<tr>
+							<td class="default" align="center">
+								<b>Resistência</b>
+							</td>
+							<td class="default" align="center">
+								<b>Recurso</b>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<%= @npc.resistance %>
+							</td>
+							<td align="center">
+								<%= @npc.resource %>
+							</td>
+						</tr>
 
-				<div class="col-md-4">
-					<%= label_tag "Indice Atributo: " %>
-					<%= @npc.attr_index %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Resitência: " %>
-					<%= @npc.resistance %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Recurso: " %>
-					<%= @npc.resource %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Aparar: " %>
-					<%= @npc.parry %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Armadura: " %>
-					<%= @npc.armour %>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Perícias -->
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">Perícias</div>
-			<div class="panel-body">
-				<div class="col-md-4">
-					<%= label_tag "Personalidade: " %>
-					<%= @npc.personality %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Movimento: " %>
-					<%= @npc.movement %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Percepção: " %>
-					<%= @npc.perception %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Sobrevivência: " %>
-					<%= @npc.survival %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Costumes: " %>
-					<%= @npc.custom %>
-				</div>
-
-				<div class="col-md-4">
-					<%= label_tag "Ocupação: " %>
-					<%= @npc.vocation %>
-				</div>
-			</div>
-		</div>
-	</div><!-- Fim Perícias -->
-
-	<!-- Armas -->
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">Armas</div>
-			<ul class="list-group">
-				<% @npc.weapons.each do |weapon| %>
-					<%= link_to weapon.name, weapon, class: "list-group-item" %>
-				<% end %>
-			</ul>
-		</div>
-	</div><!-- Fim Armas -->
-
-	<!-- Habilidades -->
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">Habilidades</div>
-			<ul class="list-group">
-				<% @npc.skills.each do |skill| %>
-					<%= link_to skill.name, skill, class: "list-group-item" %>
-				<% end %>
-			</ul>
-		</div>
-	</div><!-- Fim Habilidades -->
-
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">Descrição</div>
-			<div class="panel-body">
-				<div class="col-md-12">
-					<%= @npc.description %>
-				</div>
+						<tr>
+							<td class="default" align="center">
+								<b>Aparar</b>
+							</td>
+							<td class="default" align="center">
+								<b>Armadura</b>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<%= @npc.parry %>
+							</td>
+							<td align="center">
+								<%= @npc.armour %>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="default" align="center">
+								<b>Perícias</b>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<b>Personalidade:</b> <%= @npc.personality %>
+							</td>
+							<td align="center">
+								<b>Sobrevivência:</b> <%= @npc.survival %>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<b>Movimento:</b> <%= @npc.movement %>
+							</td>
+							<td align="center">
+								<b>Costumes:</b> <%= @npc.custom %>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<b>Percepção:</b> <%= @npc.perception %>
+							</td>
+							<td align="center">
+								<b>Ocupação:</b> <%= @npc.vocation %>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="default" align="center">
+								<b>Perícias com Armas</b>
+							</td>
+						</tr>
+						<% @npc.npc_weapons.each do |npc_weapon| %>
+							<tr>
+								<td align="center">
+									<%= link_to npc_weapon.weapon.name, npc_weapon.weapon %>
+								</td>
+								<td align="center">
+									<%= npc_weapon.bonus %>
+								</td>
+							</tr>
+						<% end %>
+						<tr>
+							<td colspan="2" class="default" align="center">
+								<b>Habilidades Especiais</b>
+							</td>
+						</tr>
+						<% @npc.skills.each do |skill| %>
+							<tr>
+								<td colspan="2" align="center">
+									<%= link_to skill.name, skill %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

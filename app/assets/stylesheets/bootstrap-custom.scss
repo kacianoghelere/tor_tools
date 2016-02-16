@@ -80,7 +80,20 @@ body>.container {
   -o-background-size: cover;
   background-size: cover;
 }
-
+.table > thead > tr > td.default, 
+.table > thead > tr > th.default, 
+.table > thead > tr.default > td, 
+.table > thead > tr.default > th, 
+.table > tbody > tr > td.default, 
+.table > tbody > tr > th.default, 
+.table > tbody > tr.default > td, 
+.table > tbody > tr.default > th, 
+.table > tfoot > tr > td.default, 
+.table > tfoot > tr > th.default, 
+.table > tfoot > tr.default > td, 
+.table > tfoot > tr.default > th {
+    background-color: #f8f5f0;
+}
 /* miscellaneous */
 .debug_dump {
 	clear: both;
