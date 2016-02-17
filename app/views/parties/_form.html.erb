@@ -19,24 +19,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @party.party_npcs.each do |member| %>
-						<tr>
-							<td width="5%">
-								<button type="button" class="btn btn-danger btn-block btn-sm del">
-									<span class="glyphicon glyphicon-minus"></span>
-								</button>
-							</td>
-							<td width="80%">
-								<%= hidden_field :member, :id, readonly: true, value: member.npc.id,
-																					class: "form-control input-sm" %>
-								<%= text_field :member, :name, value: member.npc.name,
-																					class: "form-control input-sm" %>
-							</td>
-							<td width="15%">
-								<%= number_field :member, :amount, value: member.amount,
-																					class: "form-control input-sm" %>
-							</td>
-						</tr>
+					<%= f.fields_for "members[]", [] do |ff| %>
+						<% @party.party_npcs.each do |party_npc| %>
+							<tr>
+								<td width="5%">
+									<button type="button" class="btn btn-danger btn-block btn-sm del">
+										<span class="glyphicon glyphicon-minus"></span>
+									</button>
+								</td>
+								<td width="80%">
+									<%= ff.hidden_field :npc_id, value: party_npc.npc.id,
+														class: "form-control input-sm" %>
+									<%= ff.text_field :name, value: party_npc.npc.name, 
+														class: "form-control input-sm party_npc_name" %>
+								</td>
+								<td width="15%">
+									<%= ff.number_field :amount, value: party_npc.amount, 
+														class: "form-control input-sm" %>
+								</td>
+							</tr>
+						<% end %>
 					<% end %>
 				</tbody>
 			</table>
@@ -52,45 +54,85 @@
 <% end %>
 
 <script type="text/javascript">
+	$.startAutoComplete = function() {
+		$('.party_npc_name').each(function(index, el) {
+			$.tr = $(el).closest('tr');
+			$.id = $.tr.find('input[name="party[members][][npc_id]"]');
+			$(el).autocomplete({
+        source: '/npcs.json',
+        position: {
+            collision: "flip"
+        },
+        select: function (event, ui) {
+            $.id.val(ui.item.id);
+            $(this).val(ui.item.label);
+        },
+        change: function (event, ui) {
+            if (ui.item == null) {
+                $.id.val('');
+                $(this).val('');
+            }
+        },
+        minLength: 3,
+        delay: 500
+			});
+		});
+	}
+
+	$(function() {
+		$.startAutoComplete();		
+	});
+
 	$('.add').click(function(event) {
-		$.tr        = $("<tr/>");
-		$.td_btn    = $("<td/>", { "width": "5%"  });
+		$.tr         = $("<tr/>", {"id": $.index});
+		$.td_btn     = $("<td/>", { "width": "5%"  });		
 		$.btn    = $("<button/>", { 
-			"type": "button",
-			"class": "btn btn-danger btn-block btn-sm del",
-			"html": "<span class=\"glyphicon glyphicon-minus\"></span>"
+			"type"  : "button",
+			"class" : "btn btn-danger btn-block btn-sm del",
+			"html"  : "<span class=\"glyphicon glyphicon-minus\"></span>"
 		});
 		$.btn.appendTo($.td_btn);
 
 		$.td_name = $("<td/>", { "width": "80%" });
 		$.input_id = $("<input/>", { 
-			"class": "form-control input-sm", 
-			"name": "member[id]", 
-			"id": "member_id", 
-			"type":"hidden" 
+			"class" : "form-control input-sm", 
+			"name"  : "party[members][][npc_id]", 
+			"id"    : "party_members__npc__id",
+			"type"  : "hidden" 
 		});
 		$.input_name = $("<input/>", { 
-			"class": "form-control input-sm", 
-			"name": "member[name]", 
-			"id": "member_name", 
-			"type":"text" 
+			"class" : "form-control input-sm party_npc_name", 
+			"name"  : "party[members][][name]", 
+			"id"    : "party_members__name",
+			"type"  : "text" 
 		});
 		$.input_id.appendTo($.td_name);
 		$.input_name.appendTo($.td_name);
 
 		$.td_amount = $("<td/>", { "width": "15%" });
 		$.input_amount = $("<input/>", { 
-			"class": "form-control input-sm", 
-			"name": "member[name]", 
-			"id": "member_name", 
-			"type":"number" 
+			"class" : "form-control input-sm", 
+			"name"  : "party[members][][amount]",
+			"id"    : "party_members__amount",
+			"type"  : "number",
+			"value" : 1
 		});
 		$.input_amount.appendTo($.td_amount);
 
 		$.td_btn.appendTo($.tr);
 		$.td_name.appendTo($.tr);
 		$.td_amount.appendTo($.tr);
+		$.input_index = $("<input/>", { 
+			"class"       : "form-control input-sm", 
+			"name"        : "party[party_npcs_attributes]["+$.index+"][id]", 
+			"id"          : "party_party_npcs_attributes_"+$.index+"_id",
+			"type"        : "hidden"
+		});
+		$.input_index.appendTo($.tr);
 		$("#members tbody").append($.tr);
+
+		$.fixNumbers();
+		$.startAutoComplete();
 	});
 
 	$(document).on('click', '.del', function(event) {

@@ -15,4 +15,8 @@ class Npc < ActiveRecord::Base
 	validates :survival,    presence: true
 	validates :custom,      presence: true
 	validates :vocation,    presence: true
+
+	def self.search(term)
+	  where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
+	end
 end

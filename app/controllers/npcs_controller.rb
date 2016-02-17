@@ -3,7 +3,14 @@ class NpcsController < ApplicationController
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
 	def index
-		@npcs = Npc.all
+		if params[:term]
+			respond_to do |format|
+				format.html
+				format.json { @npcs = Npc.search(params[:term]) }
+			end
+		else
+			@npcs = Npc.all
+		end
 	end
 
 	def show
