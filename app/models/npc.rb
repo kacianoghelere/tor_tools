@@ -3,10 +3,8 @@ class Npc < ActiveRecord::Base
 
 	has_many :npc_weapons
 	has_many :weapons, through: :npc_weapons
-
 	has_many :npc_skills
 	has_many :skills,  through: :npc_skills
-
 	has_many :party_npcs
 	has_many :parties, through: :party_npcs
 

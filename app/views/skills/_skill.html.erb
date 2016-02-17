@@ -7,14 +7,16 @@
 				<% end %>
 			</b>
 			<div class="pull-right">
-				<%= link_to edit_skill_path(skill), title: "Editar", 
-									class: "btn btn-primary btn-xs" do %>
-					<span class="glyphicon glyphicon-edit"></span> Editar
-				<% end %>
-				<%= link_to(skill, method: :delete, title: "Remover", 
-									class: "btn btn-danger btn-xs", 
-									data: { confirm: "Deseja remover?" }) do %>
-					<span class="glyphicon glyphicon-remove"></span> Remover
+				<% if skill.user == current_user %>
+					<%= link_to edit_skill_path(skill), title: "Editar", 
+										class: "btn btn-primary btn-xs" do %>
+						<span class="glyphicon glyphicon-edit"></span> Editar
+					<% end %>
+					<%= link_to(skill, method: :delete, title: "Remover", 
+										class: "btn btn-danger btn-xs", 
+										data: { confirm: "Deseja remover?" }) do %>
+						<span class="glyphicon glyphicon-remove"></span> Remover
+					<% end %>
 				<% end %>
 			</div>
 		</h5>

@@ -4,7 +4,7 @@ User.create!(name:	"Kaciano Ghelere",
 						 password_confirmation: "123456",
 						 admin: true)
 
-10.times do |n|
+9.times do |n|
 	name	   = Faker::Name.name
 	email    = "example-#{n+1}@railstutorial.org"
 	password = "password"
@@ -19,7 +19,7 @@ encs = ["Desarma", "Perfura", "Destrói Escudo"]
 	edge   = rand(0..11)
 	injury = rand(1..20)
 	enc    = encs.sample
-	user   = User.first
+	user   = User.all.sample
 	Weapon.create!(name: name, damage: damage, edge: edge, injury: injury, 
 									enc: enc, user: user)
 end
@@ -27,7 +27,7 @@ end
 10.times do |n|
 	name         = Faker::Lorem.word.capitalize
 	description  = Faker::Lorem.sentence
-	user         = User.first
+	user         = User.all.sample
 	Skill.create!(name: name, description: description, user: user)
 end
 
@@ -47,7 +47,7 @@ end
 	survival    = rand(1..3)
 	custom      = rand(1..3)
 	vocation    = rand(1..3)
-	user        = User.first
+	user        = User.all.sample
 	npc = Npc.create!(name: name, description: description, img_url: img_url, 
 					ally: ally, attr_index: attr_index, resistance: resistance, 
 					resource: resource, parry: parry, armour: armour, 
@@ -70,7 +70,7 @@ end
 end
 
 5.times do |n|
-	user   = User.first
+	user   = User.all.sample
 	amount = rand(1..6)
 	npc    = Npc.all.sample
 	title  = npc.name.pluralize

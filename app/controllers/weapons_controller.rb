@@ -3,7 +3,7 @@ class WeaponsController < ApplicationController
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
 	def index
-		@weapons = current_user.weapons
+		@weapons = Weapon.all
 	end
 
 	def show

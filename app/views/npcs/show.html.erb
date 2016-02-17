@@ -3,16 +3,25 @@
 <div class="row">
 
 	<div class="col-md-6">
-		<div class="thumbnail">
-			<img src="<%= @npc.img_url %>" width="400" class="img-thumbnail">
-			<div class="caption">
-				<h3><%= "#{@npc.id} - #{@npc.name}" %></h3>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h5><%= "#{@npc.id} - #{@npc.name}" %></h5>
+			</div>
+			<div class="panel-body">			
+				<% if !@npc.img_url.empty? %>
+					<center>
+						<img src="<%= @npc.img_url %>" width="300" class="img-thumbnail">
+					</center>
+				<% end %>
+				<legend><b>Descrição</b></legend>
 				<p><%= @npc.description %></p>
-				<p>
+			</div>
+			<div class="panel-footer">
+				<% if @npc.user == current_user %>
 					<%= link_to 'Editar', edit_npc_path(@npc), 
-																						class: "btn btn-primary btn-sm" %>
-					<%= link_to 'Voltar', npcs_path, class: "btn btn-default btn-sm" %>
-				</p>
+																					class: "btn btn-primary btn-sm" %>
+				<% end %>
+				<%= link_to 'Voltar', npcs_path, class: "btn btn-default btn-sm" %>
 			</div>
 		</div>
 	</div>
@@ -127,13 +136,13 @@
 						<b>Habilidades Especiais</b>
 					</div>
 				</div>
-				<% @npc.skills.each do |skill| %>
-					<div class="row-fluid">
-						<div class="col-md-12">
+				<div class="row-fluid">
+					<% @npc.skills.each do |skill| %>
+						<div class="col-md-6">
 							<%= link_to skill.name, skill %>
 						</div>
-					</div>
-				<% end %>
+					<% end %>
+				</div>
 
 			</div>
 

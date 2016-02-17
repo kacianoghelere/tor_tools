@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5>
@@ -9,25 +9,39 @@
 				</b>
 			</h5>
 		</div>
+		
+		<% if !npc.img_url.empty? %>
+			<div class="panel-body">
+				<center>
+					<img src="<%= npc.img_url %>" width="400" class="img-thumbnail">
+				</center>
+			</div>
+		<% end %>
 
 		<ul class="list-group">
 			<li class="list-group-item">
-				<b>Aliado:</b> <span class="badge"><%= npc.ally %></span>
+				<b>Aliado</b> <span class="badge"><%= bool_icon(npc.ally, true) %></span>
 			</li>
 			<li class="list-group-item">
-				<b>Indice Atributo:</b> <span class="badge"><%= npc.attr_index %></span>
+				<b>Indice Atributo</b> <span class="badge"><%= npc.attr_index %></span>
 			</li>
 		</ul>
 
 		<div class="panel-footer">
-			<%= link_to edit_npc_path(npc), title: "Editar", 
-								class: "btn btn-primary btn-xs" do %>
-				<span class="glyphicon glyphicon-edit"></span> Editar
+			<%= link_to npc, title: "Visualizar", 
+								class: "btn btn-info btn-xs" do %>
+				<span class="glyphicon glyphicon-new-window"></span> Visualizar
 			<% end %>
-			<%= link_to(npc, method: :delete, title: "Remover", 
-								class: "btn btn-danger btn-xs", 
-								data: { confirm: "Deseja remover?" }) do %>
-				<span class="glyphicon glyphicon-remove"></span> Remover
+			<% if npc.user == current_user %>
+				<%= link_to edit_npc_path(npc), title: "Editar", 
+									class: "btn btn-primary btn-xs" do %>
+					<span class="glyphicon glyphicon-edit"></span> Editar
+				<% end %>
+				<%= link_to(npc, method: :delete, title: "Remover", 
+									class: "btn btn-danger btn-xs", 
+									data: { confirm: "Deseja remover?" }) do %>
+					<span class="glyphicon glyphicon-remove"></span> Remover
+				<% end %>
 			<% end %>
 		</div>
 	</div>

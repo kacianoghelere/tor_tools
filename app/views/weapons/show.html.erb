@@ -52,8 +52,10 @@
 		</div>
 
 		<div class="panel-footer">
-			<%= link_to 'Editar', edit_weapon_path(@weapon), 
+			<% if @weapon.user == current_user %>
+				<%= link_to 'Editar', edit_weapon_path(@weapon), 
 																					class: "btn btn-primary btn-sm" %>
+			<% end %>
 			<%= link_to 'Voltar', weapons_path, class: "btn btn-default btn-sm" %>
 		</div>
 	</div>

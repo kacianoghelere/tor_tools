@@ -1,15 +1,99 @@
 <%= form_for(@party, class: 'form-horizontal') do |f| %>
-	<div class="col-md-6">
+	<div class="col-md-12 col-thin">
 		<div class="form-group">
 			<%= f.label :title, "Titulo" %>
 			<%= f.text_field :title, class: 'form-control input-sm' %>
 		</div>
+
+		<div class="table-responsive">
+			<table id="members" class="table table-condensed">
+				<thead>
+					<tr>
+						<th width="5%">
+							<button type="button" class="btn btn-success btn-block btn-sm add">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+						</th>
+						<th width="80%">Membro</th>
+						<th width="15%">Quantidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @party.party_npcs.each do |member| %>
+						<tr>
+							<td width="5%">
+								<button type="button" class="btn btn-danger btn-block btn-sm del">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
+							</td>
+							<td width="80%">
+								<%= hidden_field :member, :id, readonly: true, value: member.npc.id,
+																					class: "form-control input-sm" %>
+								<%= text_field :member, :name, value: member.npc.name,
+																					class: "form-control input-sm" %>
+							</td>
+							<td width="15%">
+								<%= number_field :member, :amount, value: member.amount,
+																					class: "form-control input-sm" %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-	<div class="col-md-12">
+	<div class="col-md-12 col-thin">
 		<div class="form-group">
 			<%= button_tag yield(:button_text),	type: :submit, 
 																					class: "btn btn-default btn-sm" %>
 		</div>
 	</div>
 <% end %>
+
+<script type="text/javascript">
+	$('.add').click(function(event) {
+		$.tr        = $("<tr/>");
+		$.td_btn    = $("<td/>", { "width": "5%"  });
+		$.btn    = $("<button/>", { 
+			"type": "button",
+			"class": "btn btn-danger btn-block btn-sm del",
+			"html": "<span class=\"glyphicon glyphicon-minus\"></span>"
+		});
+		$.btn.appendTo($.td_btn);
+
+		$.td_name = $("<td/>", { "width": "80%" });
+		$.input_id = $("<input/>", { 
+			"class": "form-control input-sm", 
+			"name": "member[id]", 
+			"id": "member_id", 
+			"type":"hidden" 
+		});
+		$.input_name = $("<input/>", { 
+			"class": "form-control input-sm", 
+			"name": "member[name]", 
+			"id": "member_name", 
+			"type":"text" 
+		});
+		$.input_id.appendTo($.td_name);
+		$.input_name.appendTo($.td_name);
+
+		$.td_amount = $("<td/>", { "width": "15%" });
+		$.input_amount = $("<input/>", { 
+			"class": "form-control input-sm", 
+			"name": "member[name]", 
+			"id": "member_name", 
+			"type":"number" 
+		});
+		$.input_amount.appendTo($.td_amount);
+
+		$.td_btn.appendTo($.tr);
+		$.td_name.appendTo($.tr);
+		$.td_amount.appendTo($.tr);
+		$("#members tbody").append($.tr);
+	});
+
+	$(document).on('click', '.del', function(event) {
+		$(this).closest('tr').remove();
+	});
+</script>

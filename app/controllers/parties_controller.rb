@@ -3,7 +3,7 @@ class PartiesController < ApplicationController
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
 	def index
-		@parties = current_user.parties
+		@parties = Party.all
 	end
 
 	def show

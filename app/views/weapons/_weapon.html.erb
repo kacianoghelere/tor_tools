@@ -32,14 +32,20 @@
 		</div>
 
 		<div class="panel-footer">
-			<%= link_to edit_weapon_path(weapon), title: "Editar", 
-								class: "btn btn-primary btn-xs" do %>
-				<span class="glyphicon glyphicon-edit"></span> Editar
+			<%= link_to weapon, title: "Visualizar", 
+								class: "btn btn-info btn-xs" do %>
+				<span class="glyphicon glyphicon-new-window"></span> Visualizar
 			<% end %>
-			<%= link_to(weapon, method: :delete, title: "Remover", 
-								class: "btn btn-danger btn-xs", 
-								data: { confirm: "Deseja remover?" }) do %>
-				<span class="glyphicon glyphicon-remove"></span> Remover
+			<% if weapon.user == current_user %>
+				<%= link_to edit_weapon_path(weapon), title: "Editar", 
+									class: "btn btn-primary btn-xs" do %>
+					<span class="glyphicon glyphicon-edit"></span> Editar
+				<% end %>
+				<%= link_to(weapon, method: :delete, title: "Remover", 
+									class: "btn btn-danger btn-xs", 
+									data: { confirm: "Deseja remover?" }) do %>
+					<span class="glyphicon glyphicon-remove"></span> Remover
+				<% end %>
 			<% end %>
 		</div>
 	</div>

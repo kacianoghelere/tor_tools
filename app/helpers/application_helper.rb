@@ -23,6 +23,12 @@ module ApplicationHelper
 		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
 	end
 
+	def bool_icon(value, print_text = false, options = { yes: "Sim", no: "Não" })
+		icon = (value ? "ok" : "ban-circle");
+		text = (print_text ? (value ? options[:yes] : options[:no]) : "")
+		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
+	end
+
 	def generate_tab(href, options = { active: false, inner: '', count: nil })
 		tab = "<li role='presentation'" +
 			(options[:active] ? " class='active' " : "") + ">" +

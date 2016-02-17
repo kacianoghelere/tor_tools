@@ -3,7 +3,7 @@ class NpcsController < ApplicationController
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
 	def index
-		@npcs = current_user.npcs
+		@npcs = Npc.all
 	end
 
 	def show

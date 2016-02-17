@@ -1,2 +1,29 @@
-<h1>Parties#show</h1>
-<p>Find me in app/views/parties/show.html.erb</p>
+<% provide(:title, "#{@party.id} - #{@party.title}") %>
+
+<div class="row">
+
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4><%= "#{@party.id} - #{@party.title}" %></h4>
+			</div>
+
+			<ul class="list-group">
+				<% @party.party_npcs.each do |party_npc| %>
+					<%= link_to party_npc.npc, class: "list-group-item" do %>
+						<%= party_npc.npc.name %>
+						<span class="badge"><%= party_npc.amount %></span>
+					<% end %>
+				<% end %>
+			</ul>
+
+			<div class="panel-footer">
+				<% if @party.user == current_user %>
+					<%= link_to 'Editar', edit_party_path(@party), 
+																						class: "btn btn-primary btn-sm" %>
+				<% end %>																			
+				<%= link_to 'Voltar', parties_path, class: "btn btn-default btn-sm" %>
+			</div>
+		</div>
+	</div>
+</div>
