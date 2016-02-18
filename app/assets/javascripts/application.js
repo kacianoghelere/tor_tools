@@ -42,6 +42,42 @@ $.startMultiselects = function() {
 		allSelectedText: 'Todos selecionados'
 	});
 }
+$.customMultiselects = function(elem, limit) {
+	$(elem).multiselect({
+		maxHeight: 200,
+		enableFiltering: false,
+		includeSelectAllOption: false,
+		buttonClass: 'btn btn-default btn-sm',
+		buttonContainer: '<div class="btn-group" />',
+		nonSelectedText: 'Selecione',
+		allSelectedText: 'Todos selecionados',
+    onChange: function(option, checked) {
+			// Get selected options.
+			var selectedOptions = $(elem).find('option:selected');
+			if (selectedOptions.length >= limit) {
+				// Disable all other checkboxes.
+				var nonSelectedOptions = $(elem).find('option').filter(function() {
+					return !$(this).is(':selected');
+				});
+
+				var dropdown = $(elem).siblings('.multiselect-container');
+				nonSelectedOptions.each(function() {
+					var input = $('input[value="' + $(this).val() + '"]');
+					input.prop('disabled', true);
+					input.parent('li').addClass('disabled');
+				});
+			} else {
+				// Enable all checkboxes.
+				var dropdown = $(elem).siblings('.multiselect-container');
+				$(elem).find('option').each(function() {
+					var input = $('input[value="' + $(this).val() + '"]');
+					input.prop('disabled', false);
+					input.parent('li').addClass('disabled');
+				});
+			}
+    }
+	});
+}
 
 $.posicoes = [
 	{ id: 1, titulo: "Vanguarda",  classe: "danger",  na: 6  },

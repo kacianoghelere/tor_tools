@@ -1,16 +1,16 @@
 <%= form_for(@npc, class: 'form-horizontal') do |f| %>
-	<div class="col-md-12 col-thin">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">Dados Básicos</div>
 			<div class="panel-body">
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="form-group">
 						<%= f.label :name, "Nome", class: 'col-md-12' %>
 						<%= f.text_field :name, class: 'form-control input-sm' %>
 					</div>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="form-group">
 						<%= f.label :img_url, "URL Ilustração", class: 'col-md-12' %>
 						<%= f.text_field :img_url, class: 'form-control input-sm' %>
@@ -20,7 +20,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-6 col-thin-left">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">Informações</div>
 			<div class="panel-body">
@@ -76,7 +76,7 @@
 	</div>
 
 	<!-- Perícias -->
-	<div class="col-md-6 col-thin-right">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">Perícias</div>
 			<div class="panel-body">
@@ -132,7 +132,7 @@
 	</div>
 	<!-- Fim Perícias -->
 
-	<div class="col-md-12 col-thin">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">Extras</div>
 			<div class="panel-body">
@@ -157,7 +157,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-12 col-thin">
+	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">Descrição</div>
 			<div class="panel-body">
@@ -167,7 +167,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-12 col-thin">
+	<div class="col-md-12">
 		<div class="form-group">
 			<%= button_tag yield(:button_text),	type: :submit, 
 																						class: "btn btn-default btn-sm" %>
@@ -176,7 +176,7 @@
 <% end %>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function() {;;
 		$.startMultiselects();
 	});
 </script>

@@ -32,7 +32,7 @@ end
 end
 
 20.times do |n|
-	name        = Faker::Lorem.word.capitalize
+	name        = Faker::Name.first_name.capitalize
 	description = Faker::Lorem.sentence
 	img_url     = Faker::Avatar.image
 	ally        = [true, false].sample
@@ -58,8 +58,7 @@ end
 	weapons = rand(1..3)
 	weapons.times do |n|
 		weapon = Weapon.all.sample
-		bonus  = rand(1..3)
-		NpcWeapon.create!(npc: npc, weapon: weapon, bonus: bonus)
+		NpcWeapon.create!(npc: npc, weapon: weapon, bonus: rand(1..3))
 	end
 
 	skills = rand(1..3)
@@ -71,9 +70,11 @@ end
 
 5.times do |n|
 	user   = User.all.sample
-	amount = rand(1..6)
-	npc    = Npc.all.sample
-	title  = npc.name.pluralize
+	amount = rand(1..4)
+	title  = Faker::Lorem.word.capitalize
 	party  = Party.create!(title: title, user: user)
-	PartyNpc.create!(party: party, npc: npc, amount: amount)
+	amount.times do |x|
+		npc = Npc.all.sample
+		party.party_npcs.create!(npc: npc, amount: rand(1..4))
+	end
 end

@@ -3,7 +3,7 @@ class CreateNpcWeapons < ActiveRecord::Migration
     create_table :npc_weapons do |t|
       t.references :npc, index: true, foreign_key: true
       t.references :weapon, index: true, foreign_key: true
-      t.integer :bonus
+      t.integer :bonus, default: 1
 
       t.timestamps null: false
     end

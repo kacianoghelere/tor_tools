@@ -19,4 +19,24 @@ class Npc < ActiveRecord::Base
 	def self.search(term)
 	  where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
 	end
+
+	# Cria o vinculo entre o npc e as armas, deleta anteriores
+	def create_weapons(weapons)
+		self.npc_weapons.destroy_all
+		weapons.each do |weapon|
+			if !weapon.empty?
+				self.npc_weapons.create({weapon_id: weapon.to_i})
+			end
+		end
+	end
+
+	# Cria o vinculo entre o npc e as habilidades, deleta anteriores
+	def create_skills(skills)
+		self.npc_skills.destroy_all
+		skills.each do |skill|
+			if !skill.empty?
+			 	self.npc_skills.create({skill_id: skill.to_i})
+			end
+		end
+	end
 end

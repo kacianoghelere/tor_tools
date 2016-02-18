@@ -17,40 +17,46 @@
 	</aside>
 </div>
 
-<% if current_user === @user %>
-	<div class="row">
-		<aside class="col-md-12">
-				<legend>Minhas criações</legend>			
-		</aside>
-		<aside class="col-md-12">
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs nav-justified" role="tablist">
-				<%= generate_tab "#npcs",    inner: "NPC's",       
-																			count: 0, active: true %>
-				<%= generate_tab "#weapons", inner: "Armas",       
-																			count: 0 %>
-				<%= generate_tab "#skills",  inner: "Habilidades", 
-																			count: 0 %>
-			</ul>
+<div class="row">
+	<aside class="col-md-12">
+		<% if current_user === @user %>
+			<legend>Minhas criações</legend>
+		<% else %>
+			<legend>Criações</legend>			
+		<% end %>
+	</aside>
+	<aside class="col-md-12">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs nav-justified" role="tablist">
+			<%= generate_tab "#npcs",    inner: "NPC's",       
+														count: @user.npcs.count, active: true %>
+			<%= generate_tab "#weapons", inner: "Armas",       
+														count: @user.weapons.count %>
+			<%= generate_tab "#skills",  inner: "Habilidades", 
+														count: @user.skills.count %>
+		</ul>
 
-			<!-- Tab panes -->
-			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="npcs">
-					<div class="panel panel-default">
-						<div class="panel-body">NPC's</div>
-					</div>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="weapons">
-					<div class="panel panel-default">
-						<div class="panel-body">Armas</div>
-					</div>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="skills">
-					<div class="panel panel-default">
-						<div class="panel-body">Habilidades</div>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="npcs">
+				<div class="panel panel-default">
+					<div class="panel-body">
+					 <%= render @user.npcs %>
 					</div>
 				</div>
 			</div>
-		</aside>
-	</div>
-<% end %>
+			<div role="tabpanel" class="tab-pane" id="weapons">
+				<div class="panel panel-default">
+					<div class="panel-body">
+					 <%= render @user.weapons %>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="skills">
+				<ul class="list-group">
+					<%= render @user.skills %>
+				</ul>
+			</div>
+		</div>
+	</aside>
+</div>

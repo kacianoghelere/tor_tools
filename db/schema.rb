@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20160216010018) do
   create_table "npc_weapons", force: :cascade do |t|
     t.integer  "npc_id"
     t.integer  "weapon_id"
-    t.integer  "bonus"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "bonus",      default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "npc_weapons", ["npc_id", "created_at"], name: "index_npc_weapons_on_npc_id_and_created_at"
