@@ -25,5 +25,7 @@ module TorTools
 
     # desabilita a porra do CoffeeScript
     config.generators.javascript_engine :js 
+
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

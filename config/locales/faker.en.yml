@@ -1,0 +1,64 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  hello: "Hello world"
+  faker:
+    norse:
+      style: [
+        Abakur,Aegir,Alcis,Alemano,Alfadu,Alfe,Alfrodul,Alifader,Alois,Alp,
+        Alrunos,Andrasta,Andvari,Angrboda,Asa,Asenheim,Asgard,Ask,Askur,
+        Audumbla,Aurvandir,Balder,Baushee,Belatucadro,Beleno,Beli,Beowulf,
+        Bergelmer,Berserker,Bestla,Bifrost,Bilskirnir,Borr,Bragi,Brokk,
+        Breidablik,Brimir,Brosingamene,Burro,Byleipter,Cor,Crodo,Dag,Dain,
+        Dazbogu,Deduska Domovoj,Donar,Donnerstag,Duende,Eddas,Edimilton,Eggther,
+        Ei,Einherjes,Elfos,Elli,Embla,Erda,Eostre,Ezudes,Fafnir,Farbanti,Fenris,
+        Fialar,Fiolnir,Fiorvim,Forsetes,Frea,Freki,Frey,Freya,Fricco,Frigga,
+        Fulla,Fyorgin,Gefion,Gefiona,Geirendur,Geirrod,Gerda,Geri,Gersemi,
+        Gialp,Gimli,Ginungagap,Gioll,Gladsheim,Glatnir,Glen,Gleipnir,Gna,Godan,
+        Gondir,Grid,Grillnborst,Groa,Gullfaxi,Gullinburst,Gulltoppr,Gunhir,
+        Gunnlod,Haiagriva,Hati,Hakemann,Har,Heidrúm,Heimdall,Hela,Hel,Henir,
+        Hermodr,Hertos,Hilda,Hlidskialf,Hlin,Hlodin,Hlorridi,Höðr,Hoenir,
+        Hofvarpnir,Holda,Hollarvaettir,Hongur,Hraesvelgr,Hreidmar,Hrungnir,
+        Hrymtrussar,Hugin,Hvergelmir,Hymir,Iarl,Iarnsaxa,Iduna,Iggdrasil,Imer,
+        Irmino,Irminsul,Irpa,Johnata,Jormungard,Jotunheim,Juba,Juwidia,Kari,
+        Karl,Kelpi,Kelpie,Kenrs,Khors,Klabanterman,Klabber,Kobald,Krodo,Kua,
+        Kvasir,Lada,Landvaettir,Landylfes,Laufey,Lif,Liftrasir,Loder,Lofn,Loki,
+        Loptr,Magni,Magur,Man,Managarmer,Mani,Manno,Mara,Mardoll,Megingard,
+        Meinvaettir,Menglod,Midgard,Midgardson,Mimamaid,Mimir,Mista,Mjolnir,
+        Mokkurkalf,Mokosi,Mundilfari,Munin,Musspell,Musphelhein,Naglfar,Nana,
+        Nara,Nastronol,Nealenia,Nehalennia,Nerto,Nibelungos,Nidhogg,Niflheim,
+        Nijod,Niord,Nixes,Njord,Noatum,Nornas,Odensberge,Odin,Odroerir,Odur,
+        Olero,Ondina,Otr,Porevit,Práo,Pamela,Ran,Reginn,Reno,Riesenheim,Rimer,
+        Rimgrim,Rinda,Ring,Rossweise,Rowana,Rubezahl,Runas,Sachrimnir,Saga,
+        Sagas,Saxnot,Scorpyus,Seeylfe,Siegfried,Siegrune,Sif,Sigina,Sigurd,
+        Silfos,Simarglu,Sindri,Siofn,Skadi,Skidbladnir,Skirmir,Skoll,Skogsfru,
+        Skogsman,Sleipner,Snotra,Sreca,Sultur,Suttung,Svadilfari,Svantovit,
+        Svipall,Syn,Tanfana,Thor,Thrudheim,Thrym,Thuner,Tialfi,Tiazi,Timer,
+        Tiro,Tivar,Trall,Trólensou,Trolléns,Trolls,Trude,Trudelmer,Trudr,
+        Trudvang,Tyr,Uller,Urdar,Utgardaloke,Vaftrudener,Valgrind,Valhala,
+        Valhol,Valquíria,Vanes,Var,Ve,Venusberga,Verdante,Vidar,Vola,Voltumna,
+        Voluspâ,Volusú,Vor,Waeterrylfe,Wafzudnir,Walaskialf,Walhala,Wieland
+        Wotan,Wodansberge,Yggdrasil,Ymir,Yord,Yormungard,Zeeneboch,Zhiridi,
+        Ziu,Zorgerdr,Zorr,Zweger
+      ]
+      name:
+        - "#{style}"

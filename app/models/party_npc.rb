@@ -1,7 +1,7 @@
 class PartyNpc < ActiveRecord::Base
 	belongs_to :party
 	belongs_to :npc
-	validates :party_id, presence: true
-	validates :npc_id,   presence: true
-	# accepts_nested_attributes_for :npc, :reject_if => :all_blank
+	before_save { self.amount = 1 unless self.amount > 0 }
+	validates_presence_of :party
+	validates_presence_of :npc
 end

@@ -32,7 +32,7 @@ end
 end
 
 20.times do |n|
-	name        = Faker::Name.first_name.capitalize
+	name        = Faker::Norse.name.capitalize
 	description = Faker::Lorem.sentence
 	img_url     = Faker::Avatar.image
 	ally        = [true, false].sample

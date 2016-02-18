@@ -4,7 +4,7 @@
 			<h5>
 				<b>
 					<%= link_to npc do %>
-						<span class="badge"><%= npc.id %></span> <%= npc.name %> 
+						<span class="badge"><%= npc.id %></span> <%= npc.name %>
 					<% end %>
 				</b>
 			</h5>
@@ -13,7 +13,7 @@
 		<% if !npc.img_url.empty? %>
 			<div class="panel-body">
 				<center>
-					<img src="<%= npc.img_url %>" width="400" class="img-thumbnail">
+					<%= image_tag npc.img_url, size: "300", class: "img-thumbnail" %>
 				</center>
 			</div>
 		<% end %>

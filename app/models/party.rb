@@ -1,19 +1,19 @@
 class Party < ActiveRecord::Base
 	belongs_to :user
-	attr_accessor :members
-	has_many :party_npcs, :dependent => :destroy 
+	has_many :party_npcs, inverse_of: :party, :dependent => :destroy 
 	has_many :npcs, through: :party_npcs
-	# accepts_nested_attributes_for :members, :reject_if => :all_blank
+	accepts_nested_attributes_for :party_npcs, :allow_destroy => true
 	validates :title, presence: true, length: { maximum: 50 }
 
-	# Cria o vinculo entre o npc e as armas, deleta anteriores
-	def create_npcs(members)
-		self.party_npcs.destroy_all
-		members.each do |member|
-			if !member.empty?
-				party_npc = self.party_npcs.create!({npc_id: member[:npc_id], 
-						amount: member[:amount]})
-			end
-		end
+	def reject_party_npcs(attributed)
+		attributed['id'].blank?
+	end
+
+	def filter_npcs
+		Npc.all #.where('"id" NOT IN (?)', self.npcs.map { |x| x.id } )
+	end
+
+	def build_party_npcs
+		self.party_npcs.build.amount = 1 unless !self.party_npcs.empty?
 	end
 end

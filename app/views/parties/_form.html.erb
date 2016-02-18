@@ -5,43 +5,52 @@
 			<%= f.text_field :title, class: 'form-control input-sm' %>
 		</div>
 
-		<div class="table-responsive">
-			<table id="members" class="table table-condensed">
-				<thead>
-					<tr>
-						<th width="5%">
-							<button type="button" class="btn btn-success btn-block btn-sm add">
-								<span class="glyphicon glyphicon-plus"></span>
-							</button>
-						</th>
-						<th width="80%">Membro</th>
-						<th width="15%">Quantidade</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%= f.fields_for "members[]", [] do |ff| %>
-						<% @party.party_npcs.each do |party_npc| %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h5>
+					<b>NPC's</b>
+					<div class="pull-right">
+						<%= f.button :name => "add_npc",    type: 'submit', 
+																				class: 'btn btn-info btn-xs' do %>
+							<%= link_icon('plus') %> Adicionar
+						<% end %>
+						<%= f.button :name => "remove_npc", type: 'submit', 
+																				class: 'btn btn-danger btn-xs' do %>
+							<%= link_icon('remove') %> Remover Selecionados
+						<% end %>
+					</div>
+				</h5>
+			</div>
+
+			<div class="table-responsive">
+				<table id="members" class="table table-condensed">
+					<thead>
+						<tr>
+							<th width="85%" colspan="2">Membro</th>
+							<th width="15%">Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= f.fields_for :party_npcs, @party.party_npcs do |ff| %>
+							<%= ff.hidden_field :id %>
 							<tr>
-								<td width="5%">
-									<button type="button" class="btn btn-danger btn-block btn-sm del">
-										<span class="glyphicon glyphicon-minus"></span>
-									</button>
+								<td width="5%" align="center">
+									<%= f.check_box :_destroy %>
 								</td>
 								<td width="80%">
-									<%= ff.hidden_field :npc_id, value: party_npc.npc.id,
-														class: "form-control input-sm" %>
-									<%= ff.text_field :name, value: party_npc.npc.name, 
-														class: "form-control input-sm party_npc_name" %>
+									<%= ff.collection_select :npc_id, @party.filter_npcs, 
+												:id, :name, {}, class: "form-control input-sm" %>
 								</td>
 								<td width="15%">
-									<%= ff.number_field :amount, value: party_npc.amount, 
-														class: "form-control input-sm" %>
+									<%= ff.number_field :amount, 
+																				class: "form-control input-sm" %>
 								</td>
 							</tr>
 						<% end %>
-					<% end %>
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
+
 		</div>
 	</div>
 
@@ -54,6 +63,7 @@
 <% end %>
 
 <script type="text/javascript">
+/*
 	$.startAutoComplete = function() {
 		$('.party_npc_name').each(function(index, el) {
 			$.tr = $(el).closest('tr');
@@ -80,7 +90,7 @@
 	}
 
 	$(function() {
-		$.startAutoComplete();		
+		$.startAutoComplete();
 	});
 
 	$('.add').click(function(event) {
@@ -138,4 +148,5 @@
 	$(document).on('click', '.del', function(event) {
 		$(this).closest('tr').remove();
 	});
+*/
 </script>
