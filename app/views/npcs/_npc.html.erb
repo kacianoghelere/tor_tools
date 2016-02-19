@@ -4,22 +4,22 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4>
-				<b>
-					<%= link_to npc, class: "text-#{ally_class}" do %>
-						<span class="badge"><%= npc.id %></span> <%= npc.name %> 
-						<span class="pull-right">
-							<%= bool_icon(npc.ally, false,
-																yes_icon: "eye-open", no_icon: "eye-close") %>
-						</span>
-					<% end %>
+				<b class="text-<%= ally_class %>">
+					<span class="badge"><%= npc.id %></span> <%= npc.name %> 
+					<span class="pull-right">
+						<%= bool_icon(npc.ally, false,
+															yes_icon: "eye-open", no_icon: "eye-close") %>
+					</span>
 				</b>
 			</h4>
 		</div>
 		
 		<% if !npc.img_url.empty? %>
-			<div class="<%= "panel-body bg-#{ally_class}" %>">
+			<div class="panel-body">
 				<center>
-					<%= image_tag npc.img_url, size: "300", class: "img-thumbnail" %>
+					<%= link_to npc, class: "bg-#{ally_class}" do %>
+						<%= image_tag npc.img_url, size: "300", class: "img-thumbnail" %>
+					<% end %>
 				</center>
 			</div>
 		<% end %>
