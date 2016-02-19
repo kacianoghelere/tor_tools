@@ -27,5 +27,7 @@ module TorTools
     config.generators.javascript_engine :js 
 
     config.autoload_paths << Rails.root.join('lib')
+    config.assets.enabled = true
+    config.assets.paths << Rails.root.join('/app/assets/fonts')
   end
 end

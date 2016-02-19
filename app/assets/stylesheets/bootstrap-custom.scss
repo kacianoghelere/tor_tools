@@ -1,15 +1,20 @@
-body { 
-	padding-top: 75px; 
-	padding-bottom: 15px; 
-	// background-color: #DDD;
-	// // background-image: url('bg/parchment_pattern.jpg');
+@font-face {
+  font-family: "Ringbearer";
+  src: url(/assets/ringbearer.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
-body>.container {
-	// padding-top: 15px; 
-	// background-color: #FFF;
-	// box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
-	// -moz-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
-	// -webkit-box-shadow: 0 2px 2px 2px rgba(0,0,0,0.12), 0 2px 2px 2px rgba(0,0,0,0.12);
+@font-face {
+  font-family: "Aniron";
+  src: url(/assets/anirm___.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Aniron_Bold";
+  src: url(/assets/anirb___.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @mixin box_sizing {
@@ -17,24 +22,101 @@ body>.container {
 	-webkit-box-sizing: border-box;
 	box-sizing:				 border-box;
 }
-
-.page-header {
-    padding-bottom: 5px;
-    margin: 20px 0px;
-    border-bottom: 1px solid #E6E3DD;
+@mixin parchment_background {
+  background: url(bg/parchment-background.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-// .checkbox {
-// 	margin-top: -10px;
-// 	margin-bottom: 10px;
-// 	span {
-// 		margin-left: 20px;
-// 		font-weight: normal;
-// 	}
-// 	input[type="checkbox"] {
-// 		margin-left: 0px;
-// 	}
-// }
+@mixin parchment_background_dark {
+  background: url(bg/parchment-background-2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+@mixin frame_border  {
+	border-image-source: url('frame-borders/frame-border-1.png');
+	border-image-slice: 170;
+	border-image-repeat: repeat;
+	border-width: 20px;
+	border-style: solid;
+}
+@mixin frame_border_second  {
+	border-image-source: url('frame-borders/frame-border-2.jpg');
+	border-image-slice: 60;
+	border-image-repeat: repeat;
+	border-width: 60px;
+	border-style: solid;
+}
+@mixin frame_border_third {
+	border-image-source: url('frame-borders/frame-border-3.jpg');
+	border-image-slice: 170;
+	border-image-repeat: repeat;
+	border-width: 170px;
+	border-style: solid;
+}
+@mixin frame_border_fourth {
+	border-image-source: url('frame-borders/frame-border-4.png');
+	border-image-slice: 200;
+	border-image-repeat: repeat;
+	border-width: 200px;
+	border-style: solid;
+}
+
+body { 
+	padding-top: 75px; 
+	padding-bottom: 15px;
+	@include parchment_background;
+
+	&>.container {
+		// background-color: #FFF;
+		// padding-left: 0;
+		// padding-right: 0;
+		// @include frame_border_second;
+	}
+}
+
+.navbar-default {
+    background: url("bg/dark_wood_pattern.png");
+}
+.navbar-default .navbar-nav > a, 
+.navbar-default .navbar-nav > a:hover,
+.navbar-default .navbar-nav > a:focus {
+    color: #98978B;
+}
+.navbar-default .navbar-nav > .active > a {
+	color: #F0F0F0;
+  background: rgba(53,43,35,0.6);
+}
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #FFF;
+  background: rgba(53,43,35,0.8);
+}
+ul.list-unstyled {
+	border-left: 1px solid #F0F0F0;
+	text-transform: none;
+}
+
+.page-header {
+	padding: 0 0 5px 0;
+	margin: 20px 0px;
+	border-bottom: 4px double #362A23;
+
+	&>h1,&>.h1,
+	&>h2,&>.h2,
+	&>h3,&>.h3,
+	&>h4,&>.h4,
+	&>h5,&>.h5,
+	&>h6,&>.h6 {
+		font-family: "Aniron";
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+}
 
 .text-left {
 	text-align: left;
@@ -74,12 +156,9 @@ body>.container {
 }
 
 .npc-bg {
-  background: url(imagem/bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	@include parchment_background_dark;
 }
+
 .table > thead > tr > td.default, 
 .table > thead > tr > th.default, 
 .table > thead > tr.default > td, 
@@ -133,6 +212,36 @@ body>.container {
 .progress {
 	margin-bottom: 0px;
 }
+.panel{
+	&>.panel-heading h1,
+	&>.panel-heading .h1,
+	&>.panel-heading h2,
+	&>.panel-heading .h2,
+	&>.panel-heading h3,
+	&>.panel-heading .h3,
+	&>.panel-heading h4,
+	&>.panel-heading .h4,
+	&>.panel-heading h5,
+	&>.panel-heading .h5,
+	&>.panel-heading h6,
+	&>.panel-heading .h6	{
+		font-family: "Aniron";
+	}
+
+	&>a, &>.img-thumbnail {
+		width:100%;
+	}
+
+	&>a>.img-thumbnail {
+		width:100%;
+		border-radius: 0;
+	}
+}
+
+a {
+    color: #7CA63F;
+    text-decoration: none;
+}
 /* miscellaneous */
 .debug_dump {
 	clear: both;
@@ -143,4 +252,3 @@ body>.container {
 	color: #EEE;
 	@include box_sizing;
 }
-

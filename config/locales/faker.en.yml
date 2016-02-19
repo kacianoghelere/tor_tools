@@ -23,7 +23,7 @@ en:
   hello: "Hello world"
   faker:
     norse:
-      style: [
+      names: [
         Abakur,Aegir,Alcis,Alemano,Alfadu,Alfe,Alfrodul,Alifader,Alois,Alp,
         Alrunos,Andrasta,Andvari,Angrboda,Asa,Asenheim,Asgard,Ask,Askur,
         Audumbla,Aurvandir,Balder,Baushee,Belatucadro,Beleno,Beli,Beowulf,
@@ -61,4 +61,4 @@ en:
         Ziu,Zorgerdr,Zorr,Zweger
       ]
       name:
-        - "#{style}"
+        - "#{names}"

@@ -20,14 +20,16 @@
 /* Import bootstrap-sprockets */
 @import "bootstrap-sprockets";
 
-/* Import lumen variables */
-@import "bootswatch/lumen/variables";
+/* Import sandstone variables */
+@import "bootswatch/sandstone/variables";
 
 /* Then bootstrap itself */
 @import "bootstrap";
 
 /* And finally bootswatch style itself */
-@import "bootswatch/lumen/bootswatch";
+@import "bootswatch/sandstone/bootswatch";
 
 /* Whatever application styles you have go last */
 @import "bootstrap-custom";
+
+@import "yamm";
