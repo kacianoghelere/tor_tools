@@ -130,7 +130,9 @@ body>.container {
 .panel-columns div.col-lg-12:last-child {
 	border-right: none;
 }
-
+.progress {
+	margin-bottom: 0px;
+}
 /* miscellaneous */
 .debug_dump {
 	clear: both;

@@ -23,8 +23,9 @@ module ApplicationHelper
 		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
 	end
 
-	def bool_icon(value, print_text = false, options = { yes: "Sim", no: "Não" })
-		icon = (value ? "ok" : "ban-circle");
+	def bool_icon(value, print_text = false, 
+			options={ yes_icon: "ok", no_icon: "ban-circle", yes: "Sim", no: "Não" })
+		icon = (value ? "#{options[:yes_icon]}" : "#{options[:no_icon]}");
 		text = (print_text ? (value ? options[:yes] : options[:no]) : "")
 		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
 	end

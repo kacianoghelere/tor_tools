@@ -19,6 +19,7 @@ class PartiesController < ApplicationController
 		@party = Party.new(party_params)
 		if params[:add_npc]
 			# add empty party_npc associated with @party
+			flash.now[:info] = "NPC adicionado."
 			@party.party_npcs.build.amount = 1
 		elsif params[:remove_npc]
 			# nested model that have _destroy attribute = 1
@@ -26,10 +27,10 @@ class PartiesController < ApplicationController
 		else
 			@party.user = current_user
 			if @party.save
-				flash[:success] = "Informações Salvas"
+				flash.now[:success] = "Informações Salvas"
 				redirect_to @party and return
 			else
-				flash[:danger] = "Ooops! Algo deu errado..."
+				flash.now[:danger] = "Ooops! Algo deu errado..."
 			end
 		end
 		render :action => 'new'
@@ -46,12 +47,11 @@ class PartiesController < ApplicationController
 			attrs = params[:party][:party_npcs_attributes]
 			unless attrs.blank?
 				for pt_attr in attrs
-					unless pt_attr.last.has_key?(:id)
-						@party.party_npcs.build(pt_attr.last.except(:_destroy))
-					end
+					@party.party_npcs.build(pt_attr.last.except(:_destroy)) unless pt_attr.last.has_key?(:id)
 				end
 			end
 			# add one more empty party_npc attribute
+			flash.now[:info] = "NPC adicionado."
 		  @party.party_npcs.build.amount = 1
 		elsif params[:remove_npc]
 			# collect all marked for delete party_npc ids
@@ -59,7 +59,7 @@ class PartiesController < ApplicationController
 			rmv = attrs.collect {|i, a| a[:id] if (a[:id] && a[:_destroy].to_i == 1)}
 			# physically delete the party_npcs from database
 			PartyNpc.delete(rmv)
-			flash[:info] = "NPC removido."
+			flash.now[:info] = "NPC removido."
 			for pt_attr in params[:party][:party_npcs_attributes]
 				# rebuild party_npcs attributes that doesn't have an id 
 				# and its _destroy attribute is not 1
@@ -70,10 +70,10 @@ class PartiesController < ApplicationController
     else
       # save goes like usual
 			if @party.update_attributes(party_params)
-				flash[:success] = "Informações atualizadas"
+				flash.now[:success] = "Informações atualizadas"
 				redirect_to @party and return
 			else
-				flash[:danger] = "Ooops! Algo deu errado..."
+				flash.now[:danger] = "Ooops! Algo deu errado..."
 			end
     end
     render :action => 'edit'
@@ -81,7 +81,7 @@ class PartiesController < ApplicationController
 
 	def destroy
 		Party.find(params[:id]).destroy
-		flash[:success] = "Operação concluída com sucesso!"
+		flash.now[:success] = "Operação concluída com sucesso!"
 		redirect_to parties_url
 	end
 
@@ -98,7 +98,7 @@ class PartiesController < ApplicationController
 		def logged_in_user
 			unless logged_in?
 				store_location
-				flash[:danger] = "Acesse o sistema para efetuar esta operação"
+				flash.now[:danger] = "Acesse o sistema para efetuar esta operação"
 				redirect_to login_url
 			end
 		end

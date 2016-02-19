@@ -11,12 +11,13 @@
 			<div class="panel-body">
 				<% @party.party_npcs.each do |p| %>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="well well-sm">
+						<div class="thumbnail">
 							<%= link_to p.npc do %>
 								<%= image_tag p.npc.img_url, size: "48", 
 																							class: "img-thumbnail" %>
-								<%= p.npc.name %>
-								<span class="badge"><%= p.amount %></span>
+								<center>
+									<%= p.npc.name %> <span class="badge"><%= p.amount %></span>
+								</center>
 							<% end %>
 						</div>
 					</div>
