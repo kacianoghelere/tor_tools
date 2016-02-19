@@ -1,2 +1,7 @@
-<h1>WeaponCategories#edit</h1>
-<p>Find me in app/views/weapon_categories/edit.html.erb</p>
+<% provide(:title, 'Editar categoria de arma') %>
+<% provide(:label, 'Categorias de armas') %>
+<% provide(:button_text, 'Salvar') %>
+
+<div class="row-fluid">
+	<%= render 'form' %>
+</div>

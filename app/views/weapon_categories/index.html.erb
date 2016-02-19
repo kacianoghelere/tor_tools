@@ -1,2 +1,13 @@
-<h1>WeaponCategories#index</h1>
-<p>Find me in app/views/weapon_categories/index.html.erb</p>
+<% provide(:title, 'Categorias de Armas') %>
+<% provide(:label, 'Categorias de Armas') %>
+
+<div class="row">
+	<%= render @weapon_categories %>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= link_to 'Nova Categoria', new_weapon_category_path, 
+																		class: "btn btn-default btn-sm" %>
+	</div>
+</div>

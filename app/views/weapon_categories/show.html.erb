@@ -1,2 +1,21 @@
-<h1>WeaponCategories#show</h1>
-<p>Find me in app/views/weapon_categories/show.html.erb</p>
+<% provide(:title, "#{@weapon_category.id} - #{@weapon_category.name}") %>
+<% provide(:label, 'Categorias de armas') %>
+
+<div class="row-fluid">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4><%= "#{@weapon_category.id} - #{@weapon_category.name}" %></h4>
+		</div>
+
+		<div class="panel-body">
+				<%= render @weapon_category.weapons %>
+		</div>
+
+		<div class="panel-footer">
+			<%= link_to 'Editar', edit_weapon_category_path(@weapon_category), 
+																					class: "btn btn-primary btn-sm" %>
+			<%= link_to 'Voltar', weapon_categories_path, 
+																					class: "btn btn-default btn-sm" %>
+		</div>
+	</div>
+</div>

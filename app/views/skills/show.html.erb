@@ -1,7 +1,10 @@
+<% provide(:title, "#{@skill.id} - #{@skill.name}") %>
+<% provide(:label, 'Habilidades') %>
+
 <div class="row-fluid">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4><%= @skill.id %> - <%= @skill.name %></h4>
+			<h4><%= "#{@skill.id} - #{@skill.name}" %></h4>
 		</div>
 
 		<div class="panel-body">

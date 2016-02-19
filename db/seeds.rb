@@ -1,6 +1,6 @@
 User.create!(name:	"Kaciano Ghelere",
 						 email: "kaciano_ghelere@yahoo.com.br",
-						 password:							"123456",
+						 password:              "123456",
 						 password_confirmation: "123456",
 						 admin: true)
 
@@ -12,16 +12,22 @@ User.create!(name:	"Kaciano Ghelere",
 							 password_confirmation: password)
 end
 
-encs = ["Desarma", "Perfura", "Destrói Escudo"]
+WeaponCategory.create!(name: "Espada", effect: "Desarma")
+WeaponCategory.create!(name: "Machado", effect: "Destrói Escudo")
+WeaponCategory.create!(name: "Arco", effect: "Perfura")
+WeaponCategory.create!(name: "Lança", effect: "Perfura")
+WeaponCategory.create!(name: "Punhal", effect: "")
+
 15.times do |n|
-	name   = Faker::Lorem.word.capitalize
-	damage = rand(1..10)
-	edge   = rand(0..11)
-	injury = rand(1..20)
-	enc    = encs.sample
-	user   = User.all.sample
-	Weapon.create!(name: name, damage: damage, edge: edge, injury: injury, 
-									enc: enc, user: user)
+	name     = Faker::Lorem.word.capitalize
+	damage   = rand(1..10)
+	edge     = rand(0..11)
+	injury   = rand(1..20)
+	user     = User.all.sample
+	category = WeaponCategory.all.sample
+	Weapon.create!(name: "#{category.name} #{name}", damage: damage, 
+									edge: edge, injury: injury,
+									user: user, weapon_category: category)
 end
 
 10.times do |n|

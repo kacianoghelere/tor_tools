@@ -1,7 +1,11 @@
+<% provide(:title, "#{@weapon.id} - #{@weapon.name}") %>
+<% provide(:label, 'Armas') %>
+<% category = @weapon.weapon_category %>
+
 <div class="row-fluid">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4><%= @weapon.id %> - <%= @weapon.name %></h4>
+			<h4><%= "#{@weapon.id} - #{@weapon.name} (#{category.name})" %></h4>
 		</div>
 
 		<div class="panel-body">
@@ -46,13 +50,13 @@
 					<label class="text-right">Ataque direcionado:</label>
 				</div>
 				<div class="col-md-9">
-					<%= @weapon.enc %>
+					<%= category.effect %>
 				</div>
 			</div>
 		</div>
 
 		<div class="panel-footer">
-			<% if @weapon.user == current_user %>
+			<% if admin? %>
 				<%= link_to 'Editar', edit_weapon_path(@weapon), 
 																					class: "btn btn-primary btn-sm" %>
 			<% end %>

@@ -32,9 +32,9 @@
 
 	<div class="col-md-6">
 		<div class="form-group">
-			<%= f.label :enc, "Ataque direcionado" %>
-			<%= f.select(:enc, ["Perfura","Desarma","Destroí Escudo"], {}, 
-																{ :class => 'form-control input-sm' }) %>
+			<%= f.label :weapon_category, "Categoria" %>
+			<%= f.collection_select :npc_id, WeaponCategory.all, 
+						:id, :name, {}, class: "form-control input-sm" %>
 		</div>
 	</div>
 

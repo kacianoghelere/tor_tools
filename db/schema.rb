@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20160219160820) do
 
   create_table "weapon_categories", force: :cascade do |t|
     t.string   "name"
+    t.string   "effect"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -119,13 +120,15 @@ ActiveRecord::Schema.define(version: 20160219160820) do
     t.integer  "damage"
     t.integer  "edge"
     t.integer  "injury"
-    t.string   "enc"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "weapon_category_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "weapons", ["user_id", "created_at"], name: "index_weapons_on_user_id_and_created_at"
   add_index "weapons", ["user_id"], name: "index_weapons_on_user_id"
+  add_index "weapons", ["weapon_category_id", "created_at"], name: "index_weapons_on_weapon_category_id_and_created_at"
+  add_index "weapons", ["weapon_category_id"], name: "index_weapons_on_weapon_category_id"
 
 end

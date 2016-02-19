@@ -1,2 +1,7 @@
-<h1>WeaponCategories#new</h1>
-<p>Find me in app/views/weapon_categories/new.html.erb</p>
+<% provide(:title, 'Nova categoria de arma') %>
+<% provide(:label, 'Categorias de armas') %>
+<% provide(:button_text, 'Criar') %>
+
+<div class="row-fluid">
+	<%= render 'form' %>
+</div>

@@ -1,0 +1,35 @@
+<% effect = weapon_category.effect %>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5>
+				<%= link_to weapon_category do %>
+					<%= "#{weapon_category.id} - #{weapon_category.name}" %> 
+				<% end %>
+			</h5>
+		</div>
+		<div class="panel-body">
+			<%= !effect.empty? ? effect : "Sem efeito" %>
+		</div>
+		<div class="panel-footer">
+			<%= link_to weapon_category, title: "Visualizar", 
+								class: "btn btn-info btn-xs" do %>
+				<span class="glyphicon glyphicon-new-window"></span> Visualizar
+			<% end %>
+			<% if admin? %>
+				<div class="pull-right">
+					<%= link_to edit_weapon_category_path(weapon_category), 
+										title: "Editar", 
+										class: "btn btn-primary btn-xs" do %>
+						<span class="glyphicon glyphicon-edit"></span>
+					<% end %>
+					<%= link_to(weapon_category, method: :delete, title: "Remover", 
+										class: "btn btn-danger btn-xs", 
+										data: { confirm: "Deseja remover?" }) do %>
+						<span class="glyphicon glyphicon-remove"></span>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
