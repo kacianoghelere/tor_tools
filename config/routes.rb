@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 	get    'help'	        => 'main#help'
 	get    'about'	      => 'main#about'
 	get    'contact'      => 'main#contact'
+	get    'battle'       => 'main#battle'
 	post   'send_contact' => 'main#send_contact'
 	get    'signup'	      => 'users#new'
 	get    'login'	      => 'sessions#new'

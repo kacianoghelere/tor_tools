@@ -47,7 +47,7 @@ class WeaponsController < ApplicationController
 	private
 		def weapon_params
 			params.require(:weapon).permit(:name, :damage, :edge, :injury, 
-																			:weapon_category)
+																			:weapon_category_id)
 		end
 
 		# Before filters

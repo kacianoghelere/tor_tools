@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+
 	def index
 		unless logged_in?
 			render "visitor"
@@ -15,6 +16,9 @@ class MainController < ApplicationController
 	end
 
 	def send_contact
+	end
+
+	def battle
 	end
 
 	private

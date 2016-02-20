@@ -1,3 +1,89 @@
-// Place all the styles related to the Main controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+table#iniciativa > thead > tr th,
+table#iniciativa > tbody > tr td {
+	padding: 3px 1px;
+}
+
+table#iniciativa.table > thead > tr > td.success,
+table#iniciativa.table > tbody > tr > td.success,
+table#iniciativa.table > tfoot > tr > td.success,
+table#iniciativa.table > thead > tr > th.success,
+table#iniciativa.table > tbody > tr > th.success,
+table#iniciativa.table > tfoot > tr > th.success,
+table#iniciativa.table > thead > tr.success > td,
+table#iniciativa.table > tbody > tr.success > td,
+table#iniciativa.table > tfoot > tr.success > td,
+table#iniciativa.table > thead > tr.success > th,
+table#iniciativa.table > tbody > tr.success > th,
+table#iniciativa.table > tfoot > tr.success > th {
+  background-color: #CEF0C0;
+}
+table#iniciativa.table-hover > tbody > tr > td.success:hover,
+table#iniciativa.table-hover > tbody > tr > th.success:hover,
+table#iniciativa.table-hover > tbody > tr.success:hover > td,
+table#iniciativa.table-hover > tbody > tr:hover > .success,
+table#iniciativa.table-hover > tbody > tr.success:hover > th {
+  background-color: #C0E9AF;
+}
+table#iniciativa.table > thead > tr > td.info,
+table#iniciativa.table > tbody > tr > td.info,
+table#iniciativa.table > tfoot > tr > td.info,
+table#iniciativa.table > thead > tr > th.info,
+table#iniciativa.table > tbody > tr > th.info,
+table#iniciativa.table > tfoot > tr > th.info,
+table#iniciativa.table > thead > tr.info > td,
+table#iniciativa.table > tbody > tr.info > td,
+table#iniciativa.table > tfoot > tr.info > td,
+table#iniciativa.table > thead > tr.info > th,
+table#iniciativa.table > tbody > tr.info > th,
+table#iniciativa.table > tfoot > tr.info > th {
+  background-color: #C1E5F7;
+}
+table#iniciativa.table-hover > tbody > tr > td.info:hover,
+table#iniciativa.table-hover > tbody > tr > th.info:hover,
+table#iniciativa.table-hover > tbody > tr.info:hover > td,
+table#iniciativa.table-hover > tbody > tr:hover > .info,
+table#iniciativa.table-hover > tbody > tr.info:hover > th {
+  background-color: #ADDBF3;
+}
+table#iniciativa.table > thead > tr > td.warning,
+table#iniciativa.table > tbody > tr > td.warning,
+table#iniciativa.table > tfoot > tr > td.warning,
+table#iniciativa.table > thead > tr > th.warning,
+table#iniciativa.table > tbody > tr > th.warning,
+table#iniciativa.table > tfoot > tr > th.warning,
+table#iniciativa.table > thead > tr.warning > td,
+table#iniciativa.table > tbody > tr.warning > td,
+table#iniciativa.table > tfoot > tr.warning > td,
+table#iniciativa.table > thead > tr.warning > th,
+table#iniciativa.table > tbody > tr.warning > th,
+table#iniciativa.table > tfoot > tr.warning > th {
+  background-color: #FFF1A6;
+}
+table#iniciativa.table-hover > tbody > tr > td.warning:hover,
+table#iniciativa.table-hover > tbody > tr > th.warning:hover,
+table#iniciativa.table-hover > tbody > tr.warning:hover > td,
+table#iniciativa.table-hover > tbody > tr:hover > .warning,
+table#iniciativa.table-hover > tbody > tr.warning:hover > th {
+  background-color: #FFED91;
+}
+table#iniciativa.table > thead > tr > td.danger,
+table#iniciativa.table > tbody > tr > td.danger,
+table#iniciativa.table > tfoot > tr > td.danger,
+table#iniciativa.table > thead > tr > th.danger,
+table#iniciativa.table > tbody > tr > th.danger,
+table#iniciativa.table > tfoot > tr > th.danger,
+table#iniciativa.table > thead > tr.danger > td,
+table#iniciativa.table > tbody > tr.danger > td,
+table#iniciativa.table > tfoot > tr.danger > td,
+table#iniciativa.table > thead > tr.danger > th,
+table#iniciativa.table > tbody > tr.danger > th,
+table#iniciativa.table > tfoot > tr.danger > th {
+  background-color: #F2AEAE;
+}
+table#iniciativa.table-hover > tbody > tr > td.danger:hover,
+table#iniciativa.table-hover > tbody > tr > th.danger:hover,
+table#iniciativa.table-hover > tbody > tr.danger:hover > td,
+table#iniciativa.table-hover > tbody > tr:hover > .danger,
+table#iniciativa.table-hover > tbody > tr.danger:hover > th {
+  background-color: #EB9E9E;
+}

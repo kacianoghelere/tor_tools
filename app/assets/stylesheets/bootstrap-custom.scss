@@ -39,7 +39,7 @@
 }
 @mixin frame_border  {
 	border-image-source: url('frame-borders/frame-border-1.png');
-	border-image-slice: 170;
+	border-image-slice: 120;
 	border-image-repeat: repeat;
 	border-width: 20px;
 	border-style: solid;
@@ -71,31 +71,42 @@ body {
 	padding-bottom: 15px;
 	@include parchment_background;
 
-	&>.container {
-		// background-color: #FFF;
-		// padding-left: 0;
-		// padding-right: 0;
-		// @include frame_border_second;
+	&>.container .jumbotron {
+		// @include parchment_background_dark;
 	}
 }
 
 .navbar-default {
     background: url("bg/dark_wood_pattern.png");
 }
-.navbar-default .navbar-nav > a, 
+.navbar-default .navbar-nav > a,
+.navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-nav > a:hover,
 .navbar-default .navbar-nav > a:focus {
-    color: #98978B;
+    color: #D4C3A2;
 }
+.navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .active > a {
 	color: #F0F0F0;
   background: rgba(53,43,35,0.6);
 }
+.navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-	color: #FFF;
+	color: #F0F0F0;
   background: rgba(53,43,35,0.8);
 }
+
+.header {
+	border-bottom: 1px solid rgb(54, 42, 35);
+	margin-bottom: 10px;
+	padding: 10px 5px;
+}
+
+.nav-pills {
+	margin-bottom: 10px;
+}
+
 ul.list-unstyled {
 	border-left: 1px solid #F0F0F0;
 	text-transform: none;
