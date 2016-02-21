@@ -15,10 +15,10 @@
 						<span class="glyphicon glyphicon-home"></span> Principal
 					<% end %>
 				</li>
+				<% if logged_in? %>
 				<li>
 					<%= link_to "Batalha", battle_path %>
 				</li>
-				<% if logged_in? %>
 					<li class="dropdown yamm-fw">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
 							<span class="glyphicon glyphicon-list-alt"></span> 

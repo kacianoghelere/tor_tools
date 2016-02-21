@@ -2,18 +2,18 @@
 
 <div class="row">
 
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h5><%= "#{@npc.id} - #{@npc.name}" %></h5>
 			</div>
+			<% if !@npc.img_url.empty? %>
+				<%= image_tag @npc.img_url, size: "200", class: "img-thumbnail" %>
+			<% end %>
 			<div class="panel-body">			
-				<% if !@npc.img_url.empty? %>
-					<center>
-						<img src="<%= @npc.img_url %>" width="300" class="img-thumbnail">
-					</center>
-				<% end %>
-				<legend><b>Descrição</b></legend>
+<!-- 				<p class="lead">
+					<b>Descrição</b>
+				</p> -->
 				<p><%= @npc.description %></p>
 			</div>
 			<div class="panel-footer">
@@ -26,7 +26,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h5>Informações</h5>

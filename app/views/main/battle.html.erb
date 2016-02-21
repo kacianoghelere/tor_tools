@@ -3,11 +3,9 @@
 		<table id="iniciativa" class="table table-condensed">
 			<thead>
 				<%= content_tag(:tr) do %>
-					<%= content_tag(:th, "",               width: "4%")  %>
-					<%= content_tag(:th, "Nome",           width: "20%") %>
+					<%= content_tag(:th, "Nome",           width: "27%") %>
 					<%= content_tag(:th, "Atributo",       width: "7%")  %>
-					<%= content_tag(:th, "Resit. Inicial", width: "10%") %>
-					<%= content_tag(:th, "Resitência",     width: "7%")  %>
+					<%= content_tag(:th, "Resitência",     width: "10%") %>
 					<%= content_tag(:th, "Recurso",        width: "7%")  %>
 					<%= content_tag(:th, "Aparar",         width: "7%")  %>
 					<%= content_tag(:th, "Armadura",       width: "7%")  %>
@@ -43,30 +41,8 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-	$(document).on('click', 'button[name="adicionar"]', function(event) {
-		$.adicionarItem();
-	});
-
-	$(document).on('click', 'button[name="remover"]', function(event) {
-		$(this).closest('tr.item-iniciativa').remove();
-	});
-	$(document).on('click', 'button[name="replicar"]', function(event) {
-		$.replicar();
-	});
-
-	$(document).on('click', 'button[name="gerar"]', function(event) {
-		$.gerarIniciativas();
-	});
-
-	$(document).on('change', 'select[name="posicao"]', function(event) {
-		$.valor   = Number($(this).val());
-		$.tr      = $(this).closest('tr.item-iniciativa');
-		$.posicao = $.buscaPosicao($.valor);
-		$.tr.removeClass("danger info success warning");
-		$.tr.addClass($.posicao.classe);
-		$.calcularNA(this);
-	});
-
-	$.adicionarItensInicio(3);
-</script>
+<% content_for :head do %>
+  <script type="text/javascript">
+    <%= render :partial => "battle.js" %>
+  </script>
+<% end %>

@@ -1,0 +1,27 @@
+$(document).ready(function() {
+	$(document).on('click', 'button[name="adicionar"]', function(event) {
+		$.adicionarItem();
+	});
+
+	$(document).on('click', 'button[name="remover"]', function(event) {
+		$(this).closest('tr.item-iniciativa').remove();
+	});
+	$(document).on('click', 'button[name="replicar"]', function(event) {
+		$.replicar();
+	});
+
+	$(document).on('click', 'button[name="gerar"]', function(event) {
+		$.gerarIniciativas();
+	});
+
+	$(document).on('change', 'select[name="posicao"]', function(event) {
+		$.valor   = Number($(this).val());
+		$.tr      = $(this).closest('tr.item-iniciativa');
+		$.posicao = $.buscaPosicao($.valor);
+		$.tr.removeClass("danger info success warning");
+		$.tr.addClass($.posicao.classe);
+		$.calcularNA(this);
+	});
+
+	$.adicionarItensInicio(3);
+});

@@ -19,6 +19,11 @@ module ApplicationHelper
 															class: "gravatar #{options[:classes]}")
 	end
 
+	# Confirms an admin user.
+	def admin_user
+		redirect_to(root_url) unless current_user.admin?
+	end
+
 	def link_icon(icon, text = '')
 		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
 	end

@@ -37,6 +37,15 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
+@mixin map_background_middle_earth {
+  background: url(bg/map-background-middle-earth.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 @mixin frame_border  {
 	border-image-source: url('frame-borders/frame-border-1.png');
 	border-image-slice: 120;
@@ -67,10 +76,18 @@
 }
 
 body { 
-	padding-top: 75px; 
-	padding-bottom: 15px;
-	@include parchment_background;
+	// font-family: Georgia, "Times New Roman", Times, serif;
+	@include map_background_middle_earth;
 
+	&>.container {
+		padding-top: 75px; 
+		padding-bottom: 15px;
+		background: rgba(0,0,0,0.02);
+		box-shadow: 0px 1px 50px 10px rgba(0, 0, 0, 0.4);
+		border-right: 1px solid #CAB27B;
+		border-left: 1px solid #CAB27B;
+		@include parchment_background;
+	}
 	&>.container .jumbotron {
 		// @include parchment_background_dark;
 	}
@@ -117,6 +134,7 @@ ul.list-unstyled {
 	margin: 20px 0px;
 	border-bottom: 4px double #362A23;
 
+	&>p,&>.p,
 	&>h1,&>.h1,
 	&>h2,&>.h2,
 	&>h3,&>.h3,
@@ -126,6 +144,7 @@ ul.list-unstyled {
 		font-family: "Aniron";
 		margin-top: 5px;
 		margin-bottom: 5px;
+		text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4);
 	}
 }
 
@@ -185,45 +204,9 @@ ul.list-unstyled {
     background-color: #f8f5f0;
 }
 
-.panel-columns {
-	padding: 0;
-}
-.panel-columns div.col-xs-6.col-header,
-.panel-columns div.col-sm-6.col-header,
-.panel-columns div.col-md-6.col-header,
-.panel-columns div.col-lg-6.col-header,
-.panel-columns div.col-xs-12.col-header,
-.panel-columns div.col-sm-12.col-header,
-.panel-columns div.col-md-12.col-header,
-.panel-columns div.col-lg-12.col-header {
-	background-color: #f8f5f0;
-}
-.panel-columns div.col-xs-6,
-.panel-columns div.col-sm-6,
-.panel-columns div.col-md-6,
-.panel-columns div.col-lg-6,
-.panel-columns div.col-xs-12,
-.panel-columns div.col-sm-12,
-.panel-columns div.col-md-12,
-.panel-columns div.col-lg-12 {
-	padding: 5px 10px;
-	border-bottom: 1px solid #E8E6E1;
-	border-right: 1px solid #E8E6E1;
-}
-.panel-columns div.col-xs-6:last-child,
-.panel-columns div.col-sm-6:last-child,
-.panel-columns div.col-md-6:last-child,
-.panel-columns div.col-lg-6:last-child,
-.panel-columns div.col-xs-12:last-child,
-.panel-columns div.col-sm-12:last-child,
-.panel-columns div.col-md-12:last-child,
-.panel-columns div.col-lg-12:last-child {
-	border-right: none;
-}
-.progress {
-	margin-bottom: 0px;
-}
 .panel{
+	&>.panel-heading p,
+	&>.panel-heading .p,
 	&>.panel-heading h1,
 	&>.panel-heading .h1,
 	&>.panel-heading h2,
@@ -247,6 +230,66 @@ ul.list-unstyled {
 		width:100%;
 		border-radius: 0;
 	}
+}
+.panel-default {
+	border-color: #E0CEB3;
+	background-color: #F8EEDD;
+	& > .panel-heading {
+		color: #3E3F3A;
+		background-color: #F3E9D9;
+		border-color: #E0CEB3;
+	}
+	& > .panel-body {
+		background-color: #FAF0E0;
+		border-color: #E0CEB3;
+	}
+	& > .panel-footer {
+		background-color: #F3E9D9;
+		border-color: #E0CEB3;
+	}
+	& > .list-group,
+	& > .list-group .list-group-item {
+		background-color: transparent;
+	}
+}
+
+.panel-columns {
+	padding: 0;
+}
+.panel-columns div.col-xs-6.col-header,
+.panel-columns div.col-sm-6.col-header,
+.panel-columns div.col-md-6.col-header,
+.panel-columns div.col-lg-6.col-header,
+.panel-columns div.col-xs-12.col-header,
+.panel-columns div.col-sm-12.col-header,
+.panel-columns div.col-md-12.col-header,
+.panel-columns div.col-lg-12.col-header {
+	background-color: #F3E9D9;
+}
+.panel-columns div.col-xs-6,
+.panel-columns div.col-sm-6,
+.panel-columns div.col-md-6,
+.panel-columns div.col-lg-6,
+.panel-columns div.col-xs-12,
+.panel-columns div.col-sm-12,
+.panel-columns div.col-md-12,
+.panel-columns div.col-lg-12 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #E0CEB3;
+	border-right: 1px solid #E0CEB3;
+}
+.panel-columns div.col-xs-6:last-child,
+.panel-columns div.col-sm-6:last-child,
+.panel-columns div.col-md-6:last-child,
+.panel-columns div.col-lg-6:last-child,
+.panel-columns div.col-xs-12:last-child,
+.panel-columns div.col-sm-12:last-child,
+.panel-columns div.col-md-12:last-child,
+.panel-columns div.col-lg-12:last-child {
+	border-right: none;
+}
+.progress {
+	margin-bottom: 0px;
 }
 
 a {

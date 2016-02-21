@@ -15,10 +15,8 @@ $.buscaPosicao = function(id) {
 
 $.gerarItemIniciativa = function (data) {
 	$.tr                = $('<tr />', {class: "item-iniciativa"});
-	$.td_remover        = $('<td />');
 	$.td_nome           = $('<td />');
 	$.td_ind_attr       = $('<td />');
-	$.td_resist_inicial = $('<td />');
 	$.td_resist         = $('<td />');
 	$.td_recurso        = $('<td />');
 	$.td_aparar         = $('<td />');
@@ -27,22 +25,40 @@ $.gerarItemIniciativa = function (data) {
 	$.td_iniciativa     = $('<td />');
 	$.td_total          = $('<td />');
 	//--------------------------------------------------------------------------
-	// REMOVER
+	// BOTOES
 	$.btn_remover = $('<button />', {
 		name:  "remover",
 		id:    "remover",
-		class: "btn btn-danger btn-sm btn-block",
+		class: "btn btn-danger btn-sm",
 		html:  "<span class='glyphicon glyphicon-remove'></span>"
 	});
-	$.btn_remover.appendTo($.td_remover);
 	//--------------------------------------------------------------------------
 	// NOME
+	$.input_group_nome = $('<div />', {
+		class: "input-group input-group-sm"
+	});
+	$.span_info_nome = $('<span />', {
+		class: "input-group-addon",
+		html: "<spanc class='glyphicon glyphicon-info-sign'></span>"
+	});
+	$.span_btn = $('<span />', {
+		class: "input-group-btn"
+	});
+	$.span_skill_nome = $('<span />', {
+		class: "input-group-addon",
+		html: "<spanc class='glyphicon glyphicon-list-alt'></span>"
+	});
 	$.select_nome = $('<select />', {
 		name:  "nome",
 		id:    "nome",
 		class: "form-control input-sm calc"
 	});
-	$.select_nome.appendTo($.td_nome);
+	$.btn_remover.appendTo($.span_btn);
+	$.span_btn.appendTo($.input_group_nome);
+	$.span_info_nome.appendTo($.input_group_nome);
+	$.select_nome.appendTo($.input_group_nome);
+	$.span_skill_nome.appendTo($.input_group_nome);
+	$.input_group_nome.appendTo($.td_nome);
 	//--------------------------------------------------------------------------
 	// IND_ATRIBUTO
 	$.input_ind_attr = $('<input />', {
@@ -56,19 +72,14 @@ $.gerarItemIniciativa = function (data) {
 	});
 	$.input_ind_attr.appendTo($.td_ind_attr);
 	//--------------------------------------------------------------------------
-	// RESIST_INICIAL
-	$.input_resist_inicial = $('<input />', {
-		type:      "numero",
-		name:      "resist_inicial",
-		id:        "resist_inicial",
-		class:     "form-control input-sm",
-		readonly:  true,
-		maxlength: "3",
-		value:     (data ? data.resist : 0)
-	});
-	$.input_resist_inicial.appendTo($.td_resist_inicial);
-	//--------------------------------------------------------------------------
 	// RESIST
+	$.input_group_resist = $('<div />', {
+		class: "input-group input-group-sm"
+	});
+	$.span_resist = $('<span />', {
+		class: "input-group-addon",
+		html: 0
+	});
 	$.input_resist = $('<input />', {
 		type:      "numero",
 		name:      "resist",
@@ -77,7 +88,9 @@ $.gerarItemIniciativa = function (data) {
 		maxlength: "3",
 		value:     (data ? data.resist : 0)
 	});
-	$.input_resist.appendTo($.td_resist);
+	$.span_resist.appendTo($.input_group_resist);
+	$.input_resist.appendTo($.input_group_resist);
+	$.input_group_resist.appendTo($.td_resist);
 	//--------------------------------------------------------------------------
 	// RECURSO
 	$.input_recurso = $('<input />', {
@@ -153,10 +166,8 @@ $.gerarItemIniciativa = function (data) {
 	});
 	$.input_total.appendTo($.td_total);
 
-	$.td_remover.appendTo($.tr);
 	$.td_nome.appendTo($.tr);
 	$.td_ind_attr.appendTo($.tr);
-	$.td_resist_inicial.appendTo($.tr);
 	$.td_resist.appendTo($.tr);
 	$.td_recurso.appendTo($.tr);
 	$.td_aparar.appendTo($.tr);

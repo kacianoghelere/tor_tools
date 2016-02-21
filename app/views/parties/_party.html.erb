@@ -11,12 +11,7 @@
 		</div>
 
 		<ul class="list-group">
-			<% party.party_npcs.each do |party_npc| %>
-				<%= link_to  party_npc.npc, class: "list-group-item" do %>
-					<%= party_npc.npc.name %>
-					<span class="badge"><%= party_npc.amount %></span>
-				<% end %>
-			<% end %>
+			<%= render party.party_npcs %>
 		</ul>
 
 		<div class="panel-footer">

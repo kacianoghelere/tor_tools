@@ -1,23 +1,24 @@
-<% ally_class = npc.ally ? 'info' : 'danger' %>
-<% perc_attr_index = (npc.attr_index*100) / 12 %>
+<% ally_class = party_npc.npc.ally ? 'info' : 'danger' %>
+<% perc_attr_index = (party_npc.npc.attr_index*100) / 12 %>
 
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<p>
+			<h6>
 				<b class="text-<%= ally_class %>">
-					<span class="badge"><%= npc.id %></span> <%= npc.name %> 
+					<span class="badge">
+						<%= party_npc.npc.id %>
+					</span> <%= party_npc.npc.name %> 
 					<span class="pull-right">
-						<%= bool_icon(npc.ally, false,
-															yes_icon: "eye-open", no_icon: "eye-close") %>
+						</span> <%= party_npc.amount %> 
 					</span>
 				</b>
-			</p>
+			</h6>
 		</div>
 
-		<% if !npc.img_url.empty? %>
+		<% if !party_npc.npc.img_url.empty? %>
 			<%= link_to npc do %>
-				<%= image_tag npc.img_url, size: "300", class: "img-thumbnail" %>
+				<%= image_tag party_npc.npc.img_url, size: "300", class: "img-thumbnail" %>
 			<% end %>
 		<% end %>
 
@@ -27,9 +28,9 @@
 				<div class="progress">
 					<div class="progress-bar progress-bar-<%= ally_class %>" 
 							role="progressbar" aria-valuemin="0" aria-valuemax="12" 
-							aria-valuenow="<%= npc.attr_index %>"
+							aria-valuenow="<%= party_npc.npc.attr_index %>"
 						 	style="width: <%= perc_attr_index %>%;">
-						<%= npc.attr_index %>
+						<%= party_npc.npc.attr_index %>
 					</div>
 				</div>
 			</li>
@@ -40,7 +41,7 @@
 														class: "btn btn-default btn-xs" do %>
 				<%= link_icon "new-window","Visualizar" %>
 			<% end %>
-			<% if npc.user == current_user %>
+			<% if party_npc.npc.user == current_user %>
 				<div class="pull-right">
 					<%= link_to edit_npc_path(npc), title: "Editar", 
 										class: "btn btn-primary btn-xs" do %>
