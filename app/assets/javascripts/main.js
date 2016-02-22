@@ -30,7 +30,7 @@ $.gerarItemIniciativa = function (data) {
 		name:  "remover",
 		id:    "remover",
 		class: "btn btn-danger btn-sm",
-		html:  "<span class='glyphicon glyphicon-remove'></span>"
+		html:  "<span class='glyphicon glyphicon-minus'></span>"
 	});
 	//--------------------------------------------------------------------------
 	// NOME
@@ -62,7 +62,7 @@ $.gerarItemIniciativa = function (data) {
 	//--------------------------------------------------------------------------
 	// IND_ATRIBUTO
 	$.input_ind_attr = $('<input />', {
-		type:      "numero",
+		type:      "number",
 		name:      "ind_atributo",
 		id:        "ind_atributo",
 		class:     "form-control input-sm",
@@ -81,7 +81,7 @@ $.gerarItemIniciativa = function (data) {
 		html: 0
 	});
 	$.input_resist = $('<input />', {
-		type:      "numero",
+		type:      "number",
 		name:      "resist",
 		id:        "resist",
 		class:     "form-control input-sm",
@@ -94,7 +94,7 @@ $.gerarItemIniciativa = function (data) {
 	//--------------------------------------------------------------------------
 	// RECURSO
 	$.input_recurso = $('<input />', {
-		type:      "numero",
+		type:      "number",
 		name:      "recurso",
 		id:        "recurso",
 		class:     "form-control input-sm",
@@ -105,7 +105,7 @@ $.gerarItemIniciativa = function (data) {
 	//--------------------------------------------------------------------------
 	// APARAR
 	$.input_aparar = $('<input />', {
-		type:      "numero",
+		type:      "number",
 		name:      "aparar",
 		id:        "aparar",
 		class:     "form-control input-sm",
@@ -117,7 +117,7 @@ $.gerarItemIniciativa = function (data) {
 	//--------------------------------------------------------------------------
 	// ARMADURA
 	$.input_armadura = $('<input />', {
-		type:      "numero",
+		type:      "number",
 		name:      "armadura",
 		id:        "armadura",
 		class:     "form-control input-sm",
@@ -144,7 +144,7 @@ $.gerarItemIniciativa = function (data) {
 	//--------------------------------------------------------------------------
 	// INICIATIVA
 	$.input_iniciativa = $('<input />', {
-		type:      "numero",
+		type:      "number",
 		name:      "iniciativa",
 		id:        "iniciativa",
 		class:     "form-control input-sm",
@@ -156,7 +156,7 @@ $.gerarItemIniciativa = function (data) {
 	//--------------------------------------------------------------------------
 	// TOTAL
 	$.input_total = $('<input />', {
-		type:      "numero",
+		type:      "number",
 		name:      "total",
 		id:        "total",
 		class:     "form-control input-sm",

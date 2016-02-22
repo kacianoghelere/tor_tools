@@ -1,21 +1,49 @@
 <% provide(:title, 'The One Ring - Tools') %>
 <% provide(:label, 'The One Ring - Tools') %>
 
-<div class="row-fluid">
-	<div class="jumbotron">
-		<h3><b>Teste</b></h3>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-			Qui dignissimos, praesentium nam hic iure odio incidunt sit illo et, 
-			a eum necessitatibus ullam, nihil nemo, exercitationem aspernatur! 
-			Nobis recusandae, architecto.
-		</p>
-		<h3><b>Teste</b></h3>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-			Qui dignissimos, praesentium nam hic iure odio incidunt sit illo et, 
-			a eum necessitatibus ullam, nihil nemo, exercitationem aspernatur! 
-			Nobis recusandae, architecto.
-		</p>
-	</div>
+<div class="row">
+	<ul class="col-xs-6 col-sm-6 col-md-4 col-lg-3 list-unstyled">
+		<li>
+			<h5>
+				<span class="glyphicon glyphicon-user"></span> 
+				<strong>Membros</strong> 
+			</h5>
+		</li>
+		<li><%= link_to "Listar", users_path   %></li>
+		<li><%= link_to "Novo",   new_user_path %></li>
+	</ul>
+	<ul class="col-xs-6 col-sm-6 col-md-4 col-lg-3 list-unstyled">
+		<li>
+			<h5>
+				<span class="glyphicon glyphicon-user"></span> 
+				<strong>Npcs</strong>
+			</h5>
+		</li>
+		<li><%= link_to "Visualizar", npcs_path    %></li>
+		<li><%= link_to "Criar",      new_npc_path %></li>
+	</ul>
+	<ul class="col-xs-6 col-sm-6 col-md-4 col-lg-3 list-unstyled">
+		<li>
+			<h5><strong>Grupos</strong></h5>
+		</li>
+		<li><%= link_to "Visualizar", parties_path   %></li>
+		<li><%= link_to "Criar",      new_party_path %></li>
+	</ul>
+	<ul class="col-xs-6 col-sm-6 col-md-4 col-lg-3 list-unstyled">
+		<li>
+			<h5><strong>Armas</strong></h5>
+		</li>
+		<li><%= link_to "Todas", weapons_path    %></li>
+		<li><%= link_to "Criar", new_weapon_path %></li>
+		<li>
+			<%= link_to "Categorias", weapon_categories_path %>
+		</li>
+	</ul>
+	<ul class="col-xs-6 col-sm-6 col-md-4 col-lg-3 list-unstyled">
+		<li>
+			<h5><strong>Habilidades</strong></h5>
+		</li>
+		<li><%= link_to "Todas", skills_path    %></li>
+		<li><%= link_to "Criar", new_skill_path %></li>
+	</ul>
 </div>
