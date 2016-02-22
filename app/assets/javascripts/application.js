@@ -81,43 +81,43 @@ $.customMultiselects = function(elem, limit) {
 }
 
 $.autocomplete = function (id_element, label_element, url) {
-    $(label_element).autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: url,
-                dataType: "json",
-                data: {
-                    term: request.term
-                },
-                success: function (data) {
-                    response($.map(data.dados, function (item) {
-                        return {
-                            id: item.id,
-                            label: item.label
-                        };
-                    }));
-                }
-            });
-        },
-        position: {
-            collision: "flip"
-        },
-        select: function (event, ui) {
-            $(id_element).val(ui.item.id);
-            $(label_element).val(ui.item.label);
-            event.preventDefault();
-        },
-        focus: function (event) {
-            event.preventDefault();
-            return false;
-        },
-        change: function (event, ui) {
-            if (ui.item == null) {
-                $(id_element).val('');
-                $(this).val('');
-            }
-        },
-        minLength: 3,
-        delay: 500
-    });
+	$(label_element).autocomplete({
+		source: function (request, response) {
+			$.ajax({
+				url: url,
+				dataType: "json",
+				data: {
+					term: request.term
+				},
+				success: function (data) {
+					response($.map(data.dados, function (item) {
+						return {
+							id: item.id,
+							label: item.label
+						};
+					}));
+				}
+			});
+		},
+		position: {
+			collision: "flip"
+		},
+		select: function (event, ui) {
+			$(id_element).val(ui.item.id);
+			$(label_element).val(ui.item.label);
+			event.preventDefault();
+		},
+		focus: function (event) {
+			event.preventDefault();
+			return false;
+		},
+		change: function (event, ui) {
+			if (ui.item == null) {
+				$(id_element).val('');
+				$(this).val('');
+			}
+		},
+		minLength: 3,
+		delay: 500
+	});
 }

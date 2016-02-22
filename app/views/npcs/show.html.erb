@@ -121,13 +121,13 @@
 						<b>Perícias com Armas</b>
 					</div>
 				</div>
-				<% @npc.npc_weapons.each do |npc_weapon| %>
+				<% @npc.equipments.each do |equipment| %>
 					<div class="row-fluid">
 						<div class="col-md-6 text-right">
-							<%= link_to npc_weapon.weapon.name, npc_weapon.weapon %>
+							<%= link_to equipment.weapon.name, equipment.weapon %>
 						</div>
 						<div class="col-md-6 text-left">
-							<%= npc_weapon.bonus %>
+							<%= equipment.bonus %>
 						</div>
 					</div>
 				<% end %>

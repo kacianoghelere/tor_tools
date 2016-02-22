@@ -1,4 +1,5 @@
 class PartiesController < ApplicationController
+	before_action :set_party, only: [:show, :edit, :update, :destroy]
 	before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
@@ -7,12 +8,11 @@ class PartiesController < ApplicationController
 	end
 
 	def show
-		@party = Party.find(params[:id])
 	end
 
 	def new
 		@party = Party.new
-		@party.build_party_npcs
+		@party.build_members
 	end
 
 	def create
@@ -20,7 +20,7 @@ class PartiesController < ApplicationController
 		if params[:add_npc]
 			# add empty party_npc associated with @party
 			flash.now[:info] = "NPC adicionado."
-			@party.party_npcs.build.amount = 1
+			@party.members.build.amount = 1
 		elsif params[:remove_npc]
 			# nested model that have _destroy attribute = 1
 			# automatically deleted by rails
@@ -37,46 +37,45 @@ class PartiesController < ApplicationController
 	end
 
 	def edit
-		@party = Party.find(params[:id])
 	end
 
 	def update
-		@party = Party.find(params[:id])
 		if params[:add_npc]
 			# rebuild the party_npc attributes that doesn't have an id
-			attrs = params[:party][:party_npcs_attributes]
-			unless attrs.blank?
-				for pt_attr in attrs
-					@party.party_npcs.build(pt_attr.last.except(:_destroy)) unless pt_attr.last.has_key?(:id)
+			unless params[:party][:members_attributes].blank?
+				for attribute in params[:party][:members_attributes]
+					if !attribute.last.has_key?(:id) || attribute.last[:id].empty?
+						@party.members.build(attribute.last.permit(:id, :bonus))
+					end
 				end
 			end
 			# add one more empty party_npc attribute
 			flash.now[:info] = "NPC adicionado."
-		  @party.party_npcs.build.amount = 1
+		  @party.members.build.amount = 1
 		elsif params[:remove_npc]
 			# collect all marked for delete party_npc ids
-			attrs = params[:party][:party_npcs_attributes]
+			attrs = params[:party][:members_attributes]
 			rmv = attrs.collect {|i, a| a[:id] if (a[:id] && a[:_destroy].to_i == 1)}
-			# physically delete the party_npcs from database
+			# physically delete the members from database
 			PartyNpc.delete(rmv)
 			flash.now[:info] = "NPC removido."
-			for pt_attr in params[:party][:party_npcs_attributes]
-				# rebuild party_npcs attributes that doesn't have an id 
+			for pt_attr in params[:party][:members_attributes]
+				# rebuild members attributes that doesn't have an id 
 				# and its _destroy attribute is not 1
 				if (!pt_attr.last.has_key?(:id) && pt_attr.last[:_destroy].to_i == 0)
-					@party.party_npcs.build(pt_attr.last.except(:_destroy)).amount = 1
+					@party.members.build(pt_attr.last.except(:_destroy)).amount = 1
 				end
 			end
-    else
-      # save goes like usual
+		else
+			# save goes like usual
 			if @party.update_attributes(party_params)
 				flash.now[:success] = "Informações atualizadas"
 				redirect_to @party and return
 			else
 				flash.now[:danger] = "Ooops! Algo deu errado..."
 			end
-    end
-    render :action => 'edit'
+		end
+		render :action => 'edit'
 	end
 
 	def destroy
@@ -86,10 +85,14 @@ class PartiesController < ApplicationController
 	end
 
 	private
+		# Use callbacks to share common setup or constraints between actions.
+		def set_party
+			@party = Party.find(params[:id])
+		end
 
 		def party_params
 			params.require(:party).permit(:title, 
-									party_npcs_attributes: [:npc_id, :amount, :_destroy, :id])
+									members_attributes: [:npc_id, :amount, :_destroy, :id])
 		end
 
 		# Before filters

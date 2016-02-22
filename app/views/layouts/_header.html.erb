@@ -1,7 +1,9 @@
 <nav class="navbar yamm navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<button type="button" class="navbar-toggle collapsed" 
+					data-toggle="collapse" data-target="#navbar" 
+					aria-expanded="false" aria-controls="navbar">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -12,7 +14,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active">
 					<%= link_to(root_path) do %>
-						<span class="glyphicon glyphicon-home"></span> Principal
+						<%= link_icon 'home' %> Principal
 					<% end %>
 				</li>
 				<% if logged_in? %>
@@ -21,8 +23,7 @@
 				</li>
 					<li class="dropdown yamm-fw">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-							<span class="glyphicon glyphicon-list-alt"></span> 
-							Gerenciamento <b class="caret"></b>
+							<%= link_icon 'th' %> Opções<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
 							<li>
@@ -32,8 +33,7 @@
 										<ul class="col-sm-3 list-unstyled">
 											<li>
 												<h5>
-													<span class="glyphicon glyphicon-user"></span> 
-													<strong>Membros</strong> 
+													<%= link_icon 'user' %> <strong>Membros</strong> 
 												</h5>
 											</li>
 											<li><%= link_to "Listar", users_path   %></li>
@@ -42,8 +42,7 @@
 										<ul class="col-sm-3 list-unstyled">
 											<li>
 												<h5>
-													<span class="glyphicon glyphicon-user"></span> 
-													<strong>Npcs</strong>
+													<%= link_icon 'user' %> <strong>Npcs</strong>
 												</h5>
 											</li>
 											<li><%= link_to "Visualizar", npcs_path    %></li>

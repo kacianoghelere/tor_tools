@@ -270,3 +270,121 @@ $.gerarIniciativas = function () {
 $.getRandom = function (limit) {
 	return Math.floor((Math.random() * limit) + 1); 
 }
+
+$.setAjaxAsync = function(value) {
+	$.ajaxSetup({async: value});
+}
+
+$.npc_popover_template = '<div class="popover" role="tooltip">'
+	+ '  <div class="arrow"></div>'
+	+ '  <div class="popover-title"></div>'
+	+ '  <div class="popover-content" style="padding: 0;"></div>'
+	+ '</div>';
+
+// Formata dados de outras despesas em tabela
+$.formatNpcInfo = function(data) {
+	$.text = '<table class="table table-bordered table-condensed">'
+		+ '  <thead>'
+		+ '    <tr>'
+		+ '      <th>Nr. Guia</th>'
+		+ '      <th>Data Emissão</th>'
+		+ '      <th>Prestador</th>'
+		+ '    </tr>'
+		+ '  </thead>'
+		+ '  <tbody>';
+	if(data.length){
+		$.each(data, function(index, val) {      
+			$.text += '<tr>'
+				+ '  <td>'+link+'</td>'
+				+ '  <td>'+val.dtemi+'</td>'
+				+ '  <td>'+val.conv+' - '+val.nmconv+'</td>'
+				+ '</tr>';
+		});
+	} else {
+		$.text += '<tr><td>Nenhuma informação encontrada</td></tr>';
+	};
+	$.text += '    </tbody>'
+		+ '</table>';
+	return $.text;
+}
+
+// Formata dados de outras despesas em tabela
+$.formatNpcSkills = function(data) {
+	$.list = '<ul class="list-group">';
+	if(data.length){
+		$.each(data, function(index, val) {      
+			$.list += '<li class="list-group-item">'
+				+ '  <h4>'+val.name+'</h4>'
+				+ '  <p>'+val.description+'</p>'
+				+ '</li>';
+		});
+	} else {
+		$.list += '<tr><td>Nenhuma informação encontrada</td></tr>';
+	};
+	$.list += '</ul>';
+	return $.list;
+}
+
+// Incializa os popovers de outras despesas nas guias
+$.initializeInfoPopover = function() {
+	$('.npc_info_popover').each(function(index, elem) {
+		$.code = $(elem).data('code');
+		$.popover_title = 'NPC: ' + $.code;
+		$.popover = $(elem).popover({
+			'trigger':   'click', 
+			'placement': 'left', 
+			'delay': {
+				show: "100",
+				hide: "100"
+			},
+			'html': true,
+			'title': $.popover_title,
+			'template': $.npc_popover_template
+		}).on('show.bs.popover', function() { // Busca dados das despesas
+			var params = {'npc[id]': $.code};
+			$.setAjaxAsync(false);
+			$.getJSON('/ajax/busca_despesas.php', params).done(function(data) {
+				$.popover.attr('data-content', $.formatNpcInfo(data.dados));
+			});
+			$.setAjaxAsync(true);
+		}).on('hide.bs.popover', function() { // Limpa dados
+			$.popover.attr('data-content', '');
+		}).on('shown.bs.popover', function() { // Executa controle de fechar
+			$(this).parent().find('div.popover .close').on('click', function(e){
+				$(this).popover('hide');
+			});
+		});
+	});
+}
+
+// Incializa os popovers de outras despesas nas guias
+$.initializeSkillPopover = function() {
+	$('.npc_skill_popover').each(function(index, elem) {
+		$.code = $(elem).data('code');
+		$.popover_title = 'NPC: ' + $.code;
+		$.popover = $(elem).popover({
+			'trigger':   'click', 
+			'placement': 'left', 
+			'delay': {
+				show: "100",
+				hide: "100"
+			},
+			'html': true,
+			'title': $.popover_title,
+			'template': $.npc_popover_template
+		}).on('show.bs.popover', function() { // Busca dados das despesas
+			$.params = {'npc[id]': $.code};
+			$.setAjaxAsync(false);
+			$.getJSON('/ajax/busca_despesas.php', $.params).done(function(data) {
+				$.popover.attr('data-content', $.formatNpcInfo(data.dados));
+			});
+			$.setAjaxAsync(true);
+		}).on('hide.bs.popover', function() { // Limpa dados
+			$.popover.attr('data-content', '');
+		}).on('shown.bs.popover', function() { // Executa controle de fechar
+			$(this).parent().find('div.popover .close').on('click', function(e){
+				$(this).popover('hide');
+			});
+		});
+	});
+}

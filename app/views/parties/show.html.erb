@@ -9,7 +9,7 @@
 			</div>
 
 			<div class="panel-body">
-				<% @party.party_npcs.each do |p| %>
+				<% @party.members.each do |p| %>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
 							<%= link_to p.npc do %>

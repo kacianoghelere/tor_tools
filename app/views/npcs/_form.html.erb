@@ -1,7 +1,7 @@
 <%= form_for(@npc, class: 'form-horizontal') do |f| %>
 	<div class="col-md-6">
 		<div class="panel panel-default">
-			<div class="panel-heading">Dados Básicos</div>
+			<div class="panel-heading"><h5>Dados Básicos</h5></div>
 			<div class="panel-body">
 				<div class="col-md-12">
 					<div class="form-group">
@@ -22,7 +22,7 @@
 
 	<div class="col-md-6">
 		<div class="panel panel-default">
-			<div class="panel-heading">Informações</div>
+			<div class="panel-heading"><h5>Informações</h5></div>
 			<div class="panel-body">
 				<div class="col-md-4">
 					<div class="form-group">
@@ -78,7 +78,7 @@
 	<!-- Perícias -->
 	<div class="col-md-6">
 		<div class="panel panel-default">
-			<div class="panel-heading">Perícias</div>
+			<div class="panel-heading"><h5>Perícias</h5></div>
 			<div class="panel-body">
 				<div class="col-md-4">
 					<div class="form-group">
@@ -134,24 +134,60 @@
 
 	<div class="col-md-6">
 		<div class="panel panel-default">
-			<div class="panel-heading">Extras</div>
-			<div class="panel-body">
-				<div class="col-md-6">
-					<div class="form-group">
-						<%= f.label :weapons, "Armas", class: 'col-md-12' %>
-						<%= collection_select(:npc, :weapons, Weapon.all, :id, :name, 
-							{selected: @npc.weapon_ids, include_blank: false, prompt: false}, 
-							multiple: true, class: "form-control input-sm")	%>
-					</div>
-				</div>
+			<div class="panel-heading">
+				<h5>Equipamentos</h5>
+			</div>
 
-				<div class="col-md-6">
-					<div class="form-group">
-						<%= f.label :skills, "Habilidades", class: 'col-md-12' %>
-						<%= collection_select(:npc, :skills, Skill.all, :id, :name, 
-							{selected: @npc.skill_ids, include_blank: false, prompt: false}, 
-							multiple: true, class: "form-control input-sm")	%>
-					</div>
+			<div class="table-reponsive">
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th width="15%">Remover</th>
+							<th width="65%">Arma</th>
+							<th width="20%">Bonus</th>
+						</div>
+					</thead>
+					<tbody>
+						<%= f.fields_for :equipments, @npc.equipments do |ff| %>
+							<tr>
+								<%= ff.hidden_field :id %>
+								<td>
+									<center><%= ff.check_box :_destroy %></center>
+								</td>
+								<td>
+									<%= ff.collection_select :weapon_id, @npc.filter_weapons, 
+												:id, :name, {}, class: "form-control input-sm" %>
+								</td>
+								<td>
+									<%= ff.number_field :bonus, class: "form-control input-sm" %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="panel-footer">
+				<%= f.button name: "add_weapon",    type: 'submit', 
+																		class: 'btn btn-info btn-xs' do %>
+					<%= link_icon('plus') %> Adicionar
+				<% end %>
+				<%= f.button name: "remove_weapon", type: 'submit', 
+																		class: 'btn btn-danger btn-xs' do %>
+					<%= link_icon('remove') %> Remover Selecionados
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h5>Habilidades</h5></div>
+			<div class="panel-body">
+				<div class="form-group">
+					<%= collection_select(:npc, :skills, Skill.all, :id, :name, 
+						{selected: @npc.skill_ids, include_blank: false, prompt: false}, 
+						multiple: true, class: "form-control input-sm")	%>
 				</div>
 			</div>
 		</div>
