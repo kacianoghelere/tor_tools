@@ -1,4 +1,5 @@
 class SkillsController < ApplicationController
+	before_action :set_skill,      only: [:show, :edit, :update, :destroy]
 	before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
@@ -7,7 +8,6 @@ class SkillsController < ApplicationController
 	end
 
 	def show
-		@skill = Skill.find(params[:id])
 	end
 
 	def new
@@ -29,7 +29,6 @@ class SkillsController < ApplicationController
 	end
 
 	def update
-		@skill = Skill.find(params[:id])
 		if @skill.update_attributes(skill_params)
 			flash[:success] = "Informações atualizadas"
 			redirect_to @skill
@@ -39,12 +38,17 @@ class SkillsController < ApplicationController
 	end
 
 	def destroy
-		Skill.find(params[:id]).destroy
+		@skill.destroy
 		flash[:success] = "Operação concluída com sucesso!"
 		redirect_to skills_url
 	end
 
 	private
+		# Use callbacks to share common setup or constraints between actions.
+		def set_skill
+			@skill = Skill.find(params[:id])
+		end
+
 		def skill_params
 			params.require(:skill).permit(:name, :description)
 		end

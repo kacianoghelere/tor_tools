@@ -1,13 +1,13 @@
 class WeaponsController < ApplicationController
-	before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-	before_action :correct_user,	 only: [:edit, :update, :destroy]
+	before_action :set_weapon,     only: [:show,:edit,:update,:destroy]
+	before_action :logged_in_user, only: [:index,:show,:edit,:update,:destroy]
+	before_action :correct_user,   only: [:edit,:update,:destroy]
 
 	def index
 		@weapons = Weapon.all
 	end
 
 	def show
-		@weapon = Weapon.find(params[:id])
 	end
 
 	def new
@@ -29,7 +29,6 @@ class WeaponsController < ApplicationController
 	end
 
 	def update
-		@weapon = Weapon.find(params[:id])
 		if @weapon.update_attributes(weapon_params)
 			flash[:success] = "Informações atualizadas"
 			redirect_to @weapon
@@ -39,12 +38,17 @@ class WeaponsController < ApplicationController
 	end
 
 	def destroy
-		Weapon.find(params[:id]).destroy
+		@weapon.destroy
 		flash[:success] = "Operação concluída com sucesso!"
 		redirect_to weapons_url
 	end
 
 	private
+		# Use callbacks to share common setup or constraints between actions.
+		def set_weapon
+			@weapon = Weapon.find(params[:id])
+		end
+
 		def weapon_params
 			params.require(:weapon).permit(:name, :damage, :edge, :injury, 
 																			:weapon_category_id)

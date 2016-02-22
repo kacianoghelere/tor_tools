@@ -1,4 +1,5 @@
 class WeaponCategoriesController < ApplicationController
+	before_action :set_weapon_category, only: [:show, :edit, :update, :destroy]
 	before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
 	before_action :admin_user,	   only: [:new, :create, :update, :edit, :destroy]
 
@@ -7,7 +8,6 @@ class WeaponCategoriesController < ApplicationController
 	end
 
 	def show
-		@weapon_category = WeaponCategory.find(params[:id])
 	end
 
 	def new
@@ -21,17 +21,15 @@ class WeaponCategoriesController < ApplicationController
 			flash.now[:success] = "Operação concluída com sucesso!"
 			redirect_to @weapon_category
 		else
-			flash.now[:danger] = "Ooops! Algo deu errado..."
+			flash.now[:danger] = COOL_ERROR_MESSAGE
 			render 'new'
 		end
 	end
 
 	def edit
-		@weapon_category = WeaponCategory.find(params[:id])
 	end
 
 	def update
-		@weapon_category = WeaponCategory.find(params[:id])
 		if @weapon_category.update_attributes(weapon_category_params)
 			flash.now[:success] = "Informações atualizadas"
 			redirect_to @weapon_category
@@ -42,12 +40,17 @@ class WeaponCategoriesController < ApplicationController
 	end
 
 	def destroy
-		WeaponCategory.find(params[:id]).destroy
+		@weapon_category.destroy
 		flash.now[:success] = "Operação concluída com sucesso!"
 		redirect_to weapon_categories_url
 	end
 
 	private
+		# Use callbacks to share common setup or constraints between actions.
+		def set_weapon_category
+			@weapon_category = WeaponCategory.find(params[:id])
+		end
+
 		def weapon_category_params
 			params.require(:weapon_category).permit(:name, :effect)
 		end

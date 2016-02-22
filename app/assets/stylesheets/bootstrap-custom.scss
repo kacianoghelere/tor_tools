@@ -23,7 +23,7 @@
 	box-sizing:				 border-box;
 }
 @mixin parchment_background {
-  background: url(bg/parchment-background.png) no-repeat center center fixed; 
+  background: url(bg/parchment-background.png) no-repeat center center; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -130,6 +130,19 @@ ul.list-unstyled {
 	text-transform: none;
 }
 
+ul.list-group.list-group-scrolled-300 {
+	max-height: 300px;
+	overflow-y: auto;
+}
+ul.list-group.list-group-scrolled-400 {
+	max-height: 400px;
+	overflow-y: auto;
+}
+ul.list-group.list-group-scrolled-500 {
+	max-height: 500px;
+	overflow-y: auto;
+}
+
 .page-header {
 	padding: 0 0 5px 0;
 	margin: 20px 0px;
@@ -145,6 +158,18 @@ ul.list-unstyled {
 		font-family: "Aniron";
 		margin-top: 5px;
 		margin-bottom: 5px;
+		text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4);
+	}
+}
+
+.modal {
+	& h1.modal-title,
+	& h2.modal-title,
+	& h3.modal-title,
+	& h4.modal-title,
+	& h5.modal-title,
+	& h6.modal-title {
+		font-family: "Aniron";
 		text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4);
 	}
 }

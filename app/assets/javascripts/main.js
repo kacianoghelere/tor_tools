@@ -15,7 +15,7 @@ $.buscaPosicao = function(id) {
 
 $.gerarItemIniciativa = function (data) {
 	$.tr                = $('<tr />', {class: "item-iniciativa"});
-	$.td_nome           = $('<td />');
+	$.td_npc           = $('<td />');
 	$.td_ind_attr       = $('<td />');
 	$.td_resist         = $('<td />');
 	$.td_recurso        = $('<td />');
@@ -34,31 +34,38 @@ $.gerarItemIniciativa = function (data) {
 	});
 	//--------------------------------------------------------------------------
 	// NOME
-	$.input_group_nome = $('<div />', {
+	$.input_group_npc = $('<div />', {
 		class: "input-group input-group-sm"
 	});
-	$.span_info_nome = $('<span />', {
+	$.span_info_npc = $('<span />', {
 		class: "input-group-addon",
 		html: "<spanc class='glyphicon glyphicon-info-sign'></span>"
 	});
 	$.span_btn = $('<span />', {
 		class: "input-group-btn"
 	});
-	$.span_skill_nome = $('<span />', {
+	$.span_skill_npc = $('<span />', {
 		class: "input-group-addon",
 		html: "<spanc class='glyphicon glyphicon-list-alt'></span>"
 	});
-	$.select_nome = $('<select />', {
-		name:  "nome",
-		id:    "nome",
-		class: "form-control input-sm calc"
-	});
 	$.btn_remover.appendTo($.span_btn);
-	$.span_btn.appendTo($.input_group_nome);
-	$.span_info_nome.appendTo($.input_group_nome);
-	$.select_nome.appendTo($.input_group_nome);
-	$.span_skill_nome.appendTo($.input_group_nome);
-	$.input_group_nome.appendTo($.td_nome);
+	$.span_btn.appendTo($.input_group_npc);
+	$.span_info_npc.appendTo($.input_group_npc);
+
+	$.setAjaxAsync(false);
+	$.ajax({
+		url: 'npcs.json',
+		type: 'GET',
+		dataType: 'json',
+		success: function(data) {
+			$.select_npc = $.formatNpcs(data);
+			$.select_npc.appendTo($.input_group_npc);
+		}
+	});
+	$.setAjaxAsync(true);
+
+	$.span_skill_npc.appendTo($.input_group_npc);
+	$.input_group_npc.appendTo($.td_npc);
 	//--------------------------------------------------------------------------
 	// IND_ATRIBUTO
 	$.input_ind_attr = $('<input />', {
@@ -166,7 +173,7 @@ $.gerarItemIniciativa = function (data) {
 	});
 	$.input_total.appendTo($.td_total);
 
-	$.td_nome.appendTo($.tr);
+	$.td_npc.appendTo($.tr);
 	$.td_ind_attr.appendTo($.tr);
 	$.td_resist.appendTo($.tr);
 	$.td_recurso.appendTo($.tr);
@@ -201,8 +208,8 @@ $.replicar = function () {
 	$.ajaxSetup({async: true});	
 	$.last  = $('#iniciativa tbody tr.item-iniciativa:last');
 
-	$.val = $.first.find('input[name="nome"]').val();
-	$.last.find('input[name="nome"]').val($.val);
+	$.val = $.first.find('input[name="npc"]').val();
+	$.last.find('input[name="npc"]').val($.val);
 
 	$.val = $.first.find('input[name="ind_atributo"]').val();
 	$.last.find('input[name="ind_atributo"]').val($.val);
@@ -237,7 +244,7 @@ $.replicar = function () {
 $.gerarIds = function () {
 	$('tr.item-iniciativa').each(function(i, tr) {
 		$(tr).attr('id', 'item-iniciativa-'+i);
-		$(tr).find('input[name="nome"]').attr('id', 'nome-'+i);
+		$(tr).find('input[name="npc"]').attr('id', 'npc-'+i);
 		$(tr).find('input[name="ind_atributo"]').attr('id', 'ind_atributo-'+i);
 		$(tr).find('input[name="resist"]').attr('id', 'resist-'+i);
 		$(tr).find('input[name="recurso"]').attr('id', 'recurso-'+i);
@@ -281,34 +288,19 @@ $.npc_popover_template = '<div class="popover" role="tooltip">'
 	+ '  <div class="popover-content" style="padding: 0;"></div>'
 	+ '</div>';
 
-// Formata dados de outras despesas em tabela
+// Formata dados do npc
 $.formatNpcInfo = function(data) {
-	$.text = '<table class="table table-bordered table-condensed">'
-		+ '  <thead>'
-		+ '    <tr>'
-		+ '      <th>Nr. Guia</th>'
-		+ '      <th>Data Emissão</th>'
-		+ '      <th>Prestador</th>'
-		+ '    </tr>'
-		+ '  </thead>'
-		+ '  <tbody>';
+	$.html = '<div>';
 	if(data.length){
-		$.each(data, function(index, val) {      
-			$.text += '<tr>'
-				+ '  <td>'+link+'</td>'
-				+ '  <td>'+val.dtemi+'</td>'
-				+ '  <td>'+val.conv+' - '+val.nmconv+'</td>'
-				+ '</tr>';
-		});
+		$.html += JSON.stringify(data);
 	} else {
-		$.text += '<tr><td>Nenhuma informação encontrada</td></tr>';
+		$.html += '';
 	};
-	$.text += '    </tbody>'
-		+ '</table>';
-	return $.text;
+	$.html += '</div>';
+	return $.html;
 }
 
-// Formata dados de outras despesas em tabela
+// Formata dados de skills
 $.formatNpcSkills = function(data) {
 	$.list = '<ul class="list-group">';
 	if(data.length){
@@ -387,4 +379,84 @@ $.initializeSkillPopover = function() {
 			});
 		});
 	});
+}
+
+$.formatParties = function(data) {
+	$.ul = $('<ul />', {class: "list-group list-group-scrolled-300"});
+	if(data.length){
+		$.each(data, function(index, val) {      
+			$.li  = $('<li />', {
+				class: "list-group-item"
+			});
+			$.div_btn  = $('<div />', {
+				class: "pull-right"
+			});
+			$.btn = $('<button />', {
+				type:  "button",
+				html:  "Adicionar",
+				class: "btn btn-default btn-sm"
+			});
+			$.btn.appendTo($.div_btn);
+			$.div_btn.appendTo($.li);
+			$.h4  = $('<h4 />', {html: '<b>'+val.id+' - '+val.title+'</b>'});
+			$.h4.appendTo($.li);
+			$.each(val.npcs, function(index, npc) {
+				$.p  = $('<p />',  {
+					html: npc
+				});
+				$.p.appendTo($.li);
+			});
+			$.li.appendTo($.ul);
+		});
+	} else {
+		$.li = $('<li />', {class: "list-group-item"});
+		$.h4 = $('<h4 />', {html: 'Nenhuma informação encontrada'});
+		$.h4.appendTo($.li);
+		$.li.appendTo($.ul);
+	};
+	return $.ul;
+}
+
+$.formatNpcs = function(data) {
+	$.select = $('<select />', {
+		class: "form-control input-sm calc",
+		name:  "npc",
+		id:    "npc"
+	});
+	if(data.length){
+		$.each(data, function(index, val) {
+			$.option   = $('<option />', {
+				value: val.id,
+				html:  val.label
+			});
+			$.option.appendTo($.select);
+		});
+	} else {
+		$.option   = $('<option />', {
+			value: '',
+			html:  'Nenhuma npc encontrado'
+		});
+		$.option.appendTo($.select);
+	};
+	return $.select;
+}
+
+$.fetchPartiesData = function() {
+	$.setAjaxAsync(false);
+	$.getJSON('parties.json').done(function(data) {
+		$.parties = $.formatParties(data);
+		$.modal_body = $('#modal-party .modal-body');
+		$.parties.appendTo($.modal_body);
+	});
+	$.setAjaxAsync(true);
+}
+
+// Fetch npc data
+$.fetchNpcData = function(id) {
+	$.url = 'npcs/'+id+'.json';
+	$.setAjaxAsync(false);
+	$.getJSON($.url).done(function(data) {
+		console.log(JSON.stringify(data));
+	});
+	$.setAjaxAsync(true);
 }

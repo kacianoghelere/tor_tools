@@ -25,8 +25,13 @@
 <div class="row-fluid">
 	<div class="pull-left">
 		<%= button_tag type: "button", name: "adicionar", 
-												class: "btn btn-success btn-xs" do %>
+												class: "btn btn-default btn-xs" do %>
 			<%= link_icon("plus", "Adicionar") %>
+		<% end %>
+		<%= button_tag type: "button", name: "adicionar_grupo",
+								 	data: { toggle: 'modal', target: '#modal-party' },
+									class: "btn btn-default btn-xs" do %>
+			<%= link_icon("plus", "Adicionar Grupo") %>
 		<% end %>
 	</div>
 	<div class="pull-right">
@@ -40,6 +45,8 @@
 		<% end %>
 	</div>
 </div>
+
+<%= render 'modal_party' %>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -68,6 +75,13 @@
 			$.calcularNA(this);
 		});
 
+		$(document).on('change', 'select[name="npc"]', function(event) {
+			$.id = Number($(this).val());
+			$.fetchNpcData($.id);
+		});
+
 		$.adicionarItensInicio(1);
+
+		$.fetchPartiesData();
 	});
 </script>
