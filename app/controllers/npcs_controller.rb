@@ -62,7 +62,8 @@ class NpcsController < ApplicationController
 			flash.now[:info] = "Equipamento adicionado."
 		elsif params[:remove_weapon]
 			# collect all marked for delete npc_weapon ids
-			rmvd = params[:npc][:equipments_attributes].collect {|i, a| a[:id] if (a[:id] && a[:_destroy].to_i == 1)}
+			attrs = params[:npc][:equipments_attributes]
+			rmvd = attrs.collect {|i, a| a[:id] if (a[:id] && a[:_destroy].to_i == 1)}
 			# physically delete the equipments from database
 			NpcWeapon.delete(rmvd)
 			flash.now[:info] = "Equipamento removido."
@@ -70,7 +71,9 @@ class NpcsController < ApplicationController
 				# rebuild equipments attributes that doesn't have an id 
 				# and its _destroy attribute is not 1
 				last = attribute.last
-				@npc.equipments.build(last.except(:id, :_destroy)) if (!last.has_key?(:id) && last[:_destroy].to_i == 0)
+				if (!last.has_key?(:id) && last[:_destroy].to_i == 0)
+					@npc.equipments.build(last.except(:id, :_destroy))
+				end
 			end
     else
 			# save goes like usual
