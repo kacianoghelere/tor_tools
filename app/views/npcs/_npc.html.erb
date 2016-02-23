@@ -22,7 +22,7 @@
 		<% end %>
 
 		<ul class="list-group">
-			<li class="list-group-item">
+			<li class="list-group-item list-group-item-small">
 				<b>Indice de Atributo</b>
 				<div class="progress">
 					<div class="progress-bar progress-bar-<%= ally_class %>" 
@@ -32,6 +32,9 @@
 						<%= npc.attr_index %>
 					</div>
 				</div>
+			</li>
+			<li class="list-group-item list-group-item-small">
+				<center><b>Criado por:</b> <%=  npc.user.name %></center>
 			</li>
 		</ul>
 

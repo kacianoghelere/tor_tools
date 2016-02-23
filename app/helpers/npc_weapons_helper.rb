@@ -1,0 +1,2 @@
+module NpcWeaponsHelper
+end

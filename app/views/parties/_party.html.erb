@@ -11,7 +11,12 @@
 		</div>
 
 		<ul class="list-group">
-			<%= render party.members %>
+			<li class="list-group-item">
+				Membros <span class="badge"><%= party.members.sum(:amount) %></span>
+			</li>
+			<li class="list-group-item">
+				Tipos <span class="badge"><%= party.members.count(:npc_id) %></span>
+			</li>
 		</ul>
 
 		<div class="panel-footer">

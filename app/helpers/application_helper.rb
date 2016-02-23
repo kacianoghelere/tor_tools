@@ -1,5 +1,8 @@
 module ApplicationHelper
-	
+	def javascript(*files)
+		content_for(:head) { javascript_include_tag(*files) }
+	end
+
 	# Returns the full title on a per-page basis.
 	def full_title(page_title = '')
 		base_title = "The One Ring Tools"

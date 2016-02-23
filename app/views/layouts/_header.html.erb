@@ -18,9 +18,6 @@
 					<% end %>
 				</li>
 				<% if logged_in? %>
-				<li>
-					<%= link_to "Batalha", battle_path %>
-				</li>
 					<li class="dropdown yamm-fw">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
 							<%= link_icon 'th' %> Opções<b class="caret"></b>
@@ -76,6 +73,9 @@
 								</div><!-- Content container to add padding -->
 							</li>
 						</ul>
+					</li>
+					<li>
+						<%= link_to "Batalha", battle_path %>
 					</li>
 				<% end %>
 			</ul>

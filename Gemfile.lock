@@ -242,6 +242,7 @@ DEPENDENCIES
   bootswatch-rails (~> 3.3.5)
   byebug
   cancancan (~> 1.10)
+  coffee-rails (~> 4.1.0)
   devise
   faker
   guard-minitest (= 2.3.1)

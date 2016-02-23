@@ -17,7 +17,8 @@
 //= require bootstrap-multiselect
 // require dataTables/jquery.dataTables
 //= require turbolinks
-//= require_tree
+// require_tree
+//= require duplicate
 
 $.fixNumbers = function() {
 	$(document).on('keyup', '[type="number"]', function(event) {

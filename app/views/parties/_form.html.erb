@@ -20,18 +20,28 @@
 					</thead>
 					<tbody>
 						<%= f.fields_for :members, @party.members do |ff| %>
-							<%= ff.hidden_field :id %>
-							<tr>
-								<td width="5%" align="center">
-									<%= ff.check_box :_destroy %>
+							<tr class="duplicatable">
+								<%= ff.hidden_field :id, class: 'nested_id' %>
+								<td align="center">
+									<% if ff.object.new_record? %>
+										<%= link_to '', class: 'btn btn-danger btn-xs destroy_dup', 
+																															remote: true do %>
+											<%= link_icon('minus') %>
+										<% end %>
+									<% else %>
+										<%= link_to party_member_path(@party, ff.object), 
+															method: :delete, remote: true, 
+															class: 'btn btn-danger btn-xs destroy_dup' do %>
+											<%= link_icon('minus') %>
+										<% end %>
+									<% end %>
 								</td>
 								<td width="80%">
 									<%= ff.collection_select :npc_id, @party.filter_npcs, 
 												:id, :name, {}, class: "form-control input-sm" %>
 								</td>
 								<td width="15%">
-									<%= ff.number_field :amount, 
-																				class: "form-control input-sm" %>
+									<%= ff.number_field :amount, class: "form-control input-sm" %>
 								</td>
 							</tr>
 						<% end %>
@@ -40,13 +50,8 @@
 			</div>
 
 			<div class="panel-footer">
-				<%= f.button :name => "add_npc",    type: 'submit', 
-																		class: 'btn btn-info btn-xs' do %>
+				<%= link_to '', class: 'btn btn-info btn-xs duplicate' do %>
 					<%= link_icon('plus') %> Adicionar
-				<% end %>
-				<%= f.button :name => "remove_npc", type: 'submit', 
-																		class: 'btn btn-danger btn-xs' do %>
-					<%= link_icon('remove') %> Remover Selecionados
 				<% end %>
 			</div>
 		</div>

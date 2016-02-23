@@ -162,6 +162,11 @@ ul.list-group.list-group-scrolled-500 {
 	}
 }
 
+.epic-text {
+	font-family: "Aniron";
+	text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4);
+}
+
 .modal {
 	& h1.modal-title,
 	& h2.modal-title,
@@ -277,6 +282,11 @@ ul.list-group.list-group-scrolled-500 {
 	& > .list-group .list-group-item {
 		background-color: transparent;
 	}
+}
+
+li.list-group-item.list-group-item-small {
+	padding: 8px 16px;
+	font-size: 75%;
 }
 
 .panel-columns {

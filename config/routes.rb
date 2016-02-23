@@ -19,6 +19,13 @@ Rails.application.routes.draw do
 	resources :parties
 	resources :weapon_categories
 
+	resources :npcs do
+		resources :npc_weapons, only: :destroy, as: :equipments
+	end
+	resources :parties do
+		resources :party_npcs, only: :destroy, as: :members
+	end
+
 	# The priority is based upon order of creation: first created -> highest priority.
 	# See how all your routes lay out with "rake routes".
 

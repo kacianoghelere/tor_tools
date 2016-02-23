@@ -22,11 +22,13 @@
 		<!-- Nav tabs -->
 		<ul class="nav nav-pills nav-justified" role="tablist">
 			<%= generate_tab "#npcs",    inner: "NPC's",
-														count: @user.npcs.count, active: true %>
+																		count: @user.npcs.count, active: true %>
+			<%= generate_tab "#parties", inner: "Grupos",
+																		count: @user.parties.count %>
 			<%= generate_tab "#weapons", inner: "Armas",
-														count: @user.weapons.count %>
+																		count: @user.weapons.count %>
 			<%= generate_tab "#skills",  inner: "Habilidades",
-														count: @user.skills.count %>
+																		count: @user.skills.count %>
 		</ul>
 
 		<!-- Tab panes -->
@@ -34,6 +36,11 @@
 			<div role="tabpanel" class="tab-pane active" id="npcs">
 				<div class="row">
 					 <%= render @user.npcs %>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="parties">
+				<div class="row">
+					 <%= render @user.parties %>
 				</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="weapons">
