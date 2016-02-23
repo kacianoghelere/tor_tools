@@ -1,6 +1,6 @@
 if logged_in?
 	json.array!(@npcs) do |npc|
-		json.id   npc.id
+		json.id    npc.id
 		json.label npc.name
 	end
 else

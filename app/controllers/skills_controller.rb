@@ -4,7 +4,11 @@ class SkillsController < ApplicationController
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
 	def index
-		@skills = Skill.all
+		if params[:npc_id]
+			@skills = Npc.find(params[:npc_id]).skills
+		else
+			@skills = Skill.all
+		end
 	end
 
 	def show

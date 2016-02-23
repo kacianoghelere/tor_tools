@@ -6,24 +6,25 @@ $.posicoes = [
 	{ id: 4, titulo: "Retaguarda", classe: "warning", na: 12 }
 ];
 
-$.buscaPosicao = function(id) {
+$.searchPosition = function(id) {
     var result = $.posicoes.filter(function(val, i) {
         return val.id === id;
     });
     return result[0];
 };
 
-$.gerarItemIniciativa = function (data) {
-	$.tr                = $('<tr />', {class: "item-iniciativa"});
-	$.td_npc           = $('<td />');
-	$.td_ind_attr       = $('<td />');
-	$.td_resist         = $('<td />');
-	$.td_recurso        = $('<td />');
-	$.td_aparar         = $('<td />');
-	$.td_armadura       = $('<td />');
-	$.td_posicao        = $('<td />');
-	$.td_iniciativa     = $('<td />');
-	$.td_total          = $('<td />');
+$.generateItemInitiative = function (data) {
+	console.log(data);
+	$.tr            = $('<tr />', {class: "item-initiative"});
+	$.td_npc        = $('<td />');
+	$.td_attr_index = $('<td />');
+	$.td_resistance = $('<td />');
+	$.td_resource   = $('<td />');
+	$.td_parry      = $('<td />');
+	$.td_armour     = $('<td />');
+	$.td_position   = $('<td />');
+	$.td_initiative = $('<td />');
+	$.td_total      = $('<td />');
 	//--------------------------------------------------------------------------
 	// BOTOES
 	$.btn_remover = $('<button />', {
@@ -38,128 +39,129 @@ $.gerarItemIniciativa = function (data) {
 		class: "input-group input-group-sm"
 	});
 	$.span_info_npc = $('<span />', {
-		class: "input-group-addon",
-		html: "<spanc class='glyphicon glyphicon-info-sign'></span>"
+		class: "input-group-addon npc_info_popover",
+		'data-code': (data ? data.id : ''),
+		html: "<span class='glyphicon glyphicon-info-sign'></span>"
 	});
-	$.span_btn = $('<span />', {
-		class: "input-group-btn"
-	});
+	$.span_btn = $('<span />', { class: "input-group-btn" });
 	$.span_skill_npc = $('<span />', {
-		class: "input-group-addon",
-		html: "<spanc class='glyphicon glyphicon-list-alt'></span>"
+		class: "input-group-addon npc_skill_popover",
+		'data-code': (data ? data.id : ''),
+		html: "<span class='glyphicon glyphicon-list-alt'></span>"
 	});
 	$.btn_remover.appendTo($.span_btn);
 	$.span_btn.appendTo($.input_group_npc);
 	$.span_info_npc.appendTo($.input_group_npc);
 
-	$.setAjaxAsync(false);
-	$.ajax({
-		url: 'npcs.json',
-		type: 'GET',
-		dataType: 'json',
-		success: function(data) {
-			$.select_npc = $.formatNpcs(data);
-			$.select_npc.appendTo($.input_group_npc);
-		}
-	});
-	$.setAjaxAsync(true);
+	$.initializeInfoPopover($.span_info_npc);
+	$.initializeSkillPopover($.span_skill_npc);
 
+	$.input_npc = $('<input />', {
+		type:      "text",
+		name:      "npc",
+		id:        "npc",
+		class:     "form-control input-sm",
+		readonly:  true,
+		value:     (data ? data.name : '')
+	});
+
+	$.input_npc.appendTo($.input_group_npc);
 	$.span_skill_npc.appendTo($.input_group_npc);
 	$.input_group_npc.appendTo($.td_npc);
 	//--------------------------------------------------------------------------
-	// IND_ATRIBUTO
-	$.input_ind_attr = $('<input />', {
+	// attr_index
+	$.input_attr_index = $('<input />', {
 		type:      "number",
-		name:      "ind_atributo",
-		id:        "ind_atributo",
+		name:      "attr_index",
+		id:        "attr_index",
 		class:     "form-control input-sm",
 		readonly:  true,
 		maxlength: "2",
-		value:     (data ? data.ind_attr : 0)
+		value:     (data ? data.attr_index : 0)
 	});
-	$.input_ind_attr.appendTo($.td_ind_attr);
+	$.input_attr_index.appendTo($.td_attr_index);
 	//--------------------------------------------------------------------------
-	// RESIST
-	$.input_group_resist = $('<div />', {
+	// resistance
+	$.input_group_resistance = $('<div />', {
 		class: "input-group input-group-sm"
 	});
-	$.span_resist = $('<span />', {
+	$.span_resistance = $('<span />', {
 		class: "input-group-addon",
-		html: 0
+		html:  (data ? data.resistance : 0)
 	});
-	$.input_resist = $('<input />', {
+	$.input_resistance = $('<input />', {
 		type:      "number",
-		name:      "resist",
-		id:        "resist",
+		name:      "resistance",
+		id:        "resistance",
 		class:     "form-control input-sm",
 		maxlength: "3",
-		value:     (data ? data.resist : 0)
+		value:     (data ? data.resistance : 0)
 	});
-	$.span_resist.appendTo($.input_group_resist);
-	$.input_resist.appendTo($.input_group_resist);
-	$.input_group_resist.appendTo($.td_resist);
+	$.span_resistance.appendTo($.input_group_resistance);
+	$.input_resistance.appendTo($.input_group_resistance);
+	$.input_group_resistance.appendTo($.td_resistance);
 	//--------------------------------------------------------------------------
-	// RECURSO
-	$.input_recurso = $('<input />', {
+	// resource
+	$.input_resource = $('<input />', {
 		type:      "number",
-		name:      "recurso",
-		id:        "recurso",
+		name:      "resource",
+		id:        "resource",
 		class:     "form-control input-sm",
 		maxlength: "2",
-		value:     (data ? data.recurso : 0)
+		value:     (data ? data.resource : 0)
 	});
-	$.input_recurso.appendTo($.td_recurso);
+	$.input_resource.appendTo($.td_resource);
 	//--------------------------------------------------------------------------
-	// APARAR
-	$.input_aparar = $('<input />', {
+	// parry
+	$.input_parry = $('<input />', {
 		type:      "number",
-		name:      "aparar",
-		id:        "aparar",
-		class:     "form-control input-sm",
-		readonly:  true,
-		maxlength: "2",
-		value:     (data ? data.aparar : 0)
-	});
-	$.input_aparar.appendTo($.td_aparar);
-	//--------------------------------------------------------------------------
-	// ARMADURA
-	$.input_armadura = $('<input />', {
-		type:      "number",
-		name:      "armadura",
-		id:        "armadura",
+		name:      "parry",
+		id:        "parry",
 		class:     "form-control input-sm",
 		readonly:  true,
 		maxlength: "2",
-		value:     (data ? data.aparar : 0)
+		value:     (data ? data.parry : 0)
 	});
-	$.input_armadura.appendTo($.td_armadura);
+	$.input_parry.appendTo($.td_parry);
 	//--------------------------------------------------------------------------
-	// POSICAO
-	$.select_posicao = $('<select />', {
-		name:  "posicao",
-		id:    "posicao",
+	// armour
+	$.input_armour = $('<input />', {
+		type:      "number",
+		name:      "armour",
+		id:        "armour",
+		class:     "form-control input-sm",
+		readonly:  true,
+		maxlength: "2",
+		value:     (data ? data.parry : 0)
+	});
+	$.input_armour.appendTo($.td_armour);
+	//--------------------------------------------------------------------------
+	// position
+	$.select_position = $('<select />', {
+		name:  "position",
+		id:    "position",
 		class: "form-control input-sm calc"
 	});
 	$.each($.posicoes, function(index, val) {
-		 $.option_posicao = $('<option />', {
+		 $.option_position = $('<option />', {
 			value: val.id,
 			html:  val.titulo
 		});
-		$.option_posicao.appendTo($.select_posicao);
+		$.option_position.appendTo($.select_position);
 	});
-	$.select_posicao.appendTo($.td_posicao);
+	$.select_position.appendTo($.td_position);
 	//--------------------------------------------------------------------------
-	// INICIATIVA
-	$.input_iniciativa = $('<input />', {
+	// initiative
+	$.input_initiative = $('<input />', {
 		type:      "number",
-		name:      "iniciativa",
-		id:        "iniciativa",
+		name:      "initiative",
+		id:        "initiative",
 		class:     "form-control input-sm",
 		maxlength: "2",
 		value:     "0",
 		disabled:  true
 	});
-	$.input_iniciativa.appendTo($.td_iniciativa);
+	$.input_initiative.appendTo($.td_initiative);
 	//--------------------------------------------------------------------------
 	// TOTAL
 	$.input_total = $('<input />', {
@@ -174,103 +176,71 @@ $.gerarItemIniciativa = function (data) {
 	$.input_total.appendTo($.td_total);
 
 	$.td_npc.appendTo($.tr);
-	$.td_ind_attr.appendTo($.tr);
-	$.td_resist.appendTo($.tr);
-	$.td_recurso.appendTo($.tr);
-	$.td_aparar.appendTo($.tr);
-	$.td_armadura.appendTo($.tr);
-	$.td_posicao.appendTo($.tr);
-	$.td_iniciativa.appendTo($.tr);
+	$.td_attr_index.appendTo($.tr);
+	$.td_resistance.appendTo($.tr);
+	$.td_resource.appendTo($.tr);
+	$.td_parry.appendTo($.tr);
+	$.td_armour.appendTo($.tr);
+	$.td_position.appendTo($.tr);
+	$.td_initiative.appendTo($.tr);
 	$.td_total.appendTo($.tr);
 	return $.tr;
 }
 
 $.adicionarItensInicio = function (qtd) {
 	for (var i = 0; i < qtd; i++) {
-		$.item = $.gerarItemIniciativa(null);
-		$('#iniciativa tbody').append($.item);
+		$.item = $.generateItemInitiative(null);
+		$('#initiative tbody').append($.item);
 		$.gerarIds();
-		$('select[name="posicao"]').trigger('change');
+		$('select[name="position"]').trigger('change');
 	};
 }
 
 $.adicionarItem = function () {
-	$.item = $.gerarItemIniciativa(null);
-	$('#iniciativa tbody').append($.item);
+	$.item = $.generateItemInitiative(null);
+	$('#initiative tbody').append($.item);
 	$.gerarIds();
-	$('select[name="posicao"]').trigger('change');
+	$('select[name="position"]').trigger('change');
 }
 
-$.replicar = function () {
-	$.first = $('#iniciativa tbody tr.item-iniciativa:first');
-	$.ajaxSetup({async: false});	
-	$.adicionarItem();
-	$.ajaxSetup({async: true});	
-	$.last  = $('#iniciativa tbody tr.item-iniciativa:last');
-
-	$.val = $.first.find('input[name="npc"]').val();
-	$.last.find('input[name="npc"]').val($.val);
-
-	$.val = $.first.find('input[name="ind_atributo"]').val();
-	$.last.find('input[name="ind_atributo"]').val($.val);
-
-	$.val = $.first.find('input[name="resist"]').val();
-	$.last.find('input[name="resist"]').val($.val);
-
-	$.val = $.first.find('input[name="recurso"]').val();
-	$.last.find('input[name="recurso"]').val($.val);
-
-	$.val = $.first.find('input[name="aparar"]').val();
-	$.last.find('input[name="aparar"]').val($.val);
-
-	$.val = $.first.find('input[name="escudo"]').val();
-	$.last.find('input[name="escudo"]').val($.val);
-
-	$.val = $.first.find('select[name="posicao"]').val();
-	$.last.find('select[name="posicao"]').val($.val);
-
-	$.val = $.first.find('select[name="armadura"]').val();
-	$.last.find('select[name="armadura"]').val($.val);
-
-	$.val = $.first.find('input[name="iniciativa"]').val();
-	$.last.find('input[name="iniciativa"]').val($.val);
-
-	$.val = $.first.find('input[name="total"]').val();
-	$.last.find('input[name="total"]').val($.val);
-
-	$('select[name="posicao"]').trigger('change');
+$.replicate = function () {
+	$.last = $('#initiative tbody tr.item-initiative:last');
+	$('#initiative tbody').append($.last.clone());		
+	$.gerarIds();
+	$('select[name="position"]').trigger('change');
 }
 
 $.gerarIds = function () {
-	$('tr.item-iniciativa').each(function(i, tr) {
-		$(tr).attr('id', 'item-iniciativa-'+i);
+	$('tr.item-initiative').each(function(i, tr) {
+		$(tr).attr('id', 'item-initiative-'+i);
 		$(tr).find('input[name="npc"]').attr('id', 'npc-'+i);
-		$(tr).find('input[name="ind_atributo"]').attr('id', 'ind_atributo-'+i);
-		$(tr).find('input[name="resist"]').attr('id', 'resist-'+i);
-		$(tr).find('input[name="recurso"]').attr('id', 'recurso-'+i);
-		$(tr).find('input[name="aparar"]').attr('id', 'aparar-'+i);
+		$(tr).find('input[name="attr_index"]').attr('id', 'attr_index-'+i);
+		$(tr).find('input[name="resistance"]').attr('id', 'resistance-'+i);
+		$(tr).find('input[name="resource"]').attr('id', 'resource-'+i);
+		$(tr).find('input[name="parry"]').attr('id', 'parry-'+i);
 		$(tr).find('input[name="escudo"]').attr('id', 'escudo-'+i);
-		$(tr).find('select[name="armadura"]').attr('id', 'posicao-'+i);
-		$(tr).find('select[name="posicao"]').attr('id', 'posicao-'+i);
-		$(tr).find('input[name="iniciativa"]').attr('id', 'iniciativa-'+i);
+		$(tr).find('select[name="armour"]').attr('id', 'position-'+i);
+		$(tr).find('select[name="position"]').attr('id', 'position-'+i);
+		$(tr).find('input[name="initiative"]').attr('id', 'initiative-'+i);
 		$(tr).find('input[name="total"]').attr('id', 'total-'+i);
+		$(tr).find('.npc_info_popover').attr('id', 'npc_info_popover-'+i);
+		$(tr).find('.npc_skill_popover').attr('id', 'npc_skill_popover-'+i);
 	});
 }
 
-$.calcularNA = function (element) {
-	$.tr      = $(element).closest('tr.item-iniciativa');
-	$.apa     = $.tr.find('input[name="aparar"]').val();
-	$.esc     = $.tr.find('input[name="escudo"]').val();
-	$.pos     = $.tr.find('select[name="posicao"]').val();
-	$.posicao = $.buscaPosicao(Number($.pos));
-	$.total   = Number($.apa) + Number($.esc) + $.posicao.na;
+$.calculateNA = function (element) {
+	$.tr       = $(element).closest('tr.item-initiative');
+	$.apa      = $.tr.find('input[name="parry"]').val();
+	$.pos      = $.tr.find('select[name="position"]').val();
+	$.position = $.searchPosition(Number($.pos));
+	$.total    = Number($.apa) + $.position.na;
 	$.tr.find('input[name="total"]').val($.total);
 }
 
-$.gerarIniciativas = function () {
-	$('tr.item-iniciativa').each(function(i, tr) {
+$.generateInitiatives = function () {
+	$('tr.item-initiative').each(function(i, tr) {
 		$.rand = $.getRandom(6);
-		$(tr).find('input[name="iniciativa"]').val($.rand);
+		$(tr).find('input[name="initiative"]').val($.rand);
 	});
 }
 
@@ -282,7 +252,7 @@ $.setAjaxAsync = function(value) {
 	$.ajaxSetup({async: value});
 }
 
-$.npc_popover_template = '<div class="popover" role="tooltip">'
+$.npc_popover_template = '<div class="popover" role="tooltip" style="min-width: 700px">'
 	+ '  <div class="arrow"></div>'
 	+ '  <div class="popover-title"></div>'
 	+ '  <div class="popover-content" style="padding: 0;"></div>'
@@ -290,95 +260,251 @@ $.npc_popover_template = '<div class="popover" role="tooltip">'
 
 // Formata dados do npc
 $.formatNpcInfo = function(data) {
-	$.html = '<div>';
-	if(data.length){
-		$.html += JSON.stringify(data);
-	} else {
-		$.html += '';
+	$.html = $('<div />', {class: "col-md-12"});
+	if(data){
+		$.div_img         = $('<div />', {class: "col-md-4 col-thin"});
+		$.div_info        = $('<div />', {class: "col-md-12 col-thin"});
+		$.panel_info      = $('<div />', {class: "panel panel-default"});
+		$.panel_body_info = $('<div />', {class: "panel-body panel-columns"});
+		$.panel_head_info = $('<div />', {
+			class: "panel-heading",
+			html: "<b>Informações de "+data.name+"</b>"
+		});
+
+		$.img      = $('<img />', {
+			src: data.img_url,
+			class: "img-thumbnail",
+			style: "width: 150px; height: 150px;"
+		});
+		$.img.appendTo($.div_img);
+		// -------------------------------------------------------------------------
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-12 col-header text-center",
+			html: "<b>Dados essênciais</b>"
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Ind. Atributo:</b> " + data.attr_index
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Aliado:</b> " + data.ally
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+		// -------------------------------------------------------------------------
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-12 col-header text-center",
+			html: "<b>Perícias</b>"
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Personalidade: </b>" + data.personality
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Sobrevivência: </b>" + data.survival
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+
+
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Movimento: </b>" + data.movement
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Costumes: </b>" + data.custom
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Percepção: </b>" + data.perception
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-6 text-center",
+			html: "<b>Ocupação: </b>" + data.vocation
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+		// -------------------------------------------------------------------------
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-12 col-header text-center",
+			html: "<b>Armas</b>"
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+
+		$.div_row = $('<div />', {class: "row-fluid"});
+		$.div = $('<div />', {
+			class: "col-md-4 col-header text-center",
+			html: '<b>Nome</b>'
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-1 col-header text-center",
+			html: '<b>Bonus</b>'
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-1 col-header text-center",
+			html: '<b>Dano</b>'
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-1 col-header text-center",
+			html: '<b>Gume</b>'
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-1 col-header text-center",
+			html: '<b>Trauma</b>'
+		});
+		$.div.appendTo($.div_row);
+		$.div = $('<div />', {
+			class: "col-md-4 col-header text-center",
+			html: '<b>Atq. Dir.</b>'
+		});
+		$.div.appendTo($.div_row);
+		$.div_row.appendTo($.panel_body_info);
+
+		$.each(data.equipments, function(index, equipment) {
+			$.div_row = $('<div />', {class: "row-fluid"});
+			$.div = $('<div />', {
+				class: "col-md-4 text-center",
+				html: equipment.weapon.name
+			});
+			$.div.appendTo($.div_row);
+			$.div = $('<div />', {
+				class: "col-md-1 text-center",
+				html: equipment.bonus
+			});
+			$.div.appendTo($.div_row);
+			$.div = $('<div />', {
+				class: "col-md-1 text-center",
+				html: equipment.weapon.damage
+			});
+			$.div.appendTo($.div_row);
+			$.div = $('<div />', {
+				class: "col-md-1 text-center",
+				html: equipment.weapon.edge
+			});
+			$.div.appendTo($.div_row);
+			$.div = $('<div />', {
+				class: "col-md-1 text-center",
+				html: equipment.weapon.injury
+			});
+			$.div.appendTo($.div_row);
+			$.div = $('<div />', {
+				class: "col-md-4 text-center",
+				html: equipment.weapon.weapon_category.effect
+			});
+			$.div.appendTo($.div_row);
+			$.div_row.appendTo($.panel_body_info);
+		});
+
+		// $.div_img.appendTo($.html);
+		$.panel_head_info.appendTo($.panel_info);
+		$.panel_body_info.appendTo($.panel_info);
+		$.panel_info.appendTo($.div_info);
+		$.div_info.appendTo($.html);
 	};
-	$.html += '</div>';
 	return $.html;
 }
 
 // Formata dados de skills
 $.formatNpcSkills = function(data) {
-	$.list = '<ul class="list-group">';
-	if(data.length){
+	$.list = '<ul class="list-group" style="margin-bottom: 0;">';
+	if(data){
 		$.each(data, function(index, val) {      
-			$.list += '<li class="list-group-item">'
-				+ '  <h4>'+val.name+'</h4>'
+			$.list += '<li class="list-group-item list-group-item-small">'
+				+ '  <h6><b>'+val.name+'</b></h6>'
 				+ '  <p>'+val.description+'</p>'
 				+ '</li>';
 		});
 	} else {
-		$.list += '<tr><td>Nenhuma informação encontrada</td></tr>';
+		$.list += '<li class="list-group-item list-group-item-small">'
+			+ 'Nenhuma informação encontrada';
+			+ '</li>';
 	};
 	$.list += '</ul>';
 	return $.list;
 }
 
 // Incializa os popovers de outras despesas nas guias
-$.initializeInfoPopover = function() {
-	$('.npc_info_popover').each(function(index, elem) {
-		$.code = $(elem).data('code');
-		$.popover_title = 'NPC: ' + $.code;
+$.initializeInfoPopover = function(elem) {
+	$.code = $(elem).data('code');
+	$.url = 'npcs/' + $.code + '.json';
+	$.setAjaxAsync(false);
+	$.getJSON($.url).done(function(data) {
+		$.info = $.formatNpcInfo(data);
 		$.popover = $(elem).popover({
-			'trigger':   'click', 
-			'placement': 'left', 
+			'trigger':   'hover', 
+			'placement': 'right', 
 			'delay': {
 				show: "100",
 				hide: "100"
 			},
 			'html': true,
-			'title': $.popover_title,
-			'template': $.npc_popover_template
-		}).on('show.bs.popover', function() { // Busca dados das despesas
-			var params = {'npc[id]': $.code};
-			$.setAjaxAsync(false);
-			$.getJSON('/ajax/busca_despesas.php', params).done(function(data) {
-				$.popover.attr('data-content', $.formatNpcInfo(data.dados));
-			});
-			$.setAjaxAsync(true);
-		}).on('hide.bs.popover', function() { // Limpa dados
-			$.popover.attr('data-content', '');
+			'title': 'Informações ('+$.code+')',
+			'container': 'body',
+			'template': $.npc_popover_template,
+			'content': $.info
 		}).on('shown.bs.popover', function() { // Executa controle de fechar
 			$(this).parent().find('div.popover .close').on('click', function(e){
 				$(this).popover('hide');
 			});
 		});
 	});
+	$.setAjaxAsync(true);
 }
 
 // Incializa os popovers de outras despesas nas guias
-$.initializeSkillPopover = function() {
-	$('.npc_skill_popover').each(function(index, elem) {
-		$.code = $(elem).data('code');
-		$.popover_title = 'NPC: ' + $.code;
+$.initializeSkillPopover = function(elem) {
+	$.code = $(elem).data('code');
+	$.url = 'npcs/' + $.code + '/skills.json';
+	$.setAjaxAsync(false);
+	$.getJSON($.url).done(function(data) {
+		$.skills = $.formatNpcSkills(data);
 		$.popover = $(elem).popover({
-			'trigger':   'click', 
-			'placement': 'left', 
+			'trigger':   'hover', 
+			'placement': 'right', 
 			'delay': {
 				show: "100",
 				hide: "100"
 			},
 			'html': true,
-			'title': $.popover_title,
-			'template': $.npc_popover_template
-		}).on('show.bs.popover', function() { // Busca dados das despesas
-			$.params = {'npc[id]': $.code};
-			$.setAjaxAsync(false);
-			$.getJSON('/ajax/busca_despesas.php', $.params).done(function(data) {
-				$.popover.attr('data-content', $.formatNpcInfo(data.dados));
-			});
-			$.setAjaxAsync(true);
-		}).on('hide.bs.popover', function() { // Limpa dados
-			$.popover.attr('data-content', '');
+			'title': 'Habilidades ('+$.code+')',
+			'container': 'body',
+			'template': $.npc_popover_template,
+			'content': $.skills
 		}).on('shown.bs.popover', function() { // Executa controle de fechar
 			$(this).parent().find('div.popover .close').on('click', function(e){
 				$(this).popover('hide');
 			});
 		});
 	});
+	$.setAjaxAsync(true);
 }
 
 $.formatParties = function(data) {
@@ -417,7 +543,7 @@ $.formatParties = function(data) {
 	return $.ul;
 }
 
-$.formatNpcs = function(data) {
+$.formatNpcs = function(data, selected) {
 	$.select = $('<select />', {
 		class: "form-control input-sm calc",
 		name:  "npc",
@@ -429,6 +555,9 @@ $.formatNpcs = function(data) {
 				value: val.id,
 				html:  val.label
 			});
+			if (selected && (val.id == selected)) {
+				$.option.prop('selected', true);
+			};
 			$.option.appendTo($.select);
 		});
 	} else {
@@ -456,7 +585,12 @@ $.fetchNpcData = function(id) {
 	$.url = 'npcs/'+id+'.json';
 	$.setAjaxAsync(false);
 	$.getJSON($.url).done(function(data) {
-		console.log(JSON.stringify(data));
+		$.item = $.generateItemInitiative(data);
+		$('#initiative tbody').append($.item);
+		$.initializeInfoPopover();
+		$.initializeSkillPopover();
+		$.gerarIds();
+		$('select[name="position"]').trigger('change');
 	});
 	$.setAjaxAsync(true);
 }

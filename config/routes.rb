@@ -20,6 +20,9 @@ Rails.application.routes.draw do
 	resources :weapon_categories
 
 	resources :npcs do
+		resources :skills, only: :index, as: :skills
+	end
+	resources :npcs do
 		resources :npc_weapons, only: :destroy, as: :equipments
 	end
 	resources :parties do

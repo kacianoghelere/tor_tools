@@ -15,6 +15,26 @@ class NpcsController < ApplicationController
 	end
 
 	def show
+		respond_to do |format|
+			format.html
+			format.json { 
+				render :json => @npc.to_json(:include => { 
+					:equipments => { 
+						:only    => [:weapon, :bonus],
+						:include => { 
+							:weapon  => { 
+								:only    => [:name, :damage, :damage, :edge, :injury],
+								:include => {
+									:weapon_category => {
+										:only    => [:name, :effect]
+									}
+								}
+							}
+						}
+					}
+				}
+			)}
+		end
 	end
 
 	def new

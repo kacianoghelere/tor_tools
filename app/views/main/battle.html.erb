@@ -1,48 +1,61 @@
 <% provide(:title, 'Batalha') %>
 <% provide(:label, 'Batalha') %>
 
-<div class="row-fluid">
-	<div class="table-responsive">
-		<table id="iniciativa" class="table table-condensed">
-			<thead>
-				<%= content_tag(:tr) do %>
-					<%= content_tag(:th, "Nome",       width: "27%") %>
-					<%= content_tag(:th, "Atributo",   width: "7%")  %>
-					<%= content_tag(:th, "Resitência", width: "10%") %>
-					<%= content_tag(:th, "Recurso",    width: "7%")  %>
-					<%= content_tag(:th, "Aparar",     width: "7%")  %>
-					<%= content_tag(:th, "Armadura",   width: "7%")  %>
-					<%= content_tag(:th, "Posição",    width: "10%") %>
-					<%= content_tag(:th, "Iniciativa", width: "7%")  %>
-					<%= content_tag(:th, "NA Total",   width: "7%")  %>
-				<% end %>
-			</thead>
-			<tbody></tbody>
-		</table>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			<table id="initiative" class="table table-condensed">
+				<thead>
+					<%= content_tag(:tr) do %>
+						<%= content_tag(:th, "Nome",       width: "28%") %>
+						<%= content_tag(:th, "Atributo",   width: "7%")  %>
+						<%= content_tag(:th, "Resitência", width: "7%")  %>
+						<%= content_tag(:th, "Recurso",    width: "7%")  %>
+						<%= content_tag(:th, "Aparar",     width: "7%")  %>
+						<%= content_tag(:th, "Armadura",   width: "7%")  %>
+						<%= content_tag(:th, "Posição",    width: "12%") %>
+						<%= content_tag(:th, "Iniciativa", width: "7%")  %>
+						<%= content_tag(:th, "NA Total",   width: "7%")  %>
+					<% end %>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
 	</div>
 </div>
 
-<div class="row-fluid">
-	<div class="pull-left">
-		<%= button_tag type: "button", name: "adicionar", 
-												class: "btn btn-default btn-xs" do %>
-			<%= link_icon("plus", "Adicionar") %>
-		<% end %>
-		<%= button_tag type: "button", name: "adicionar_grupo",
-								 	data: { toggle: 'modal', target: '#modal-party' },
-									class: "btn btn-default btn-xs" do %>
-			<%= link_icon("plus", "Adicionar Grupo") %>
-		<% end %>
-	</div>
-	<div class="pull-right">
-		<%= button_tag type: "button", name: "replicar", 
-												class: "btn btn-default btn-xs" do %>
-			<%= link_icon("duplicate", "Replicar") %>
-		<% end %>
-		<%= button_tag type: "button", name: "gerar", 
-												class: "btn btn-default btn-xs" do %>
-			<%= link_icon("cog", " Gerar Iniciativa") %>
-		<% end %>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="col-sm-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon">NPC</span>
+				<%= collection_select(:battle, :npc_id, Npc.all, :id, :name, {}, 
+																						class: "form-control") %>
+				<span class="input-group-btn">
+					<%= button_tag type: "button", name: "adicionar", 
+															class: "btn btn-default btn-sm" do %>
+						<%= link_icon("plus", "Adicionar") %>
+					<% end %>
+				</span>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="pull-right">
+				<%= button_tag type: "button", name: "adicionar_grupo",
+										 	data: { toggle: 'modal', target: '#modal-party' },
+											class: "btn btn-default btn-sm" do %>
+					<%= link_icon("plus", "Adicionar Grupo") %>
+				<% end %>
+				<%= button_tag type: "button", name: "replicar", 
+														class: "btn btn-default btn-sm" do %>
+					<%= link_icon("duplicate", "Replicar") %>
+				<% end %>
+				<%= button_tag type: "button", name: "gerar", 
+														class: "btn btn-default btn-sm" do %>
+					<%= link_icon("cog", " Gerar Iniciativa") %>
+				<% end %>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -51,36 +64,32 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(document).on('click', 'button[name="adicionar"]', function(event) {
-			$.adicionarItem();
-		});
-
-		$(document).on('click', 'button[name="remover"]', function(event) {
-			$(this).closest('tr.item-iniciativa').remove();
-		});
-
-		$(document).on('click', 'button[name="replicar"]', function(event) {
-			$.replicar();
-		});
-
-		$(document).on('click', 'button[name="gerar"]', function(event) {
-			$.gerarIniciativas();
-		});
-
-		$(document).on('change', 'select[name="posicao"]', function(event) {
-			$.valor   = Number($(this).val());
-			$.tr      = $(this).closest('tr.item-iniciativa');
-			$.posicao = $.buscaPosicao($.valor);
-			$.tr.removeClass("danger info success warning");
-			$.tr.addClass($.posicao.classe);
-			$.calcularNA(this);
-		});
-
-		$(document).on('change', 'select[name="npc"]', function(event) {
-			$.id = Number($(this).val());
+			$.id = Number($('select[name="battle[npc_id]"]').val());
 			$.fetchNpcData($.id);
 		});
 
-		$.adicionarItensInicio(1);
+		$(document).on('click', 'button[name="remover"]', function(event) {
+			$(this).closest('tr.item-initiative').remove();
+		});
+
+		$(document).on('click', 'button[name="replicar"]', function(event) {
+			$.replicate();
+		});
+
+		$(document).on('click', 'button[name="gerar"]', function(event) {
+			$.generateInitiatives();
+		});
+
+		$(document).on('change', 'select[name="position"]', function(event) {
+			$.valor   = Number($(this).val());
+			$.tr      = $(this).closest('tr.item-initiative');
+			$.posicao = $.searchPosition($.valor);
+			$.tr.removeClass("danger info success warning");
+			$.tr.addClass($.posicao.classe);
+			$.calculateNA(this);
+		});
+
+		$.fetchNpcData(1);
 
 		$.fetchPartiesData();
 	});
