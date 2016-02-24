@@ -30,10 +30,13 @@
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon">NPC</span>
 				<%= collection_select(:battle, :npc_id, Npc.all, :id, :name, {}, 
-																						class: "form-control") %>
+								data: {
+									toggle: "tooltip", placement: "top" },
+								title: "O NPC selecionado será adicionado à lista",
+								class: "form-control") %>
 				<span class="input-group-btn">
 					<%= button_tag type: "button", name: "adicionar", 
-															class: "btn btn-default btn-sm" do %>
+								class: "btn btn-default btn-sm" do %>
 						<%= link_icon("plus", "Adicionar") %>
 					<% end %>
 				</span>
@@ -42,16 +45,25 @@
 		<div class="col-sm-6">
 			<div class="pull-right">
 				<%= button_tag type: "button", name: "adicionar_grupo",
-										 	data: { toggle: 'modal', target: '#modal-party' },
-											class: "btn btn-default btn-sm" do %>
+								data: {
+									toggle: 'modal', target: '#modal-party', 
+									toggle: "tooltip", placement: "top" },
+								title: "Os NPCs do grupo selecionado serão adicionados à lista", 
+								class: "btn btn-default btn-sm" do %>
 					<%= link_icon("plus", "Adicionar Grupo") %>
 				<% end %>
-				<%= button_tag type: "button", name: "replicate", 
-														class: "btn btn-default btn-sm" do %>
+				<%= button_tag type: "button", name: "replicate",
+								data: {
+									toggle: "tooltip", placement: "top" },
+								title: "O último NPC será replicado", 
+								class: "btn btn-default btn-sm" do %>
 					<%= link_icon("duplicate", "Replicar") %>
 				<% end %>
 				<%= button_tag type: "button", name: "generate", 
-														class: "btn btn-default btn-sm" do %>
+								data: {
+									toggle: "tooltip", placement: "top" },
+								title: "Gera numeração de iniciativa para todos os NPCs", 
+								class: "btn btn-default btn-sm" do %>
 					<%= link_icon("cog", " Gerar Iniciativa") %>
 				<% end %>
 			</div>
@@ -97,5 +109,6 @@
 		// $.fetchNpcData(1);
 
 		$.fetchPartiesData();
+		$('[data-toggle="tooltip"]').tooltip();
 	});
 </script>

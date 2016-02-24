@@ -43,7 +43,7 @@
 														class: "btn btn-default btn-xs" do %>
 				<%= link_icon "new-window","Visualizar" %>
 			<% end %>
-			<% if npc.user == current_user %>
+			<% if current_user?(npc.user) || admin? %>
 				<div class="pull-right">
 					<%= link_to edit_npc_path(npc), title: "Editar", 
 										class: "btn btn-primary btn-xs" do %>

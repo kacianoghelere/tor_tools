@@ -25,11 +25,11 @@
 			</div>
 
 			<div class="panel-footer">
-				<% if @party.user == current_user %>
+				<% if current_user?(@party.user) || admin? %>
 					<%= link_to 'Editar', edit_party_path(@party), 
 																						class: "btn btn-primary btn-sm" %>
 				<% end %>																			
-				<%= link_to 'Voltar', parties_path, class: "btn btn-default btn-sm" %>
+				<%= link_to 'Voltar', :back, class: "btn btn-default btn-sm" %>
 			</div>
 		</div>
 	</div>

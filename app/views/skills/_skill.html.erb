@@ -22,7 +22,7 @@
 				<span class="glyphicon glyphicon-new-window"></span> Visualizar
 			<% end %>
 			<div class="pull-right">
-				<% if skill.user == current_user %>
+				<% if current_user?(skill.user) || admin? %>
 					<%= link_to edit_skill_path(skill), title: "Editar", 
 										class: "btn btn-primary btn-xs" do %>
 						<span class="glyphicon glyphicon-edit"></span> Editar

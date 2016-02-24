@@ -203,6 +203,11 @@ $.replicate = ->
   $.last = $('#initiative tbody tr.item-initiative:last')
   $('#initiative tbody').append $.last.clone()
   $.gerarIds()
+  $('tr.item-initiative').each (i, tr) ->
+    $.info  = $(tr).find('.npc_info_popover')
+    $.initializeInfoPopover($.info)
+    $.skill = $(tr).find('.npc_skill_popover')
+    $.initializeSkillPopover($.skill)
   $('select[name="position"]').trigger 'change'
   return
 

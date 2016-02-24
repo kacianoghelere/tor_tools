@@ -24,7 +24,7 @@
 								class: "btn btn-default btn-xs" do %>
 				<span class="glyphicon glyphicon-new-window"></span> Visualizar
 			<% end %>
-			<% if party.user == current_user %>
+			<% if current_user?(party.user) || admin? %>
 				<div class="pull-right">
 					<%= link_to edit_party_path(party), title: "Editar", 
 										class: "btn btn-primary btn-xs" do %>
