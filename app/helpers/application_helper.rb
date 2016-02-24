@@ -31,6 +31,10 @@ module ApplicationHelper
 		("<span class='glyphicon glyphicon-#{icon}'></span> #{text}").html_safe
 	end
 
+	def slice_text(text = '', size = 30)
+		text.length > size ? "#{text.slice(0, size)}..." : text
+	end
+
 	def bool_icon(value, print_text = false, 
 			options={ yes_icon: "ok", no_icon: "ban-circle", yes: "Sim", no: "Não" })
 		icon = (value ? "#{options[:yes_icon]}" : "#{options[:no_icon]}");

@@ -23,14 +23,14 @@
 /* Import sandstone variables */
 @import "bootswatch/sandstone/variables";
 
+/* Custom variables */
+@import "variables";
+
 /* Then bootstrap itself */
 @import "bootstrap";
 
 /* And finally bootswatch style itself */
 @import "bootswatch/sandstone/bootswatch";
-
-/* Custom variables */
-@import "variables";
 
 /* Whatever application styles you have go last */
 @import "bootstrap-custom";

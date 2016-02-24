@@ -68,6 +68,6 @@ class WeaponsController < ApplicationController
 		# Confirms the correct user.
 		def correct_user
 			@weapon = Weapon.find(params[:id])
-			redirect_to(root_url) unless current_user?(@weapon.user)
+			redirect_to(root_url) unless current_user?(@weapon.user) || admin?
 		end
 end

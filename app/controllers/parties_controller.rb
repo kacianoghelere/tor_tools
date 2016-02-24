@@ -72,6 +72,6 @@ class PartiesController < ApplicationController
 		# Confirms the correct user.
 		def correct_user
 			@party = Party.find(params[:id])
-			redirect_to(root_url) unless current_user?(@party.user)
+			redirect_to(root_url) unless current_user?(@party.user) || admin?
 		end
 end

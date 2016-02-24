@@ -15,10 +15,8 @@
 			</p>
 		</div>
 
-		<% if !npc.img_url.empty? %>
-			<%= link_to npc do %>
-				<%= image_tag npc.img_url, size: "300", class: "img-thumbnail" %>
-			<% end %>
+		<%= link_to npc do %>
+			<%= image_tag npc.img_url, size: "300", class: "img-thumbnail" %>
 		<% end %>
 
 		<ul class="list-group">

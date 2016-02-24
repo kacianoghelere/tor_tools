@@ -8,6 +8,7 @@ class Npc < ActiveRecord::Base
 	has_many :party_npcs
 	has_many :parties, through: :party_npcs
 	accepts_nested_attributes_for :equipments, :allow_destroy => true
+	before_save { self.img_url = 'no_image' unless !self.img_url.empty? }
 
 	validates :name,        presence: true, length: { maximum: 50 }
 	validates :personality, presence: true
@@ -37,6 +38,11 @@ class Npc < ActiveRecord::Base
 
 	def build_equipments
 		self.equipments.build.bonus = 1 unless !self.equipments.empty?
+	end
+
+	def self.newest
+		all.select(:id, :name, :description, :img_url)
+			.order(created_at: :desc).limit(3)
 	end
 
 	# Cria o vinculo entre o npc e as habilidades, deleta anteriores

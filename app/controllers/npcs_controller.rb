@@ -33,6 +33,7 @@ class NpcsController < ApplicationController
 			end
 		else
 			@npcs = Npc.all
+			@newest = Npc.newest
 		end
 	end
 
@@ -125,6 +126,6 @@ class NpcsController < ApplicationController
 
 		# Confirms the correct user.
 		def correct_user
-			redirect_to(root_url) unless current_user?(@npc.user)
+			redirect_to(root_url) unless current_user?(@npc.user) || admin?
 		end
 end

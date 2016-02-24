@@ -2,6 +2,65 @@
 <% provide(:label, 'Npcs') %>
 
 <div class="row">
+	<div class="col-md-12">
+		<h4 class="epic-title"><b>Recentes</b></h4>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="carousel-mini">
+			<div id="carousel-npcs" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<% @newest.each_with_index do |n, index| %>
+						<li data-target="#carousel-npcs" 
+								data-slide-to="<%= index %>" 
+								class="<%= index == 0 ? 'active' : '' %>"></li>
+					<% end %>
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<% @newest.each_with_index do |n, index| %>
+						<div class="item <%= index == 0 ? 'active' : '' %>">
+							<%= link_to n do %>
+								<center>
+									<%= image_tag n.img_url, size: "300",  
+																						class: "img-thumbnail" %>
+								</center>
+								<div class="carousel-caption">
+									<h3><%= n.name %></h3>
+									<p><small><%= slice_text(n.description, 100) %></small></p>
+								</div>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+
+				<!-- Controls -->
+				<a class="left carousel-control" href="#carousel-npcs" 
+						role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" 
+						aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#carousel-npcs" 
+						role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" 
+						aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h4 class="epic-title"><b>Outros npcs</b></h4>
+	</div>
+</div>
+<div class="row">
 	<%= render @npcs %>
 </div>
 

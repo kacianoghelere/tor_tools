@@ -8,21 +8,19 @@
 			<div class="panel-heading">
 				<h5><%= "#{@npc.id} - #{@npc.name}" %></h5>
 			</div>
-			<% if !@npc.img_url.empty? %>
-				<%= image_tag @npc.img_url, size: "200", class: "img-thumbnail" %>
-			<% end %>
-			<div class="panel-body">			
-<!-- 				<p class="lead">
-					<b>Descrição</b>
-				</p> -->
+
+			<%= image_tag @npc.img_url, size: "200", class: "img-thumbnail" %>
+
+			<div class="panel-body">
 				<p><%= @npc.description %></p>
 			</div>
+
 			<div class="panel-footer">
 				<% if current_user?(@npc.user) || admin? %>
 					<%= link_to 'Editar', edit_npc_path(@npc), 
 																					class: "btn btn-primary btn-sm" %>
 				<% end %>
-				<%= link_to 'Voltar', :back, class: "btn btn-default btn-sm" %>
+				<%= link_to 'Voltar', npcs_path, class: "btn btn-default btn-sm" %>
 			</div>
 		</div>
 	</div>

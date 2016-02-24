@@ -71,6 +71,6 @@ class SkillsController < ApplicationController
 		# Confirms the correct user.
 		def correct_user
 			@skill = Skill.find(params[:id])
-			redirect_to(root_url) unless current_user?(@skill.user)
+			redirect_to(root_url) unless current_user?(@skill.user) || admin?
 		end
 end
