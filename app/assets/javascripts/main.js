@@ -252,19 +252,22 @@ $.setAjaxAsync = function(value) {
 	$.ajaxSetup({async: value});
 }
 
-$.npc_popover_template = '<div class="popover" role="tooltip" style="min-width: 700px">'
+$.npc_popover_template = '<div class="popover" role="tooltip" style="min-width: 600px">'
 	+ '  <div class="arrow"></div>'
 	+ '  <div class="popover-title"></div>'
-	+ '  <div class="popover-content" style="padding: 0;"></div>'
+	+ '  <div class="popover-content"></div>'
 	+ '</div>';
 
 // Formata dados do npc
 $.formatNpcInfo = function(data) {
-	$.html = $('<div />', {class: "col-md-12"});
+	$.html = $('<div />', {class: "col-md-12 col-thin"});
 	if(data){
 		$.div_img         = $('<div />', {class: "col-md-4 col-thin"});
 		$.div_info        = $('<div />', {class: "col-md-12 col-thin"});
-		$.panel_info      = $('<div />', {class: "panel panel-default"});
+		$.panel_info      = $('<div />', {
+			class: "panel panel-default",
+			style: "font-size: 75%"
+		});
 		$.panel_body_info = $('<div />', {class: "panel-body panel-columns"});
 		$.panel_head_info = $('<div />', {
 			class: "panel-heading",
@@ -310,12 +313,12 @@ $.formatNpcInfo = function(data) {
 		$.div_row = $('<div />', {class: "row-fluid"});
 		$.div = $('<div />', {
 			class: "col-md-6 text-center",
-			html: "<b>Personalidade: </b>" + data.personality
+			html: "<b>Personalidade: </b>" + $.getDiams(data.personality)
 		});
 		$.div.appendTo($.div_row);
 		$.div = $('<div />', {
 			class: "col-md-6 text-center",
-			html: "<b>Sobrevivência: </b>" + data.survival
+			html: "<b>Sobrevivência: </b>" + $.getDiams(data.survival)
 		});
 		$.div.appendTo($.div_row);
 		$.div_row.appendTo($.panel_body_info);
@@ -324,12 +327,12 @@ $.formatNpcInfo = function(data) {
 		$.div_row = $('<div />', {class: "row-fluid"});
 		$.div = $('<div />', {
 			class: "col-md-6 text-center",
-			html: "<b>Movimento: </b>" + data.movement
+			html: "<b>Movimento: </b>" + $.getDiams(data.movement)
 		});
 		$.div.appendTo($.div_row);
 		$.div = $('<div />', {
 			class: "col-md-6 text-center",
-			html: "<b>Costumes: </b>" + data.custom
+			html: "<b>Costumes: </b>" + $.getDiams(data.custom)
 		});
 		$.div.appendTo($.div_row);
 		$.div_row.appendTo($.panel_body_info);
@@ -337,12 +340,12 @@ $.formatNpcInfo = function(data) {
 		$.div_row = $('<div />', {class: "row-fluid"});
 		$.div = $('<div />', {
 			class: "col-md-6 text-center",
-			html: "<b>Percepção: </b>" + data.perception
+			html: "<b>Percepção: </b>" + $.getDiams(data.perception)
 		});
 		$.div.appendTo($.div_row);
 		$.div = $('<div />', {
 			class: "col-md-6 text-center",
-			html: "<b>Ocupação: </b>" + data.vocation
+			html: "<b>Ocupação: </b>" + $.getDiams(data.vocation)
 		});
 		$.div.appendTo($.div_row);
 		$.div_row.appendTo($.panel_body_info);
@@ -377,13 +380,13 @@ $.formatNpcInfo = function(data) {
 		});
 		$.div.appendTo($.div_row);
 		$.div = $('<div />', {
-			class: "col-md-1 col-header text-center",
+			class: "col-md-2 col-header text-center",
 			html: '<b>Trauma</b>'
 		});
 		$.div.appendTo($.div_row);
 		$.div = $('<div />', {
-			class: "col-md-4 col-header text-center",
-			html: '<b>Atq. Dir.</b>'
+			class: "col-md-3 col-header text-center",
+			html: '<b>Atq. Direcionado</b>'
 		});
 		$.div.appendTo($.div_row);
 		$.div_row.appendTo($.panel_body_info);
@@ -397,7 +400,7 @@ $.formatNpcInfo = function(data) {
 			$.div.appendTo($.div_row);
 			$.div = $('<div />', {
 				class: "col-md-1 text-center",
-				html: equipment.bonus
+				html: $.getDiams(equipment.bonus)
 			});
 			$.div.appendTo($.div_row);
 			$.div = $('<div />', {
@@ -411,13 +414,14 @@ $.formatNpcInfo = function(data) {
 			});
 			$.div.appendTo($.div_row);
 			$.div = $('<div />', {
-				class: "col-md-1 text-center",
+				class: "col-md-2 text-center",
 				html: equipment.weapon.injury
 			});
 			$.div.appendTo($.div_row);
 			$.div = $('<div />', {
-				class: "col-md-4 text-center",
-				html: equipment.weapon.weapon_category.effect
+				class: "col-md-3 text-center",
+				html: (equipment.weapon.weapon_category.effect ? 
+					equipment.weapon.weapon_category.effect : '--')
 			});
 			$.div.appendTo($.div_row);
 			$.div_row.appendTo($.panel_body_info);
@@ -430,6 +434,14 @@ $.formatNpcInfo = function(data) {
 		$.div_info.appendTo($.html);
 	};
 	return $.html;
+}
+
+$.getDiams = function(amount) {
+	$.text = '';
+	for (var i = 0; i < amount; i++) {
+		$.text += '&diams;';
+	};
+	return $.text;
 }
 
 // Formata dados de skills
@@ -466,7 +478,6 @@ $.initializeInfoPopover = function(elem) {
 				hide: "100"
 			},
 			'html': true,
-			'title': 'Informações ('+$.code+')',
 			'container': 'body',
 			'template': $.npc_popover_template,
 			'content': $.info
