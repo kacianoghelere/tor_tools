@@ -4,13 +4,21 @@ User.create!(name:	"Kaciano Ghelere",
 						 password_confirmation: "123456",
 						 admin: true)
 
-9.times do |n|
+10.times do |n|
 	name	   = Faker::Name.name
 	email    = "example-#{n+1}@railstutorial.org"
 	password = "password"
 	User.create!(name:	name, email: email, password: password,
 							 password_confirmation: password)
 end
+
+# Following relationships
+users = User.all
+user  = users.first
+following = users[2..10]
+followers = users[3..8]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
 
 WeaponCategory.create!(name: "Espada", effect: "Desarma")
 WeaponCategory.create!(name: "Machado", effect: "Destrói Escudo")
@@ -25,16 +33,15 @@ WeaponCategory.create!(name: "Punhal", effect: "")
 	injury   = rand(1..20)
 	user     = User.all.sample
 	category = WeaponCategory.all.sample
-	Weapon.create!(name: "#{category.name} #{name}", damage: damage, 
-									edge: edge, injury: injury,
-									user: user, weapon_category: category)
+	user.weapons.create!(name: "#{category.name} #{name}", damage: damage, 
+									edge: edge, injury: injury, weapon_category: category)
 end
 
 10.times do |n|
 	name         = Faker::Lorem.word.capitalize
 	description  = Faker::Lorem.sentence
 	user         = User.all.sample
-	Skill.create!(name: name, description: description, user: user)
+	user.skills.create!(name: name, description: description)
 end
 
 20.times do |n|
@@ -54,23 +61,21 @@ end
 	custom      = rand(1..3)
 	vocation    = rand(1..3)
 	user        = User.all.sample
-	npc = Npc.create!(name: name, description: description, img_url: img_url, 
+	npc = user.npcs.create!(name: name, description: description, img_url: img_url, 
 					ally: ally, attr_index: attr_index, resistance: resistance, 
 					resource: resource, parry: parry, armour: armour, 
 					personality: personality, movement: movement, 
 					perception: perception, survival: survival, custom: custom, 
-					vocation: vocation, user: user)
+					vocation: vocation)
 
 	weapons = rand(1..3)
 	weapons.times do |n|
-		weapon = Weapon.all.sample
-		NpcWeapon.create!(npc: npc, weapon: weapon, bonus: rand(1..3))
+		npc.equipments.create!(npc: npc, weapon: Weapon.all.sample, bonus: rand(1..3))
 	end
 
 	skills = rand(1..3)
 	skills.times do |n|
-		skill = Skill.all.sample
-		NpcSkill.create!(npc: npc, skill: skill)
+		npc.npc_skills.create!(npc: npc, skill: Skill.all.sample)
 	end
 end
 
@@ -78,9 +83,9 @@ end
 	user   = User.all.sample
 	amount = rand(1..4)
 	title  = Faker::Lorem.word.capitalize
-	party  = Party.create!(title: title, user: user)
+	party  = user.parties.create!(title: title)
 	amount.times do |x|
 		npc = Npc.all.sample
-		party.party_npcs.create!(npc: npc, amount: rand(1..4))
+		party.members.create!(npc: npc, amount: rand(1..4))
 	end
 end

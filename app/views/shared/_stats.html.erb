@@ -1,0 +1,19 @@
+<% @user ||= current_user %>
+<ul class="nav nav-pills nav-justified stats">
+	<li role="presentation">
+		<a href="<%= following_user_path(@user) %>">
+			Seguindo 
+			<strong id="following" class="badge">
+				<%= @user.following.count %>
+			</strong>
+		</a>
+	</li>
+	<li role="presentation">
+		<a href="<%= followers_user_path(@user) %>">
+			Seguidores 
+			<strong id="followers" class="badge">
+				<%= @user.followers.count %>
+			</strong>
+		</a>
+	</li>
+</ul>

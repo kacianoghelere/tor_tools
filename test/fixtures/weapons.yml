@@ -1,17 +1,1 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-  damage: 1
-  edge: 1
-  injury: 1
-  enc: MyString
-  user_id: 
-
-two:
-  name: MyString
-  damage: 1
-  edge: 1
-  injury: 1
-  enc: MyString
-  user_id: 
+# 

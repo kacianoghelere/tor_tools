@@ -22,6 +22,7 @@ module TorTools
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.action_view.embed_authenticity_token_in_remote_forms = true
 
     config.autoload_paths << Rails.root.join('lib')
     config.assets.enabled = true

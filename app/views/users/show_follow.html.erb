@@ -1,0 +1,35 @@
+<% provide(:title, @title) %>
+<% provide(:label, @title) %>
+<div class="row">
+	<div class="col-md-3">
+		<center class="well well-sm">
+			<section class="user_info">
+				<%= link_to @user do %>
+					<%= gravatar_for @user, classes: "img-circle" %>
+					<h3><%= @user.name %></h3>
+				<% end %>
+			</section>
+
+			<section class="stats">
+				<%= render 'shared/stats' %>
+				<% if @users.any? %>
+					<div class="user_avatars">
+						<% @users.each do |user| %>
+							<%= link_to user do %>
+								<%= gravatar_for(user, size: 30, classes: "img-circle") %>
+							<% end %>
+						<% end %>
+					</div>
+				<% end %>
+			</section>
+		</center>
+	</div>
+
+	<div class="col-md-9">
+		<% if @users.any? %>
+			<ul class="list-group">
+				<%= render partial: 'list_user', collection: @users, as: :user %>
+			</ul>
+		<% end %>
+	</div>
+</div>

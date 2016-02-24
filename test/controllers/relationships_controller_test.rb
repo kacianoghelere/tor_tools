@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NpcWeaponTest < ActiveSupport::TestCase
+class RelationshipsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end
