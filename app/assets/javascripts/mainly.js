@@ -28,8 +28,8 @@ $.generateItemInitiative = function (data) {
 	//--------------------------------------------------------------------------
 	// BOTOES
 	$.btn_remover = $('<button />', {
-		name:  "remover",
-		id:    "remover",
+		name:  "remove",
+		id:    "remove",
 		class: "btn btn-danger btn-sm",
 		html:  "<span class='glyphicon glyphicon-minus'></span>"
 	});
@@ -436,14 +436,6 @@ $.formatNpcInfo = function(data) {
 	return $.html;
 }
 
-$.getDiams = function(amount) {
-	$.text = '';
-	for (var i = 0; i < amount; i++) {
-		$.text += '&diams;';
-	};
-	return $.text;
-}
-
 // Formata dados de skills
 $.formatNpcSkills = function(data) {
 	$.list = '<ul class="list-group" style="margin-bottom: 0;">';
@@ -529,9 +521,11 @@ $.formatParties = function(data) {
 				class: "pull-right"
 			});
 			$.btn = $('<button />', {
-				type:  "button",
-				html:  "Adicionar",
-				class: "btn btn-default btn-sm"
+				type:        "button",
+				html:        "Adicionar",
+				name:        "add_party",
+				'data-code': val.id,
+				class:       "btn btn-default btn-sm"
 			});
 			$.btn.appendTo($.div_btn);
 			$.div_btn.appendTo($.li);
@@ -602,6 +596,23 @@ $.fetchNpcData = function(id) {
 		$.initializeSkillPopover();
 		$.gerarIds();
 		$('select[name="position"]').trigger('change');
+	});
+	$.setAjaxAsync(true);
+}
+
+// Fetch party data
+$.fetchPartyData = function(id) {
+	$.url = 'parties/'+id+'/npcs.json';
+	$.setAjaxAsync(false);
+	$.getJSON($.url).done(function(data) {
+		$.each(data, function(index, npc) {
+			$.item = $.generateItemInitiative(npc);
+			$('#initiative tbody').append($.item);
+			$.initializeInfoPopover();
+			$.initializeSkillPopover();
+			$.gerarIds();
+			$('select[name="position"]').trigger('change');
+		});
 	});
 	$.setAjaxAsync(true);
 }

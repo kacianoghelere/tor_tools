@@ -21,12 +21,11 @@ Rails.application.routes.draw do
 
 	resources :npcs do
 		resources :skills, only: :index, as: :skills
-	end
-	resources :npcs do
 		resources :npc_weapons, only: :destroy, as: :equipments
 	end
 	resources :parties do
-		resources :party_npcs, only: :destroy, as: :members
+		resources :npcs,       only: :index,   as: :npcs
+		resources :party_npcs, only: [:index, :destroy], as: :members
 	end
 
 	# The priority is based upon order of creation: first created -> highest priority.

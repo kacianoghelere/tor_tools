@@ -4,7 +4,29 @@ class NpcsController < ApplicationController
 	before_action :correct_user,	 only: [:correct_user, :edit, :update, :destroy]
 
 	def index
-		if params[:term]
+		if params[:party_id]
+			@npcs = Party.find(params[:party_id]).npcs
+			respond_to do |format|
+				format.html
+				format.json { 
+					render :json => @npcs.to_json(:include => { 
+						:equipments => { 
+							:only    => [:weapon, :bonus],
+							:include => { 
+								:weapon  => { 
+									:only    => [:name, :damage, :damage, :edge, :injury],
+									:include => {
+										:weapon_category => {
+											:only    => [:name, :effect]
+										}
+									}
+								}
+							}
+						}
+					}
+				)}
+			end
+		elsif params[:term]
 			respond_to do |format|
 				format.html
 				format.json { @npcs = Npc.search(params[:term]) }

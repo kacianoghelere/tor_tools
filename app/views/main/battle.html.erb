@@ -46,11 +46,11 @@
 											class: "btn btn-default btn-sm" do %>
 					<%= link_icon("plus", "Adicionar Grupo") %>
 				<% end %>
-				<%= button_tag type: "button", name: "replicar", 
+				<%= button_tag type: "button", name: "replicate", 
 														class: "btn btn-default btn-sm" do %>
 					<%= link_icon("duplicate", "Replicar") %>
 				<% end %>
-				<%= button_tag type: "button", name: "gerar", 
+				<%= button_tag type: "button", name: "generate", 
 														class: "btn btn-default btn-sm" do %>
 					<%= link_icon("cog", " Gerar Iniciativa") %>
 				<% end %>
@@ -68,16 +68,21 @@
 			$.fetchNpcData($.id);
 		});
 
-		$(document).on('click', 'button[name="remover"]', function(event) {
+		$(document).on('click', 'button[name="remove"]', function(event) {
 			$(this).closest('tr.item-initiative').remove();
 		});
 
-		$(document).on('click', 'button[name="replicar"]', function(event) {
+		$(document).on('click', 'button[name="replicate"]', function(event) {
 			$.replicate();
 		});
 
-		$(document).on('click', 'button[name="gerar"]', function(event) {
+		$(document).on('click', 'button[name="generate"]', function(event) {
 			$.generateInitiatives();
+		});
+
+		$(document).on('click', 'button[name="add_party"]', function(event) {
+			$.code = $(this).data('code');
+			$.fetchPartyData($.code);
 		});
 
 		$(document).on('change', 'select[name="position"]', function(event) {
@@ -89,7 +94,7 @@
 			$.calculateNA(this);
 		});
 
-		$.fetchNpcData(1);
+		// $.fetchNpcData(1);
 
 		$.fetchPartiesData();
 	});
