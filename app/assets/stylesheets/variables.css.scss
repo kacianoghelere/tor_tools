@@ -1,14 +1,28 @@
-/* VARIAVEIS */
-$gray-base:              #000 !default;
-$gray-darker:            #602F19 !default;
-$gray-dark:              #8F4625 !default;
-$gray:                   #B5582F !default;
-$gray-light:             #D76837 !default;
-$gray-lighter:           #FF7B41 !default;
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base:              #2A1F09 !default; // matiz 18
+// $gray-darker:            #413012 !default;
+// $gray-dark:              #B09560 !default;
+// $gray:                   #C6B084 !default;
+// $gray-light:             #E2D9C6 !default;
+// $gray-lighter:           #EDE7DA !default;
+
+$gray-darker:            lighten($gray-base, 16.66%);
+$gray-dark:              lighten($gray-darker, 16.66%);
+$gray:                   lighten($gray-dark, 16.66%);
+$gray-light:             lighten($gray, 16.66%);
+$gray-lighter:           lighten($gray-light, 16.66%);
 
 $brand-primary:         #325D88 !default;
-$brand-success:         #93C54B !default;
-$brand-info:            #29ABE0 !default;
-$brand-warning:         #F47C3C !default;
-$brand-danger:          #d9534f !default;
-/* FIM VARIAVEIS */
+$brand-success:         #81B537 !default;
+$brand-info:            #1D9FD4 !default;
+$brand-warning:         #F4A53C !default;
+$brand-danger:          #D04C48 !default;
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+$font-family-sans-serif:  serif, "Helvetica Neue", Helvetica, Arial !default;
+$font-family-serif:       serif, Georgia, "Times New Roman", Times !default;

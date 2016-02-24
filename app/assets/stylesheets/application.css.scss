@@ -17,14 +17,14 @@
 
 /* Example using 'Cerulean' bootswatch */
 
+/* Custom variables */
+@import "variables";
+
 /* Import bootstrap-sprockets */
 @import "bootstrap-sprockets";
 
 /* Import sandstone variables */
 @import "bootswatch/sandstone/variables";
-
-/* Custom variables */
-@import "variables";
 
 /* Then bootstrap itself */
 @import "bootstrap";

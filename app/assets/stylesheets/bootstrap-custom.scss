@@ -1,8 +1,9 @@
+/* Custom variables */
+@import "variables";
+/* Import bootstrap-sprockets */
 @import "bootstrap-sprockets";
 /* Import sandstone variables */
 @import "bootswatch/sandstone/variables";
-/* Custom variables */
-@import "variables";
 /* Then bootstrap itself */
 @import "bootstrap";
 /* And finally bootswatch style itself */
@@ -103,8 +104,6 @@ body {
 		background: rgba(0,0,0,0.02);
 		box-shadow: 0px 1px 50px 10px rgba(0, 0, 0, 0.4);
 		border: 1px solid #CAB27B;
-		// background-color: #E8D3A1;
-		// background: linear-gradient(#CAB27B, #D9C598, #E8D3A1);
 		@include parchment_pattern;
 	}
 	&>.container .jumbotron {
@@ -292,20 +291,20 @@ ul.list-group.list-group-scrolled-500 {
 	}
 }
 .panel-default {
-	border-color: #E0CEB3;
-	background-color: #F8EEDD;
+	border-color: $gray-light;
+	background-color: $gray-lighter;
 	& > .panel-heading {
 		color: #3E3F3A;
-		background-color: #F3E9D9;
-		border-color: #E0CEB3;
+		background-color: $gray-lighter;
+		border-color: $gray-light;
 	}
 	& > .panel-body {
-		background-color: #FAF0E0;
-		border-color: #E0CEB3;
+		background-color: $gray-lighter;
+		border-color: $gray-light;
 	}
 	& > .panel-footer {
-		background-color: #F3E9D9;
-		border-color: #E0CEB3;
+		background-color: $gray-lighter;
+		border-color: $gray-light;
 	}
 	& > .list-group,
 	& > .list-group .list-group-item {
@@ -405,7 +404,7 @@ li.list-group-item.list-group-item-small {
 .panel-columns div.col-sm-12.col-header,
 .panel-columns div.col-md-12.col-header,
 .panel-columns div.col-lg-12.col-header {
-	background-color: #F3E9D9;
+	background-color: lighten($gray-light, 10%);
 }
 .panel-columns div.col-xs-1,
 .panel-columns div.col-sm-1,
@@ -457,8 +456,8 @@ li.list-group-item.list-group-item-small {
 .panel-columns div.col-lg-12
  {
 	padding: 5px 10px;
-	border-bottom: 1px solid #E0CEB3;
-	border-right: 1px solid #E0CEB3;
+	border-bottom: 1px solid lighten($gray-light, 10%);
+	border-right: 1px solid lighten($gray-light, 10%);
 }
 .panel-columns div.col-xs-1:last-child,
 .panel-columns div.col-sm-1:last-child,
@@ -513,11 +512,6 @@ li.list-group-item.list-group-item-small {
 }
 .progress {
 	margin-bottom: 0px;
-}
-
-a {
-    color: #7CA63F;
-    text-decoration: none;
 }
 
 .footer {
