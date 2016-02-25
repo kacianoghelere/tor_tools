@@ -213,7 +213,7 @@
 					<div class="panel-heading"><h5>Habilidades</h5></div>
 					<div class="panel-body">
 						<div class="form-group">
-							<%= f.collection_select(:skills, Skill.all, :id, :name, 
+							<%= f.collection_select(:skills, @npc.filter_skills, :id, :name, 
 								{selected: @npc.skill_ids, include_blank: false, prompt: false}, 
 								multiple: true, class: "form-control input-sm")	%>
 						</div>

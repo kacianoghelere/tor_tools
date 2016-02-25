@@ -37,18 +37,12 @@ class Npc < ActiveRecord::Base
 	  where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
 	end
 
-	# Cria o vinculo entre o npc e as armas, deleta anteriores
-	def create_weapons(weapons)
-		self.equipments.destroy_all
-		weapons.each do |weapon|
-			if !weapon.empty?
-				self.equipments.create({weapon_id: weapon.to_i})
-			end
-		end
+	def filter_weapons
+		Weapon.all_active
 	end
 
-	def filter_weapons
-		Weapon.all #.where('"id" NOT IN (?)', self.npcs.map { |x| x.id } )
+	def filter_skills
+		Skill.all_active
 	end
 
 	def build_equipments

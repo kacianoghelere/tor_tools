@@ -12,7 +12,7 @@ class Party < ActiveRecord::Base
 	end
 
 	def filter_npcs
-		Npc.all #.where('"id" NOT IN (?)', self.npcs.map { |x| x.id } )
+		Npc.all_active
 	end
 
 	def self.all_active
