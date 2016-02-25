@@ -87,8 +87,8 @@ body {
 		border: 1px solid #CAB27B;
 		@include parchment_pattern;
 	}
-	&>.container .jumbotron {
-		// @include parchment_background_dark;
+	&>.container ~ .container {
+		margin-top: 10px; 
 	}
 }
 .popover-content {
@@ -432,9 +432,13 @@ li.list-group-item.list-group-item-small {
 }
 
 .footer {
-	padding: 10px;
+	border-top: 1px solid $gray-light;
+	padding: 5px 10px;
 	color: #30251F;
 	text-align: center;
+	font-size: 9px;
+	float: left;
+	width: 100%;
 }
 
 /* miscellaneous */
@@ -442,7 +446,8 @@ li.list-group-item.list-group-item-small {
 	clear: both;
 	float: left;
 	width: 100%;
-	margin-top: 45px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	background-color: #272822;
 	color: #EEE;
 	@include box_sizing;
