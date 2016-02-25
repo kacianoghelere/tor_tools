@@ -54,7 +54,7 @@ class SkillsController < ApplicationController
 		end
 
 		def skill_params
-			params.require(:skill).permit(:name, :description)
+			params.require(:skill).permit(:name, :cost, :description)
 		end
 
 		# Before filters

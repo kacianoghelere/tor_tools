@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20160224180317) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
+    t.integer  "cost"
     t.string   "description"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
