@@ -7,16 +7,31 @@ class Npc < ActiveRecord::Base
 	has_many :skills,  through: :npc_skills
 	has_many :party_npcs
 	has_many :parties, through: :party_npcs
+	has_many :activity_feeds
 	accepts_nested_attributes_for :equipments, :allow_destroy => true
 	before_save { self.img_url = 'no_image' unless !self.img_url.empty? }
 
 	validates :name,        presence: true, length: { maximum: 50 }
-	validates :personality, presence: true
-	validates :movement,    presence: true
-	validates :perception,  presence: true
-	validates :survival,    presence: true
-	validates :custom,      presence: true
-	validates :vocation,    presence: true
+	validates :attr_index,  presence: true, numericality: { only_integer: true }
+	validates :resource,    presence: true, numericality: { only_integer: true }
+	validates :armour,      presence: true, numericality: { only_integer: true }
+	validates :parry,       presence: true, numericality: { only_integer: true }
+	validates :personality, presence: true, numericality: { only_integer: true }
+	validates :movement,    presence: true, numericality: { only_integer: true }
+	validates :perception,  presence: true, numericality: { only_integer: true }
+	validates :survival,    presence: true, numericality: { only_integer: true }
+	validates :custom,      presence: true, numericality: { only_integer: true }
+	validates :vocation,    presence: true, numericality: { only_integer: true }
+	validates_inclusion_of :attr_index,  in: 1..12
+	validates_inclusion_of :resource,    in: 2..5
+	validates_inclusion_of :armour,      in: 1..6
+	validates_inclusion_of :parry,       in: 2..5
+	validates_inclusion_of :personality, in: 1..3
+	validates_inclusion_of :movement,    in: 1..3
+	validates_inclusion_of :perception,  in: 1..3
+	validates_inclusion_of :survival,    in: 1..3
+	validates_inclusion_of :custom,      in: 1..3
+	validates_inclusion_of :vocation,    in: 1..3
 
 	def self.search(term)
 	  where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
@@ -40,8 +55,12 @@ class Npc < ActiveRecord::Base
 		self.equipments.build.bonus = 1 unless !self.equipments.empty?
 	end
 
+	def self.all_active
+		all.where(deleted: false)
+	end
+
 	def self.newest
-		all.select(:id, :name, :description, :img_url)
+		all.where(deleted: false).select(:id, :name, :description, :img_url)
 			.order(created_at: :desc).limit(3)
 	end
 

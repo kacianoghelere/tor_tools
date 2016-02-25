@@ -5,6 +5,8 @@ class CreateWeapons < ActiveRecord::Migration
       t.integer :damage
       t.integer :edge
       t.integer :injury
+      t.boolean :deleted, :default => false
+      t.timestamp :deleted_at
       t.references :user, index: true, foreign_key: true
       t.references :weapon_category, index: true, foreign_key: true
 

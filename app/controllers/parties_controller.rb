@@ -4,7 +4,7 @@ class PartiesController < ApplicationController
 	before_action :correct_user,	 only: [:edit, :update, :destroy]
 
 	def index
-		@parties = Party.all
+		@parties = Party.all_active
 	end
 
 	def show
@@ -19,6 +19,7 @@ class PartiesController < ApplicationController
 		@party = Party.new(party_params)
 		@party.user = current_user
 		if @party.save
+			current_user.generate_feed(party: @party, feed_type: 'insertion')
 			flash.now[:success] = "Informações Salvas"
 			redirect_to @party and return
 		else
@@ -34,6 +35,7 @@ class PartiesController < ApplicationController
 		# save goes like usual
 		if @party.update_attributes(party_params)
 			flash.now[:success] = "Informações atualizadas"
+			current_user.generate_feed(party: @party, feed_type: 'updated')
 			redirect_to @party and return
 		else
 			flash.now[:danger] = "Ooops! Algo deu errado..."
@@ -42,7 +44,8 @@ class PartiesController < ApplicationController
 	end
 
 	def destroy
-		Party.find(params[:id]).destroy
+		current_user.generate_feed(party: @party, feed_type: 'destroyed')
+		@party.update(deleted: true, deleted_at: Time.zone.now)
 		flash.now[:success] = "Operação concluída com sucesso!"
 		redirect_to parties_url
 	end

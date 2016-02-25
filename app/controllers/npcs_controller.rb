@@ -32,7 +32,7 @@ class NpcsController < ApplicationController
 				format.json { @npcs = Npc.search(params[:term]) }
 			end
 		else
-			@npcs = Npc.all
+			@npcs = Npc.all_active
 			@newest = Npc.newest
 		end
 	end
@@ -69,6 +69,7 @@ class NpcsController < ApplicationController
 		@npc = Npc.new(npc_params)
 		@npc.user = current_user
 		if @npc.save
+			current_user.generate_feed(npc: @npc, feed_type: 'insertion')
 			@npc.create_skills(params[:npc][:skills])
 			flash.now[:success] = COOL_SUCCESS_MESSAGE
 			redirect_to @npc and return
@@ -85,6 +86,7 @@ class NpcsController < ApplicationController
 		# save goes like usual
 		if @npc.update_attributes(npc_params)
 			@npc.create_skills(params[:npc][:skills])
+			current_user.generate_feed(npc: @npc, feed_type: 'updated')
 			flash[:success] = COOL_SUCCESS_MESSAGE
 			redirect_to @npc and return
 		else
@@ -94,7 +96,8 @@ class NpcsController < ApplicationController
 	end
 
 	def destroy
-		@npc.destroy
+		current_user.generate_feed(npc: @npc, feed_type: 'destroyed')
+		@npc.update(deleted: true, deleted_at: Time.zone.now)
 		flash.now[:success] = "Operação concluída com sucesso!"
 		redirect_to npcs_url
 	end

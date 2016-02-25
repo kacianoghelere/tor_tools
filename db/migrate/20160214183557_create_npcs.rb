@@ -16,6 +16,8 @@ class CreateNpcs < ActiveRecord::Migration
       t.integer :survival,    :null => false, :default => 1
       t.integer :custom,      :null => false, :default => 1
       t.integer :vocation,    :null => false, :default => 1
+      t.boolean :deleted, :default => false
+      t.timestamp :deleted_at
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false

@@ -1,4 +1,11 @@
 <%= form_for(@weapon_category, class: 'form-horizontal') do |f| %>
+	<div class="col-md-12">
+		<div class="form-group">
+			<%= render partial: 'shared/error_messages', 
+																				locals: {object: @weapon_category} %>
+		</div>
+	</div>
+
 	<div class="col-md-6">
 		<div class="form-group">
 			<%= f.label :name, "Nome" %>

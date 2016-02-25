@@ -9,25 +9,6 @@
 /* And finally bootswatch style itself */
 @import "bootswatch/sandstone/bootswatch";
 
-@font-face {
-  font-family: "Ringbearer";
-  src: url(/assets/ringbearer.ttf) format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Aniron";
-  src: url(/assets/anirm___.ttf) format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Aniron_Bold";
-  src: url(/assets/anirb___.ttf) format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 @mixin box_sizing {
 	-moz-box-sizing:		border-box;
 	-webkit-box-sizing: border-box;
@@ -335,15 +316,17 @@ li.list-group-item.list-group-item-small {
 	color: $gray_lighter;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
+
 .carousel-mini {
 	max-width: 750px;
 	margin: 0 auto;
 }
 .carousel {
-	background-color: rgba(54,42,35,0.5);
-	border: 1px solid $epic-brown;
-	border-top: 3px double $epic-brown;
-	border-bottom: 3px double $epic-brown;
+	background-color: transparentize($gray_darker, 0.5);
+	border: 1px solid $gray_darker;
+	border-top: 3px double $gray_darker;
+	border-bottom: 3px double $gray_darker;
+	border-radius: 4px;
 
 	& .carousel-caption {
 		color: $gray_lighter;
@@ -362,158 +345,84 @@ li.list-group-item.list-group-item-small {
 .panel-columns {
 	padding: 0;
 }
-.panel-columns div.col-xs-1.col-header,
-.panel-columns div.col-sm-1.col-header,
-.panel-columns div.col-md-1.col-header,
-.panel-columns div.col-lg-1.col-header,
-.panel-columns div.col-xs-2.col-header,
-.panel-columns div.col-sm-2.col-header,
-.panel-columns div.col-md-2.col-header,
-.panel-columns div.col-lg-2.col-header,
-.panel-columns div.col-xs-3.col-header,
-.panel-columns div.col-sm-3.col-header,
-.panel-columns div.col-md-3.col-header,
-.panel-columns div.col-lg-3.col-header,
-.panel-columns div.col-xs-4.col-header,
-.panel-columns div.col-sm-4.col-header,
-.panel-columns div.col-md-4.col-header,
-.panel-columns div.col-lg-4.col-header,
-.panel-columns div.col-xs-5.col-header,
-.panel-columns div.col-sm-5.col-header,
-.panel-columns div.col-md-5.col-header,
-.panel-columns div.col-lg-5.col-header,
-.panel-columns div.col-xs-6.col-header,
-.panel-columns div.col-sm-6.col-header,
-.panel-columns div.col-md-6.col-header,
-.panel-columns div.col-lg-6.col-header,
-.panel-columns div.col-xs-7.col-header,
-.panel-columns div.col-sm-7.col-header,
-.panel-columns div.col-md-7.col-header,
-.panel-columns div.col-lg-7.col-header,
-.panel-columns div.col-xs-8.col-header,
-.panel-columns div.col-sm-8.col-header,
-.panel-columns div.col-md-8.col-header,
-.panel-columns div.col-lg-8.col-header,
-.panel-columns div.col-xs-9.col-header,
-.panel-columns div.col-sm-9.col-header,
-.panel-columns div.col-md-9.col-header,
-.panel-columns div.col-lg-9.col-header,
-.panel-columns div.col-xs-10.col-header,
-.panel-columns div.col-sm-10.col-header,
-.panel-columns div.col-md-10.col-header,
-.panel-columns div.col-lg-10.col-header,
-.panel-columns div.col-xs-11.col-header,
-.panel-columns div.col-sm-11.col-header,
-.panel-columns div.col-md-11.col-header,
-.panel-columns div.col-lg-11.col-header,
-.panel-columns div.col-xs-12.col-header,
-.panel-columns div.col-sm-12.col-header,
-.panel-columns div.col-md-12.col-header,
-.panel-columns div.col-lg-12.col-header {
+.panel-columns div.col-xs-1.col-header,.panel-columns div.col-sm-1.col-header,
+.panel-columns div.col-md-1.col-header,.panel-columns div.col-lg-1.col-header,
+.panel-columns div.col-xs-2.col-header,.panel-columns div.col-sm-2.col-header,
+.panel-columns div.col-md-2.col-header,.panel-columns div.col-lg-2.col-header,
+.panel-columns div.col-xs-3.col-header,.panel-columns div.col-sm-3.col-header,
+.panel-columns div.col-md-3.col-header,.panel-columns div.col-lg-3.col-header,
+.panel-columns div.col-xs-4.col-header,.panel-columns div.col-sm-4.col-header,
+.panel-columns div.col-md-4.col-header,.panel-columns div.col-lg-4.col-header,
+.panel-columns div.col-xs-5.col-header,.panel-columns div.col-sm-5.col-header,
+.panel-columns div.col-md-5.col-header,.panel-columns div.col-lg-5.col-header,
+.panel-columns div.col-xs-6.col-header,.panel-columns div.col-sm-6.col-header,
+.panel-columns div.col-md-6.col-header,.panel-columns div.col-lg-6.col-header,
+.panel-columns div.col-xs-7.col-header,.panel-columns div.col-sm-7.col-header,
+.panel-columns div.col-md-7.col-header,.panel-columns div.col-lg-7.col-header,
+.panel-columns div.col-xs-8.col-header,.panel-columns div.col-sm-8.col-header,
+.panel-columns div.col-md-8.col-header,.panel-columns div.col-lg-8.col-header,
+.panel-columns div.col-xs-9.col-header,.panel-columns div.col-sm-9.col-header,
+.panel-columns div.col-md-9.col-header,.panel-columns div.col-lg-9.col-header,
+.panel-columns div.col-xs-10.col-header,.panel-columns div.col-sm-10.col-header,
+.panel-columns div.col-md-10.col-header,.panel-columns div.col-lg-10.col-header,
+.panel-columns div.col-xs-11.col-header,.panel-columns div.col-sm-11.col-header,
+.panel-columns div.col-md-11.col-header,.panel-columns div.col-lg-11.col-header,
+.panel-columns div.col-xs-12.col-header,.panel-columns div.col-sm-12.col-header,
+.panel-columns div.col-md-12.col-header,.panel-columns div.col-lg-12.col-header {
 	background-color: lighten($gray-light, 10%);
 }
-.panel-columns div.col-xs-1,
-.panel-columns div.col-sm-1,
-.panel-columns div.col-md-1,
-.panel-columns div.col-lg-1,
-.panel-columns div.col-xs-2,
-.panel-columns div.col-sm-2,
-.panel-columns div.col-md-2,
-.panel-columns div.col-lg-2,
-.panel-columns div.col-xs-3,
-.panel-columns div.col-sm-3,
-.panel-columns div.col-md-3,
-.panel-columns div.col-lg-3,
-.panel-columns div.col-xs-4,
-.panel-columns div.col-sm-4,
-.panel-columns div.col-md-4,
-.panel-columns div.col-lg-4,
-.panel-columns div.col-xs-5,
-.panel-columns div.col-sm-5,
-.panel-columns div.col-md-5,
-.panel-columns div.col-lg-5,
-.panel-columns div.col-xs-6,
-.panel-columns div.col-sm-6,
-.panel-columns div.col-md-6,
-.panel-columns div.col-lg-6,
-.panel-columns div.col-xs-7,
-.panel-columns div.col-sm-7,
-.panel-columns div.col-md-7,
-.panel-columns div.col-lg-7,
-.panel-columns div.col-xs-8,
-.panel-columns div.col-sm-8,
-.panel-columns div.col-md-8,
-.panel-columns div.col-lg-8,
-.panel-columns div.col-xs-9,
-.panel-columns div.col-sm-9,
-.panel-columns div.col-md-9,
-.panel-columns div.col-lg-9,
-.panel-columns div.col-xs-10,
-.panel-columns div.col-sm-10,
-.panel-columns div.col-md-10,
-.panel-columns div.col-lg-10,
-.panel-columns div.col-xs-11,
-.panel-columns div.col-sm-11,
-.panel-columns div.col-md-11,
-.panel-columns div.col-lg-11,
-.panel-columns div.col-xs-12,
-.panel-columns div.col-sm-12,
-.panel-columns div.col-md-12,
-.panel-columns div.col-lg-12
- {
+.panel-columns div.col-xs-1,.panel-columns div.col-sm-1,
+.panel-columns div.col-md-1,.panel-columns div.col-lg-1,
+.panel-columns div.col-xs-2,.panel-columns div.col-sm-2,
+.panel-columns div.col-md-2,.panel-columns div.col-lg-2,
+.panel-columns div.col-xs-3,.panel-columns div.col-sm-3,
+.panel-columns div.col-md-3,.panel-columns div.col-lg-3,
+.panel-columns div.col-xs-4,.panel-columns div.col-sm-4,
+.panel-columns div.col-md-4,.panel-columns div.col-lg-4,
+.panel-columns div.col-xs-5,.panel-columns div.col-sm-5,
+.panel-columns div.col-md-5,.panel-columns div.col-lg-5,
+.panel-columns div.col-xs-6,.panel-columns div.col-sm-6,
+.panel-columns div.col-md-6,.panel-columns div.col-lg-6,
+.panel-columns div.col-xs-7,.panel-columns div.col-sm-7,
+.panel-columns div.col-md-7,.panel-columns div.col-lg-7,
+.panel-columns div.col-xs-8,.panel-columns div.col-sm-8,
+.panel-columns div.col-md-8,.panel-columns div.col-lg-8,
+.panel-columns div.col-xs-9,.panel-columns div.col-sm-9,
+.panel-columns div.col-md-9,.panel-columns div.col-lg-9,
+.panel-columns div.col-xs-10,.panel-columns div.col-sm-10,
+.panel-columns div.col-md-10,.panel-columns div.col-lg-10,
+.panel-columns div.col-xs-11,.panel-columns div.col-sm-11,
+.panel-columns div.col-md-11,.panel-columns div.col-lg-11,
+.panel-columns div.col-xs-12,.panel-columns div.col-sm-12,
+.panel-columns div.col-md-12,.panel-columns div.col-lg-12 {
 	padding: 5px 10px;
 	border-bottom: 1px solid lighten($gray-light, 10%);
 	border-right: 1px solid lighten($gray-light, 10%);
 }
-.panel-columns div.col-xs-1:last-child,
-.panel-columns div.col-sm-1:last-child,
-.panel-columns div.col-md-1:last-child,
-.panel-columns div.col-lg-1:last-child,
-.panel-columns div.col-xs-2:last-child,
-.panel-columns div.col-sm-2:last-child,
-.panel-columns div.col-md-2:last-child,
-.panel-columns div.col-lg-2:last-child,
-.panel-columns div.col-xs-3:last-child,
-.panel-columns div.col-sm-3:last-child,
-.panel-columns div.col-md-3:last-child,
-.panel-columns div.col-lg-3:last-child,
-.panel-columns div.col-xs-4:last-child,
-.panel-columns div.col-sm-4:last-child,
-.panel-columns div.col-md-4:last-child,
-.panel-columns div.col-lg-4:last-child,
-.panel-columns div.col-xs-5:last-child,
-.panel-columns div.col-sm-5:last-child,
-.panel-columns div.col-md-5:last-child,
-.panel-columns div.col-lg-5:last-child,
-.panel-columns div.col-xs-6:last-child,
-.panel-columns div.col-sm-6:last-child,
-.panel-columns div.col-md-6:last-child,
-.panel-columns div.col-lg-6:last-child,
-.panel-columns div.col-xs-7:last-child,
-.panel-columns div.col-sm-7:last-child,
-.panel-columns div.col-md-7:last-child,
-.panel-columns div.col-lg-7:last-child,
-.panel-columns div.col-xs-8:last-child,
-.panel-columns div.col-sm-8:last-child,
-.panel-columns div.col-md-8:last-child,
-.panel-columns div.col-lg-8:last-child,
-.panel-columns div.col-xs-9:last-child,
-.panel-columns div.col-sm-9:last-child,
-.panel-columns div.col-md-9:last-child,
-.panel-columns div.col-lg-9:last-child,
-.panel-columns div.col-xs-10:last-child,
-.panel-columns div.col-sm-10:last-child,
-.panel-columns div.col-md-10:last-child,
-.panel-columns div.col-lg-10:last-child,
-.panel-columns div.col-xs-11:last-child,
-.panel-columns div.col-sm-11:last-child,
-.panel-columns div.col-md-11:last-child,
-.panel-columns div.col-lg-11:last-child,
-.panel-columns div.col-xs-12:last-child,
-.panel-columns div.col-sm-12:last-child,
-.panel-columns div.col-md-12:last-child,
-.panel-columns div.col-lg-12:last-child
- {
+.panel-columns div.col-xs-1:last-child,.panel-columns div.col-sm-1:last-child,
+.panel-columns div.col-md-1:last-child,.panel-columns div.col-lg-1:last-child,
+.panel-columns div.col-xs-2:last-child,.panel-columns div.col-sm-2:last-child,
+.panel-columns div.col-md-2:last-child,.panel-columns div.col-lg-2:last-child,
+.panel-columns div.col-xs-3:last-child,.panel-columns div.col-sm-3:last-child,
+.panel-columns div.col-md-3:last-child,.panel-columns div.col-lg-3:last-child,
+.panel-columns div.col-xs-4:last-child,.panel-columns div.col-sm-4:last-child,
+.panel-columns div.col-md-4:last-child,.panel-columns div.col-lg-4:last-child,
+.panel-columns div.col-xs-5:last-child,.panel-columns div.col-sm-5:last-child,
+.panel-columns div.col-md-5:last-child,.panel-columns div.col-lg-5:last-child,
+.panel-columns div.col-xs-6:last-child,.panel-columns div.col-sm-6:last-child,
+.panel-columns div.col-md-6:last-child,.panel-columns div.col-lg-6:last-child,
+.panel-columns div.col-xs-7:last-child,.panel-columns div.col-sm-7:last-child,
+.panel-columns div.col-md-7:last-child,.panel-columns div.col-lg-7:last-child,
+.panel-columns div.col-xs-8:last-child,.panel-columns div.col-sm-8:last-child,
+.panel-columns div.col-md-8:last-child,.panel-columns div.col-lg-8:last-child,
+.panel-columns div.col-xs-9:last-child,.panel-columns div.col-sm-9:last-child,
+.panel-columns div.col-md-9:last-child,.panel-columns div.col-lg-9:last-child,
+.panel-columns div.col-xs-10:last-child,.panel-columns div.col-sm-10:last-child,
+.panel-columns div.col-md-10:last-child,.panel-columns div.col-lg-10:last-child,
+.panel-columns div.col-xs-11:last-child,.panel-columns div.col-sm-11:last-child,
+.panel-columns div.col-md-11:last-child,.panel-columns div.col-lg-11:last-child,
+.panel-columns div.col-xs-12:last-child,.panel-columns div.col-sm-12:last-child,
+.panel-columns div.col-md-12:last-child,.panel-columns div.col-lg-12:last-child {
 	border-right: none;
 }
 .progress {

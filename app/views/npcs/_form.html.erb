@@ -1,6 +1,12 @@
 <%= form_for(@npc, id: "npc_form", class: 'form-horizontal') do |f| %>
 	<div class="row">
 		<div class="col-md-12">
+			<%= render partial: 'shared/error_messages', locals: {object: @npc} %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
 			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-heading"><h5>Dados Básicos</h5></div>
@@ -39,7 +45,7 @@
 
 						<div class="col-md-4">
 							<div class="form-group">
-								<%= f.label :attr_index, "Indice Atributo", 
+								<%= f.label :attr_index, "Ind. Atributo", 
 																												class: 'col-md-12' %>
 								<%= f.number_field :attr_index, in: 1..12, step: 1, 
 															class: 'form-control input-sm' %>
@@ -57,7 +63,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<%= f.label :resource, "Recurso", class: 'col-md-12' %>
-								<%= f.number_field :resource, in: 0..20, step: 1, 
+								<%= f.number_field :resource, in: 2..5, step: 1, value: 2,
 															class: 'form-control input-sm' %>
 							</div>
 						</div>
@@ -65,7 +71,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<%= f.label :parry, "Aparar", class: 'col-md-12' %>
-								<%= f.number_field :parry, in: 0..20, step: 1, 
+								<%= f.number_field :parry, in: 2..5, step: 1, value: 2,
 															class: 'form-control input-sm' %>
 							</div>
 						</div>
@@ -73,7 +79,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<%= f.label :armour, "Armadura", class: 'col-md-12' %>
-								<%= f.number_field :armour, in: 0..20, step: 1, 
+								<%= f.number_field :armour, in: 1..6, step: 1, 
 															class: 'form-control input-sm' %>
 							</div>
 						</div>
@@ -93,16 +99,16 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<%= f.label :personality, "Personalidade", class: 'col-md-12' %>
-								<%= f.number_field :personality, in: 1..25, step: 1, 
-															class: 'form-control input-sm' %>
+								<%= f.number_field :personality, in: 1..3, step: 1, 
+																							class: 'form-control input-sm' %>
 							</div>
 						</div>
 
 						<div class="col-md-4">
 							<div class="form-group">
 								<%= f.label :movement, "Movimento", class: 'col-md-12' %>
-								<%= f.number_field :movement, in: 0..11, step: 1, 
-															class: 'form-control input-sm' %>
+								<%= f.number_field :movement, in: 1..3, step: 1, 
+																							class: 'form-control input-sm' %>
 							</div>
 						</div>
 
@@ -110,7 +116,7 @@
 							<div class="form-group">
 								<%= f.label :perception, "Percepção", class: 'col-md-12' %>
 								<%= f.number_field :perception, in: 1..3, step: 1, 
-															class: 'form-control input-sm' %>
+																							class: 'form-control input-sm' %>
 							</div>
 						</div>
 
@@ -118,7 +124,7 @@
 							<div class="form-group">
 								<%= f.label :survival, "Sobrevivência", class: 'col-md-12' %>
 								<%= f.number_field :survival, in: 1..3, step: 1, 
-															class: 'form-control input-sm' %>
+																							class: 'form-control input-sm' %>
 							</div>
 						</div>
 
@@ -126,7 +132,7 @@
 							<div class="form-group">
 								<%= f.label :custom, "Costumes", class: 'col-md-12' %>
 								<%= f.number_field :custom, in: 1..3, step: 1, 
-															class: 'form-control input-sm' %>
+																							class: 'form-control input-sm' %>
 							</div>
 						</div>
 
@@ -134,7 +140,7 @@
 							<div class="form-group">
 								<%= f.label :vocation, "Ocupação", class: 'col-md-12' %>
 								<%= f.number_field :vocation, in: 1..3, step: 1, 
-															class: 'form-control input-sm' %>
+																							class: 'form-control input-sm' %>
 							</div>
 						</div>
 					</div>

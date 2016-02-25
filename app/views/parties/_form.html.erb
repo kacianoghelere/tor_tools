@@ -1,6 +1,12 @@
 <%= form_for(@party, class: 'form-horizontal') do |f| %>
 	<div class="col-md-12 col-thin">
 		<div class="form-group">
+			<%= render partial: 'shared/error_messages', locals: {object: @party} %>
+		</div>
+	</div>
+
+	<div class="col-md-12 col-thin">
+		<div class="form-group">
 			<%= f.label :title, "Titulo" %>
 			<%= f.text_field :title, class: 'form-control input-sm' %>
 		</div>

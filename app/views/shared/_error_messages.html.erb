@@ -1,12 +1,15 @@
-<% if @user.errors.any? %>
+<% if object.errors.any? %>
 	<div id="error_explanation">
 		<div class="alert alert-danger">
-			The form contains <%= pluralize(@user.errors.count, "error") %>.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h5>Ooops! Algo deu errado...</h5>
+			<ul>
+			<% object.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
 		</div>
-		<ul>
-		<% @user.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-		<% end %>
-		</ul>
 	</div>
 <% end %>

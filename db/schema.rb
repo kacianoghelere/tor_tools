@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224180317) do
+ActiveRecord::Schema.define(version: 20160225112043) do
+
+  create_table "activity_feeds", force: :cascade do |t|
+    t.string   "feed_type",  null: false
+    t.integer  "npc_id"
+    t.integer  "skill_id"
+    t.integer  "weapon_id"
+    t.integer  "party_id"
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "activity_feeds", ["npc_id", "created_at"], name: "index_activity_feeds_on_npc_id_and_created_at"
+  add_index "activity_feeds", ["npc_id"], name: "index_activity_feeds_on_npc_id"
+  add_index "activity_feeds", ["party_id", "created_at"], name: "index_activity_feeds_on_party_id_and_created_at"
+  add_index "activity_feeds", ["party_id"], name: "index_activity_feeds_on_party_id"
+  add_index "activity_feeds", ["skill_id", "created_at"], name: "index_activity_feeds_on_skill_id_and_created_at"
+  add_index "activity_feeds", ["skill_id"], name: "index_activity_feeds_on_skill_id"
+  add_index "activity_feeds", ["user_id", "created_at"], name: "index_activity_feeds_on_user_id_and_created_at"
+  add_index "activity_feeds", ["user_id"], name: "index_activity_feeds_on_user_id"
+  add_index "activity_feeds", ["weapon_id", "created_at"], name: "index_activity_feeds_on_weapon_id_and_created_at"
+  add_index "activity_feeds", ["weapon_id"], name: "index_activity_feeds_on_weapon_id"
 
   create_table "npc_skills", force: :cascade do |t|
     t.integer  "npc_id"
@@ -54,6 +76,8 @@ ActiveRecord::Schema.define(version: 20160224180317) do
     t.integer  "survival",    default: 1,     null: false
     t.integer  "custom",      default: 1,     null: false
     t.integer  "vocation",    default: 1,     null: false
+    t.boolean  "deleted",     default: false
+    t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
@@ -64,9 +88,11 @@ ActiveRecord::Schema.define(version: 20160224180317) do
 
   create_table "parties", force: :cascade do |t|
     t.string   "title"
+    t.boolean  "deleted",    default: false
+    t.datetime "deleted_at"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "parties", ["user_id", "created_at"], name: "index_parties_on_user_id_and_created_at"
@@ -100,9 +126,11 @@ ActiveRecord::Schema.define(version: 20160224180317) do
     t.string   "name"
     t.integer  "cost"
     t.string   "description"
+    t.boolean  "deleted",     default: false
+    t.datetime "deleted_at"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "skills", ["user_id", "created_at"], name: "index_skills_on_user_id_and_created_at"
@@ -132,10 +160,12 @@ ActiveRecord::Schema.define(version: 20160224180317) do
     t.integer  "damage"
     t.integer  "edge"
     t.integer  "injury"
+    t.boolean  "deleted",            default: false
+    t.datetime "deleted_at"
     t.integer  "user_id"
     t.integer  "weapon_category_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "weapons", ["user_id", "created_at"], name: "index_weapons_on_user_id_and_created_at"

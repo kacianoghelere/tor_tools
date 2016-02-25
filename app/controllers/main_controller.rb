@@ -4,6 +4,8 @@ class MainController < ApplicationController
 	def index
 		unless logged_in?
 			render "visitor"
+		else
+			@feeds = current_user.feed
 		end
 	end
 

@@ -2,6 +2,97 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
+@font-face {
+  font-family: "Ringbearer";
+  src: url(/assets/ringbearer.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Aniron";
+  src: url(/assets/anirm___.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Aniron_Bold";
+  src: url(/assets/anirb___.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Alegreya-Black";
+  src: url(/assets/Alegreya-Black.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Alegreya-BlackItalic";
+  src: url(/assets/Alegreya-BlackItalic.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Alegreya-Bold";
+  src: url(/assets/Alegreya-Bold.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Alegreya-BoldItalic";
+  src: url(/assets/Alegreya-BoldItalic.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Alegreya-Italic";
+  src: url(/assets/Alegreya-Italic.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Alegreya-Regular";
+  src: url(/assets/Alegreya-Regular.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "AlegreyaSC-Black";
+  src: url(/assets/AlegreyaSC-Black.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "AlegreyaSC-BlackItalic";
+  src: url(/assets/AlegreyaSC-BlackItalic.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "AlegreyaSC-Bold";
+  src: url(/assets/AlegreyaSC-Bold.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "AlegreyaSC-BoldItalic";
+  src: url(/assets/AlegreyaSC-BoldItalic.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "AlegreyaSC-Italic";
+  src: url(/assets/AlegreyaSC-Italic.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "AlegreyaSC-Regular.otf";
+  src: url(/assets/AlegreyaSC-Regular.otf) format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 $gray-base:              #2A1F09 !default; // matiz 18
 // $gray-darker:            #413012 !default;
 // $gray-dark:              #B09560 !default;
@@ -24,5 +115,7 @@ $brand-danger:          #D04C48 !default;
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
-$font-family-sans-serif:  serif, "Helvetica Neue", Helvetica, Arial !default;
-$font-family-serif:       serif, Georgia, "Times New Roman", Times !default;
+$font-family-sans-serif:  "Alegreya-Regular", serif, "Helvetica Neue", Helvetica, Arial !default;
+$font-family-serif:       "Alegreya-Regular", serif, Georgia, "Times New Roman", Times !default;
+
+$font-size-base:          12px !default;

@@ -252,13 +252,13 @@ $.setAjaxAsync = (value) ->
   $.ajaxSetup async: value
   return
 
-$.npc_popover_template = '<div class="popover" role="tooltip" style="min-width: 600px">' + '  <div class="arrow"></div>' + '  <div class="popover-title"></div>' + '  <div class="popover-content"></div>' + '</div>'
+$.npc_popover_template = '<div class="popover" role="tooltip" style="min-width: 700px">' + '<div class="arrow"></div>' + '<div class="popover-title"></div>' + '<div class="popover-content"></div>' + '</div>'
 # Formata dados do npc
 
 $.formatNpcInfo = (data) ->
   $.html = $('<div />', class: 'col-md-12 col-thin')
   if data
-    $.div_img = $('<div />', class: 'col-md-4 col-thin')
+    $.div_img = $('<div />', class: 'col-md-12 col-thin')
     $.div_info = $('<div />', class: 'col-md-12 col-thin')
     $.panel_info = $('<div />',
       class: 'panel panel-default'
@@ -266,12 +266,13 @@ $.formatNpcInfo = (data) ->
     $.panel_body_info = $('<div />', class: 'panel-body panel-columns')
     $.panel_head_info = $('<div />',
       class: 'panel-heading'
-      html: '<b>Informações de ' + data.name + '</b>')
+      html: "<b>Informações de #{data.name}</b>")
+
     $.img = $('<img />',
       src: data.img_url
       class: 'img-thumbnail'
-      style: 'width: 150px; height: 150px;')
-    $.img.appendTo $.div_img
+      style: 'width: 48px; height: 48px; margin-right: 10px')
+    $.img.prependTo $.panel_head_info
     # -------------------------------------------------------------------------
     $.div_row = $('<div />', class: 'row-fluid')
     $.div = $('<div />',
@@ -387,7 +388,6 @@ $.formatNpcInfo = (data) ->
       $.div.appendTo $.div_row
       $.div_row.appendTo $.panel_body_info
       return
-    # $.div_img.appendTo($.html);
     $.panel_head_info.appendTo $.panel_info
     $.panel_body_info.appendTo $.panel_info
     $.panel_info.appendTo $.div_info
@@ -400,11 +400,15 @@ $.formatNpcSkills = (data) ->
   $.list = '<ul class="list-group" style="margin-bottom: 0;">'
   if data
     $.each data, (index, val) ->
-      $.list += '<li class="list-group-item list-group-item-small">' + '  <h6><b>' + val.name + '</b></h6>' + '  <p>' + val.description + '</p>' + '</li>'
+      $.list += "<li class='list-group-item list-group-item-small'>" 
+      $.list += "  <h6><b>#{val.name}</b> (Custo: #{val.cost})</h6>"
+      $.list += "  <p>#{val.description}</p>"
+      $.list += "</li>"
       return
   else
-    $.list += '<li class="list-group-item list-group-item-small">' + 'Nenhuma informação encontrada'
-    +'</li>'
+    $.list += '<li class="list-group-item list-group-item-small">' 
+    $.list += 'Nenhuma informação encontrada'
+    $.list += '</li>'
   $.list += '</ul>'
   $.list
 
@@ -412,7 +416,7 @@ $.formatNpcSkills = (data) ->
 
 $.initializeInfoPopover = (elem) ->
   $.code = $(elem).data('code')
-  $.url = 'npcs/' + $.code + '.json'
+  $.url = "npcs/#{$.code}.json"
   $.setAjaxAsync false
   $.getJSON($.url).done (data) ->
     $.info = $.formatNpcInfo(data)
@@ -440,7 +444,7 @@ $.initializeInfoPopover = (elem) ->
 
 $.initializeSkillPopover = (elem) ->
   $.code = $(elem).data('code')
-  $.url = 'npcs/' + $.code + '/skills.json'
+  $.url = "npcs/#{$.code}/skills.json"
   $.setAjaxAsync false
   $.getJSON($.url).done (data) ->
     $.skills = $.formatNpcSkills(data)
@@ -451,7 +455,7 @@ $.initializeSkillPopover = (elem) ->
         show: '100'
         hide: '100'
       'html': true
-      'title': 'Habilidades (' + $.code + ')'
+      'title': 'Habilidades'
       'container': 'body'
       'template': $.npc_popover_template
       'content': $.skills).on('shown.bs.popover', ->
@@ -544,7 +548,7 @@ $.fetchNpcData = (id) ->
 # Fetch party data
 
 $.fetchPartyData = (id) ->
-  $.url = 'parties/' + id + '/party_npcs.json'
+  $.url = "parties/#{id}/party_npcs.json"
   $.setAjaxAsync false
   $.getJSON($.url).done (data) ->
     $.each data, (index, member) ->

@@ -4,6 +4,8 @@ class CreateSkills < ActiveRecord::Migration
       t.string :name
       t.integer :cost
       t.string :description
+      t.boolean :deleted, :default => false
+      t.timestamp :deleted_at
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 	has_many :skills,  dependent: :destroy
 	has_many :npcs,    dependent: :destroy
 	has_many :parties, dependent: :destroy
+	has_many :activity_feeds
 	attr_accessor :remember_token
 	before_save { self.email = email.downcase }
 	validates :name, presence: true, length: { maximum: 50 }
@@ -49,6 +50,19 @@ class User < ActiveRecord::Base
 	def forget
 		update_attribute(:remember_digest, nil)
 	end
+
+  # Defines a proto-feed.
+  # See "Following users" for the full implementation.
+  def feed
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    ActivityFeed.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+  end
+
+  def generate_feed(**feed)
+  	activity_feeds.create(feed)
+  end
 
 	# Follows a user.
 	def follow(other_user)

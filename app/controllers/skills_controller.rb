@@ -5,9 +5,9 @@ class SkillsController < ApplicationController
 
 	def index
 		if params[:npc_id]
-			@skills = Npc.find(params[:npc_id]).skills
+			@skills = Npc.find(params[:npc_id]).skills.where(deleted: false)
 		else
-			@skills = Skill.all
+			@skills = Skill.all_active
 		end
 	end
 
@@ -22,6 +22,7 @@ class SkillsController < ApplicationController
 		@skill = Skill.new(skill_params)
 		@skill.user = current_user
 		if @skill.save
+			current_user.generate_feed(skill: @skill, feed_type: 'insertion')
 			flash[:success] = "Operação concluída com sucesso!"
 			redirect_to @skill
 		else
@@ -35,6 +36,7 @@ class SkillsController < ApplicationController
 	def update
 		if @skill.update_attributes(skill_params)
 			flash[:success] = "Informações atualizadas"
+			current_user.generate_feed(skill: @skill, feed_type: 'updated')
 			redirect_to @skill
 		else
 			render 'edit'
@@ -42,7 +44,8 @@ class SkillsController < ApplicationController
 	end
 
 	def destroy
-		@skill.destroy
+		current_user.generate_feed(skill: @skill, feed_type: 'destroyed')
+		@skill.update(deleted: true, deleted_at: Time.zone.now)
 		flash[:success] = "Operação concluída com sucesso!"
 		redirect_to skills_url
 	end

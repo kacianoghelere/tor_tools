@@ -1,4 +1,10 @@
 <%= form_for(@skill, class: 'form-horizontal') do |f| %>
+	<div class="col-md-12 col-thin">
+		<div class="form-group">
+			<%= render partial: 'shared/error_messages', locals: {object: @skill} %>
+		</div>
+	</div>
+
 	<div class="col-md-8">
 		<div class="form-group">
 			<%= f.label :name, "Nome" %>

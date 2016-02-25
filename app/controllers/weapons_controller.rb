@@ -4,7 +4,7 @@ class WeaponsController < ApplicationController
 	before_action :correct_user,   only: [:edit,:update,:destroy]
 
 	def index
-		@weapons = Weapon.all
+		@weapons = Weapon.all_active
 	end
 
 	def show
@@ -18,6 +18,7 @@ class WeaponsController < ApplicationController
 		@weapon = Weapon.new(weapon_params)
 		@weapon.user = current_user
 		if @weapon.save
+			current_user.generate_feed(weapon: @weapon, feed_type: 'insertion')
 			flash[:success] = "Operação concluída com sucesso!"
 			redirect_to @weapon
 		else
@@ -31,6 +32,7 @@ class WeaponsController < ApplicationController
 	def update
 		if @weapon.update_attributes(weapon_params)
 			flash[:success] = "Informações atualizadas"
+			current_user.generate_feed(weapon: @weapon, feed_type: 'updated')
 			redirect_to @weapon
 		else
 			render 'edit'
@@ -38,7 +40,8 @@ class WeaponsController < ApplicationController
 	end
 
 	def destroy
-		@weapon.destroy
+		current_user.generate_feed(weapon: @weapon, feed_type: 'destroyed')
+		@weapon.update(deleted: true, deleted_at: Time.zone.now)
 		flash[:success] = "Operação concluída com sucesso!"
 		redirect_to weapons_url
 	end

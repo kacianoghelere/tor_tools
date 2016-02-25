@@ -3,6 +3,7 @@ class Party < ActiveRecord::Base
 	has_many :members, class_name: "PartyNpc", inverse_of: :party, 
 		:dependent => :destroy 
 	has_many :npcs, through: :members
+	has_many :activity_feeds
 	accepts_nested_attributes_for :members, :allow_destroy => true
 	validates :title, presence: true, length: { maximum: 50 }
 
@@ -12,6 +13,10 @@ class Party < ActiveRecord::Base
 
 	def filter_npcs
 		Npc.all #.where('"id" NOT IN (?)', self.npcs.map { |x| x.id } )
+	end
+
+	def self.all_active
+		all.where(deleted: false)
 	end
 
 	def build_members
