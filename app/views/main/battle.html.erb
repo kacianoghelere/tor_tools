@@ -1,8 +1,9 @@
 <% provide(:title, 'Batalha') %>
 <% provide(:label, 'Batalha') %>
-<%= content_for :js_scripts do %>
-	<%= javascript_include_tag 'application', 'battle' %>
-<% end %>
+
+<%#= content_for :js_scripts do %>
+	<%#= javascript_include_tag 'application', 'main_battle' %>
+<%# end %>
 
 <div class="row">
 	<div class="col-sm-12">
@@ -32,7 +33,7 @@
 		<div class="col-sm-6">
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon">NPC</span>
-				<%= collection_select(:battle, :npc_id, Npc.all, :id, :name, {}, 
+				<%= collection_select(:battle, :npc_id, @npcs, :id, :name, {}, 
 								data: {
 									toggle: "tooltip", placement: "top" },
 								title: "O NPC selecionado será adicionado à lista",
@@ -73,10 +74,3 @@
 </div>
 
 <%= render 'modal_party' %>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$.fetchPartiesData();
-		$('[data-toggle="tooltip"]').tooltip();
-	});
-</script>

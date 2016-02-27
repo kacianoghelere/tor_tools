@@ -22,6 +22,8 @@ class MainController < ApplicationController
 	end
 
 	def battle
+		@npcs    = Npc.all_active
+		@parties = Party.all_active
 	end
 
 	private
