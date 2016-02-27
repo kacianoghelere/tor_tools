@@ -14,7 +14,7 @@ jQuery ($) ->
         e.preventDefault()
         lastnested = $('.duplicatable').last()
         newnested  = $(nested).clone()
-        formsOnPage    = $('.duplicatable').length
+        formsOnPage = $('.duplicatable').length
 
         $(newnested).find('.nested_id').each ->
           $(this).val ''

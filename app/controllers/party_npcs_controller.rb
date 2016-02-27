@@ -37,7 +37,7 @@ class PartyNpcsController < ApplicationController
 	end
 
 	def destroy
-		@set_party_npc.destroy
+		@party_npc.destroy
 		flash.now[:success] = "Operação concluída com sucesso!"
 		render :nothing => true
 	end

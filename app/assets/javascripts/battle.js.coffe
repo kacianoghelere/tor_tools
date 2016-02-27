@@ -1,0 +1,28 @@
+jQuery ($) ->
+    $(document).on 'click','button[name="adicionar"]', (event) ->
+      $.id = Number($('select[name="battle[npc_id]"]').val)
+      $.fetchNpcData($.id)
+
+    $(document).on 'click','button[name="remove"]', (event) ->
+      $(this).closest('tr.item-initiative').remove()
+
+    $(document).on 'click','button[name="replicate"]', (event) ->
+      $.replicate()
+
+    $(document).on 'click','button[name="generate"]', (event) ->
+      $.generateInitiatives()
+
+    $(document).on 'change','.select[name="position"]', (event) ->
+      $.code = $(this).data('code')
+      $.fetchPartyData($.code)
+
+    $(document).on 'change','.select[name="position"]', (event) ->
+      $.valor = Number($(this).val())
+      $.tr = $(this).closest('tr.item-initiative')
+      $.posicao = $.searchPosition($.valor)
+      $.tr.removeClass("danger info success warning")
+      $.tr.addClass($.posicao.classe)
+      $.calculateNA(this)
+
+    $.fetchPartiesData()
+    $('[data-toggle="tooltip"]').tooltip()
