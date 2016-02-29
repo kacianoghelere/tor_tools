@@ -49,6 +49,12 @@ group :test do
   gem 'guard-minitest',     '2.3.1'
 end
 
+group :production do
+  gem 'pg',             '0.17.1'
+  gem 'rails_12factor', '0.0.2'
+  gem 'puma',           '2.11.1'
+end
+
 gem 'devise'
 gem 'cancancan', '~> 1.10'
 group :development, :test do
