@@ -15,7 +15,7 @@
 	box-sizing:				 border-box;
 }
 @mixin parchment_background {
-  background: url(bg/parchment-background.png) no-repeat center center; 
+  background: image-url(bg/parchment-background.png) no-repeat center center; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -23,7 +23,7 @@
 }
 
 @mixin parchment_background_dark {
-  background: url(bg/parchment-background-2.jpg) no-repeat center center fixed; 
+  background: image-url(bg/parchment-background-2.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -31,11 +31,11 @@
 }
 
 @mixin parchment_pattern {
-  background: url(bg/parchment-pattern.jpg) repeat; 
+  background: image-url(bg/parchment-pattern.jpg) repeat; 
 }
 
 @mixin map_background_middle_earth {
-  background: url(bg/map-background-middle-earth.jpg) no-repeat center center fixed; 
+  background: image-url(bg/map-background-middle-earth.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -43,28 +43,28 @@
 }
 
 @mixin frame_border  {
-	border-image-source: url('frame-borders/frame-border-1.png');
+	border-image-source: image-url('frame-borders/frame-border-1.png');
 	border-image-slice: 120;
 	border-image-repeat: repeat;
 	border-width: 20px;
 	border-style: solid;
 }
 @mixin frame_border_second  {
-	border-image-source: url('frame-borders/frame-border-2.jpg');
+	border-image-source: image-url('frame-borders/frame-border-2.jpg');
 	border-image-slice: 60;
 	border-image-repeat: repeat;
 	border-width: 60px;
 	border-style: solid;
 }
 @mixin frame_border_third {
-	border-image-source: url('frame-borders/frame-border-3.jpg');
+	border-image-source: image-url('frame-borders/frame-border-3.jpg');
 	border-image-slice: 170;
 	border-image-repeat: repeat;
 	border-width: 170px;
 	border-style: solid;
 }
 @mixin frame_border_fourth {
-	border-image-source: url('frame-borders/frame-border-4.png');
+	border-image-source: image-url('frame-borders/frame-border-4.png');
 	border-image-slice: 200;
 	border-image-repeat: repeat;
 	border-width: 200px;
@@ -98,7 +98,7 @@ body {
 	}
 }
 .navbar-default {
-    background: url("bg/dark_wood_pattern.png");
+    background: image-url("bg/dark_wood_pattern.png");
 }
 .navbar-default .navbar-nav > a,
 .navbar-default .navbar-nav > li > a,
