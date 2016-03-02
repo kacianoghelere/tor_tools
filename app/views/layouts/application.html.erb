@@ -5,11 +5,6 @@
 	<%= stylesheet_link_tag    'application', media: 'all', 
 																						'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', params[:controller] %>
-	<% action_script = "#{params[:controller]}_#{params[:action]}" %>
-	<% if Rails.application.assets.find_asset action_script %>
-		<%= javascript_include_tag 'application', action_script %>
-		<% end %>
-	<%= yield(:js_scripts) %>
 	<%= csrf_meta_tags %>
 </head>
 	<body class="<%= controller_name %> <%= action_name %>">

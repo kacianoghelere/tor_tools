@@ -1,3 +1,40 @@
+jQuery ($) ->
+  $(document).on 'ready page:load', ->
+    console.log('main.js.coffee loaded')
+    $.fetchPartiesData();
+    $('[data-toggle="tooltip"]').tooltip()
+
+    $('button[name="adicionar"]').click (event) ->
+      $.id = Number($('select[name="battle[npc_id]"]').val())
+      $.fetchNpcData $.id
+      return
+
+    $('button[name="remove"]').click (event) ->
+      $(this).closest('tr.item-initiative').remove()
+      return
+
+    $('button[name="replicate"]').click  (event) ->
+      $.replicate()
+      return
+
+    $('button[name="generate"]').click (event) ->
+      $.generateInitiatives()
+      return
+
+    $('button[name="add_party"]').click (event) ->
+      $.code = $(this).data('code')
+      $.fetchPartyData $.code
+      return
+
+    $('select[name="position"]').change (event) ->
+      $.valor = Number($(this).val())
+      $.tr = $(this).closest('tr.item-initiative')
+      $.posicao = $.searchPosition($.valor)
+      $.tr.removeClass 'danger info success warning'
+      $.tr.addClass $.posicao.classe
+      $.calculateNA this
+      return
+
 $.posicoes = [
   {
     id: 1
@@ -57,6 +94,10 @@ $.generateItemInitiative = (data) ->
     class: 'input-group-addon npc_info_popover'
     'data-code': if data then data.id else ''
     html: '<span class=\'glyphicon glyphicon-info-sign\'></span>')
+  $.span_desc_npc = $('<span />',
+    class: 'input-group-addon npc_desc_popover'
+    'data-code': if data then data.id else ''
+    html: '<span class=\'glyphicon glyphicon-align-left\'></span>')
   $.span_btn = $('<span />', class: 'input-group-btn')
   $.span_skill_npc = $('<span />',
     class: 'input-group-addon npc_skill_popover'
@@ -65,7 +106,9 @@ $.generateItemInitiative = (data) ->
   $.btn_remover.appendTo $.span_btn
   $.span_btn.appendTo $.input_group_npc
   $.span_info_npc.appendTo $.input_group_npc
+  $.span_desc_npc.appendTo $.input_group_npc
   $.initializeInfoPopover $.span_info_npc
+  $.initializeDescPopover $.span_desc_npc
   $.initializeSkillPopover $.span_skill_npc
   $.input_npc = $('<input />',
     type: 'text'
@@ -206,6 +249,8 @@ $.replicate = ->
   $('tr.item-initiative').each (i, tr) ->
     $.info  = $(tr).find('.npc_info_popover')
     $.initializeInfoPopover($.info)
+    $.desc = $(tr).find('.npc_desc_popover')
+    $.initializeDescPopover($.desc)
     $.skill = $(tr).find('.npc_skill_popover')
     $.initializeSkillPopover($.skill)
   $('select[name="position"]').trigger 'change'
@@ -394,6 +439,21 @@ $.formatNpcInfo = (data) ->
     $.div_info.appendTo $.html
   $.html
 
+# Formata dados de desc
+
+$.formatNpcDesc = (data) ->
+  $.list = '<ul class="list-group" style="margin-bottom: 0;">'
+  if data
+    $.list += '<li class="list-group-item list-group-item-small">' 
+    $.list += data.description
+    $.list += '</li>'
+  else
+    $.list += '<li class="list-group-item list-group-item-small">' 
+    $.list += 'Nenhuma informação encontrada'
+    $.list += '</li>'
+  $.list += '</ul>'
+  $.list
+
 # Formata dados de skills
 
 $.formatNpcSkills = (data) ->
@@ -422,7 +482,7 @@ $.initializeInfoPopover = (elem) ->
     $.info = $.formatNpcInfo(data)
     $.popover = $(elem).popover(
       'trigger': 'hover'
-      'placement': 'right'
+      'placement': 'bottom'
       'delay':
         show: '100'
         hide: '100'
@@ -430,6 +490,35 @@ $.initializeInfoPopover = (elem) ->
       'container': 'body'
       'template': $.npc_popover_template
       'content': $.info).on('shown.bs.popover', ->
+      # Executa controle de fechar
+      $(this).parent().find('div.popover .close').on 'click', (e) ->
+        $(this).popover 'hide'
+        return
+      return
+    )
+    return
+  $.setAjaxAsync true
+  return
+
+# Incializa os popovers de outras despesas nas guias
+
+$.initializeDescPopover = (elem) ->
+  $.code = $(elem).data('code')
+  $.url = "npcs/#{$.code}.json"
+  $.setAjaxAsync false
+  $.getJSON($.url).done (data) ->
+    $.desc = $.formatNpcDesc(data)
+    $.popover = $(elem).popover(
+      'trigger': 'hover'
+      'placement': 'bottom'
+      'delay':
+        show: '100'
+        hide: '100'
+      'html': true
+      'title': 'Descrição'
+      'container': 'body'
+      'template': $.npc_popover_template
+      'content': $.desc).on('shown.bs.popover', ->
       # Executa controle de fechar
       $(this).parent().find('div.popover .close').on 'click', (e) ->
         $(this).popover 'hide'
@@ -450,7 +539,7 @@ $.initializeSkillPopover = (elem) ->
     $.skills = $.formatNpcSkills(data)
     $.popover = $(elem).popover(
       'trigger': 'hover'
-      'placement': 'right'
+      'placement': 'bottom'
       'delay':
         show: '100'
         hide: '100'

@@ -10,7 +10,7 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w( main.js npcs.js )
 
-%w( npcs parties duplicate main users skills weapons weapon_categories sessions main_battle ).each do |c|
+%w( npcs parties duplicate main users skills weapons weapon_categories sessions main_index main_battle ).each do |c|
   Rails.application.config.assets.precompile += ["#{c}.js.coffee"]
   Rails.application.config.assets.precompile += ["#{c}.js"]
 end
