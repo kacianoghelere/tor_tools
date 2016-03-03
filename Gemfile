@@ -21,11 +21,11 @@ gem 'will_paginate'
 gem 'papercrop'
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+gem 'web-console', '~> 2.0', group: :development 
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
 end
 

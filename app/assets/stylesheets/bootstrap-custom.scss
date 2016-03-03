@@ -147,6 +147,16 @@ ul.list-group.list-group-scrolled-500 {
 	max-height: 500px;
 	overflow-y: auto;
 }
+
+
+ul.list-inline {
+	list-style: none;
+
+	& > li {
+		display: inline-block;
+	}
+}
+
 .stats {
 	max-width: 400px;
 	margin: 0 auto;

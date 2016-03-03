@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-	resources :users
-	resources :weapons
-	resources :skills
-	resources :npcs
-	resources :parties
-	resources :weapon_categories
 	root   'main#index'
 	get    'main/index'
 	get    'index'	      => 'main#index'
@@ -18,18 +12,24 @@ Rails.application.routes.draw do
 	get    'login'	      => 'sessions#new'
 	post   'login'	      => 'sessions#create'
 	delete 'logout'	      => 'sessions#destroy'
+	resources :users
+	resources :weapons
+	resources :skills
+	resources :npcs
+	resources :parties
+	resources :weapon_categories
 
-  resources :users do
-    member do
-      get :following, :followers
-    end
-  end
+	resources :users do
+		member do
+			get :following, :followers
+		end
+	end
 	resources :npcs do
-		resources :skills, only: :index, as: :skills
+		resources :skills,      only: :index,   as: :skills
 		resources :npc_weapons, only: :destroy, as: :equipments
 	end
 	resources :parties do
-		resources :npcs,       only: :index,   as: :npcs
+		resources :npcs,       only: :index,             as: :npcs
 		resources :party_npcs, only: [:index, :destroy], as: :members
 	end
 	resources :relationships, only: [:create, :destroy]

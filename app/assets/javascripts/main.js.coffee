@@ -1,7 +1,6 @@
 jQuery ($) ->
   $(document).on 'ready page:load', ->
     console.log('main.js.coffee loaded')
-    $.fetchPartiesData();
     $('[data-toggle="tooltip"]').tooltip()
 
     $('button[name="adicionar"]').click (event) ->
@@ -9,7 +8,8 @@ jQuery ($) ->
       $.fetchNpcData $.id
       return
 
-    $('button[name="remove"]').click (event) ->
+    $('body').on 'click','button[name="remove"]', (event) ->
+      console.log($(this))
       $(this).closest('tr.item-initiative').remove()
       return
 

@@ -11,7 +11,27 @@
 			</div>
 			
 			<div class="modal-body">
-
+				<ul class="list-group list-group-scrolled-300">
+					<% @parties.each do |party| %>
+						<li class="list-group-item">
+							<div class="pull-right">
+								<%= button_tag 'Adicionar', name: 'add_party', 
+																			data: { code: party.id },
+																			class: 'btn btn-default btn-sm' %>
+							</div>
+							<h4><b><%= "#{party.id} - #{party.title}" %></b></h4>
+							<ul class="list-inline">
+								<% party.members.each do |member| %>
+									<li>
+										<%= content_tag :p, class: "label label-default" do %>
+											<%= "#{member.npc.name} x #{member.amount}" %>
+										<% end %>
+									</li>
+								<% end %>
+							</ul>
+						</li>
+					<% end %>
+				</ul>
 			</div>
 
 			<div class="modal-footer">
